@@ -1,33 +1,42 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+
 import './App.css'
+import AuthLayout from './Modules/Shared/Authentication/AuthLayout/AuthLayout'
+import NotFound from './Modules/Shared/NotFound/NotFound'
+import Login from './Modules/Authentication/Login/Login'
+import Register from './Modules/Authentication/Register/Register'
+import ForgetPassword from './Modules/Authentication/Forget-Password/Forget-Password'
+import ResetPassword from './Modules/Authentication/Reset-Password/Reset-Password'
+
+
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  const routes=createBrowserRouter([
+    // auth layout
+    {
+      path:'',
+      element: <AuthLayout/>,
+      errorElement:<NotFound/>,
+      children:[
+        {path:'login',element:<Login/>},
+        {path:'register',element:<Register/>},
+        {path:'forget-password',element:<ForgetPassword/>},
+        {path:'reset-password',element:<ResetPassword/>},
+  
+      ]
+    },
+    
+    // master layout
+    
+    // dashboard layout
+
+  ])
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    <RouterProvider router={routes}></RouterProvider>
+
     </>
   )
 }
