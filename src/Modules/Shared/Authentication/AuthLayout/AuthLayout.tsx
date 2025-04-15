@@ -112,7 +112,7 @@ export default function AuthLayout() {
                                 <Outlet />
                             </Box>
 
-                            <Button
+                            {/* <Button
                                 variant="contained"
                                 sx={{
                                     display:'block' ,
@@ -123,7 +123,7 @@ export default function AuthLayout() {
                                 }}
                                 >
                                 {buttonTitle}
-                            </Button>
+                            </Button> */}
                         </Box>
                         
                 
@@ -135,7 +135,7 @@ export default function AuthLayout() {
                 sx={{
                     display: {xs:'none',md:'block'} ,
                     width:'95%' ,
-                    height: '95vh', 
+                    height: '100vh', 
                     backgroundImage: `url(${image})`,
                     backgroundSize: 'cover', 
                     backgroundPosition: 'center',

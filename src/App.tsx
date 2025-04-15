@@ -7,6 +7,7 @@ import Login from './Modules/Authentication/Login/Login'
 import Register from './Modules/Authentication/Register/Register'
 import ForgetPassword from './Modules/Authentication/Forget-Password/Forget-Password'
 import ResetPassword from './Modules/Authentication/Reset-Password/Reset-Password'
+import { Bounce, ToastContainer } from 'react-toastify'
 
 
 
@@ -36,6 +37,18 @@ function App() {
   return (
     <>
     <RouterProvider router={routes}></RouterProvider>
+    <ToastContainer
+      position="top-right"
+      autoClose={3000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick={false}
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="colored"
+      transition={Bounce}/>
 
     </>
   )
