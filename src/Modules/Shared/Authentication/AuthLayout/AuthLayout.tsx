@@ -17,7 +17,7 @@ export default function AuthLayout() {
         description: 'If you don’t have an account, please register.',
         subDescription: 'You Can',
         spanDescription: 'Register here',
-        buttonTitle: 'Login',
+        // buttonTitle: 'Login',
         href:"/register"
         },
         '/register': {
@@ -50,7 +50,7 @@ export default function AuthLayout() {
     };
 
     // Get the current route's props or set default props
-    const { image, title, description, buttonTitle, subDescription, spanDescription ,href} = routePropsMap[location.pathname] || {
+    const { image, title, description, subDescription, spanDescription ,href} = routePropsMap[location.pathname] || {
         image: '',
         title: '',
         description: '',
@@ -112,7 +112,7 @@ export default function AuthLayout() {
                                 <Outlet />
                             </Box>
 
-                            <Button
+                            {/* <Button
                                 variant="contained"
                                 sx={{
                                     display:'block' ,
@@ -123,7 +123,7 @@ export default function AuthLayout() {
                                 }}
                                 >
                                 {buttonTitle}
-                            </Button>
+                            </Button> */}
                         </Box>
                         
                 
@@ -141,6 +141,7 @@ export default function AuthLayout() {
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
                     borderRadius:5
+                    
                 }}
                 >
             </Grid>

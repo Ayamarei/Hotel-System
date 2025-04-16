@@ -2,9 +2,6 @@
 
 export default function Register() {
   return (
-    <>
-
-     register
-    </>
+    <div>Register</div>
   )
 }
