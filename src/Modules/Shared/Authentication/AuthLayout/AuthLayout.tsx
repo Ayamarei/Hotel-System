@@ -135,7 +135,7 @@ export default function AuthLayout() {
                 sx={{
                     display: {xs:'none',md:'block'} ,
                     width:'95%' ,
-                    height: '95vh', 
+                    height: '100vh', 
                     backgroundImage: `url(${image})`,
                     backgroundSize: 'cover', 
                     backgroundPosition: 'center',
