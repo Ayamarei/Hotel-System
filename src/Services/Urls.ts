@@ -4,5 +4,5 @@ export const USERS_URLS={
   REGISTER:'/users/',
   CHANGE_PASSWORD: '/users/change-password',
   RESET_PASSWORD:'/users/reset-password',
-  FORGET_PASSWORD:'/users/forget-password',
+  FORGET_PASSWORD:'/users/forgot-password',
 }

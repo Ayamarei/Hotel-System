@@ -1,0 +1,19 @@
+{
+   "RegisterForm": {
+      "Please-type": "من فضلك اكتب هنا...",
+      "User-Name": "اسم المستخدم",
+      "Phone-number": "رقم الهاتف",
+      "Country": "البلد",
+      "Email": "البريد الإلكتروني",
+      "Password": "كلمة المرور",
+      "Confirm-Password": "تأكيد كلمة المرور",
+      "Passwords-not-match": "كلمتا المرور غير متطابقتين",
+      "Upload-Image": "تحميل الصورة",
+      "Image-uploaded": "تم تحميل الصورة بنجاح!",
+      "Remove": "إزالة",
+      "Register...": "جاري التسجيل...",
+      "Register": "تسجيل"
+}
+
+  }
+  

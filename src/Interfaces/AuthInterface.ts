@@ -1,3 +1,14 @@
+
+export interface IForget{
+    email:string
+}
+export interface IReset{
+    email:string,
+    seed:string,
+    password:string,
+    confirmPassword:string
+}
+
 // Register
 export interface IRegisterForm {
     userName:string,
@@ -8,5 +19,3 @@ export interface IRegisterForm {
     confirmPassword:string
 
 }
-
-

@@ -29,6 +29,10 @@ import { IRegisterForm } from "../../../Interfaces/AuthInterface";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { publicUserAxiosInstance } from "../../../Services/Axiosinstance";
 import { USERS_URLS } from "../../../Services/Urls";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { AxiosError } from "axios";
+import { useTranslation } from "react-i18next";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: "#fff",
@@ -58,7 +62,7 @@ export default function Register() {
   const [uploadSuccess, setUploadSuccess] = React.useState(false);
   const [showPassword, setShowPassword] = React.useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
-
+  const navigate=useNavigate();
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleClickShowConfirmPassword = () =>
     setShowConfirmPassword((show) => !show);
@@ -110,15 +114,13 @@ const onSubmit = async (data: IRegisterForm) => {
       }
     );
 
-    console.log("✅ Registered successfully:", response.data.message);
-  } catch (error: any) {
-    if (error.response) {
-      console.error("❌ Server responded with error:", error.response.data);
-    } else if (error.request) {
-      console.error("❌ No response received from server");
-    } else {
-      console.error("❌ Error in setting up the request:", error.message);
-    }
+    toast.success(response.data?.message)
+   navigate('/login')
+  }catch (error) {
+    console.log(error)
+      if(error instanceof AxiosError){
+        toast.error(error?.response?.data?.message||'Something Went Wrong')
+      }
   }
 };
 
@@ -145,15 +147,15 @@ const onSubmit = async (data: IRegisterForm) => {
     setUploadSuccess(false);
     setUploadedImage(null);
   };
-
+const { t } = useTranslation();
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl fullWidth sx={{ mb: 2 }}>
-          <label htmlFor="outlined-username">User Name</label>
+          <label htmlFor="outlined-username">{t("RegisterForm.User-Name")}</label>
           <TextField
             id="username"
-            placeholder="Please type here ..."
+            placeholder={t("RegisterForm.Please-type")}
             sx={{ width: "100%" }}
             variant="filled"
             slotProps={{
@@ -175,10 +177,10 @@ const onSubmit = async (data: IRegisterForm) => {
           >
             <Grid size={6}>
               <FormControl fullWidth sx={{ mb: 2 }}>
-                <label htmlFor="Phone">Phone number</label>
+                <label htmlFor="Phone">{t("RegisterForm.Phone-number")}</label>
                 <TextField
                   id="Phone"
-                  placeholder="Please type here ..."
+                  placeholder={t("RegisterForm.Please-type")}
                   sx={{ width: "100%" }}
                   variant="filled"
                   slotProps={{
@@ -197,10 +199,10 @@ const onSubmit = async (data: IRegisterForm) => {
 
             <Grid size={6}>
               <FormControl fullWidth sx={{ mb: 2 }}>
-                <label htmlFor="outlined-username">Country</label>
+                <label htmlFor="outlined-username">{t("RegisterForm.Country")}</label>
                 <TextField
                   id="Country"
-                  placeholder="Please type here ..."
+                  placeholder={t("RegisterForm.Please-type")}
                   sx={{ width: "100%" }}
                   variant="filled"
                   slotProps={{
@@ -217,10 +219,10 @@ const onSubmit = async (data: IRegisterForm) => {
           </Grid>
         </Box>
         <FormControl fullWidth sx={{ mb: 2 }}>
-          <label htmlFor="Email">Email</label>
+          <label htmlFor="Email">{t("RegisterForm.Email")}</label>
           <TextField
             id="Email"
-            placeholder="Please type here ..."
+            placeholder={t("RegisterForm.Please-type")}
             sx={{ width: "100%" }}
             variant="filled"
             slotProps={{
@@ -234,7 +236,7 @@ const onSubmit = async (data: IRegisterForm) => {
           )}
         </FormControl>
 
-        <InputLabel htmlFor="password">Password</InputLabel>
+        <InputLabel htmlFor="password">{t("RegisterForm.Password")}</InputLabel>
         <FormControl sx={{ width: "100%", mb: 2 }} variant="filled">
           <FilledInput
             id="password"
@@ -262,7 +264,7 @@ const onSubmit = async (data: IRegisterForm) => {
           )}
         </FormControl>
 
-        <InputLabel htmlFor="confirm-password">Confirm Password</InputLabel>
+        <InputLabel htmlFor="confirm-password">{t("RegisterForm.Confirm-Password")}</InputLabel>
         <FormControl sx={{ width: "100%", mb: 2 }} variant="filled">
           <FilledInput
             id="confirm-password"
@@ -288,7 +290,7 @@ const onSubmit = async (data: IRegisterForm) => {
               ...CONFIRMPASSWORD_VALIDATION,
               validate: (confirmPassword) =>
                 confirmPassword === watch("password") ||
-                "Passwords do not match",
+              t("RegisterForm.Passwords-not-match"),
             })}
             error={!!errors.confirmPassword}
           />
@@ -326,7 +328,7 @@ const onSubmit = async (data: IRegisterForm) => {
                 },
               }}
             >
-              Upload Image
+              {t("RegisterForm.Upload-Image")}
               <VisuallyHiddenInput
                 type="file"
                 accept=".jpg, .jpeg, .png"
@@ -350,14 +352,14 @@ const onSubmit = async (data: IRegisterForm) => {
               }}
             >
               <Typography variant="body1">
-                Image uploaded successfully!
+              {t("RegisterForm.Upload-Image")}
               </Typography>
               <Button
                 variant="text"
                 onClick={handleUploadNewImage}
                 sx={{ color: "#dc3545" }}
               >
-                Remove
+                {t("RegisterForm.Remove")}
               </Button>
             </Box>
           )}
@@ -370,7 +372,7 @@ const onSubmit = async (data: IRegisterForm) => {
           variant="contained"
           sx={{ backgroundColor: THEMECOLOR.mainBlue }}
         >
-          {isSubmitting ? "Register..." : "Register"}
+          {isSubmitting ? t("RegisterForm.Register..."): t("RegisterForm.Register")}
         </Button>
       </form>
     </>
