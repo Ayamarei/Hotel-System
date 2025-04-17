@@ -19,15 +19,10 @@ function App() {
   // local
   const { t } = useTranslation();
   const lng=cookies.get("i18next")||"en";
-  // useEffect(()=>{
-  //     window.document.dir=i18n.dir();
-  //   },[lng])
-  useEffect(() => {
-    document.documentElement.lang = lng;
-    document.documentElement.dir = i18n.dir(lng); // <<< التعديل هنا
-  }, [lng]);
-  
-  
+
+  useEffect(()=>{
+      window.document.dir=i18n.dir();
+    },[lng])
 
   // routes
   const routes=createBrowserRouter([
