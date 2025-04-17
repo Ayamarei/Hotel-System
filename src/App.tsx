@@ -12,7 +12,17 @@ import { useTranslation, initReactI18next } from "react-i18next";
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import i18n from './i18n'
 import cookies from "js-cookie"
-
+import MasterLayout from './Shared/MasterLayout/MasterLayout'
+import RoomsList from './Rooms/RoomsList/RoomsList'
+import RoomsData from './Rooms/RoomsData/RoomsData'
+import AdsList from './ADS/AdsList/AdsList'
+import AdsData from './ADS/AdsData/AdsData'
+import FacilitiesData from './Facilities/FacilitiesData/FacilitiesData'
+import FacilitiesList from './Facilities/FacilitiesList/FacilitiesList'
+import ListBooking from './Booking/ListBooking'
+import ListUsers from './Users/ListUsers'
+import Dashboard from './Modules/Dashboard/Dashboard'
+import ChangePassword from './Modules/Authentication/Change-Password/Change-Password'
 
 
 function App() {
@@ -36,11 +46,28 @@ function App() {
         {path:'register',element:<Register/>},
         {path:'forget-password',element:<ForgetPassword/>},
         {path:'reset-password',element:<ResetPassword/>},
+        {path:'Change-Password',element:<ChangePassword/>},
   
       ]
     },
-    // master layout
     // dashboard layout
+{
+  path:'dashboard',
+  element:<MasterLayout/>,
+  errorElement:<NotFound/>,
+  children:[
+    {path:'',element:<Dashboard/>},
+    {path:'rooms',element:<RoomsList/>},
+    {path:'rooms-data',element:<RoomsData/>},
+    {path:'ads',element:<AdsList/>},
+    {path:'ads-data',element:<AdsData/>},
+    {path:'facilities',element:<FacilitiesList/>},
+    {path:'facilities-data',element:<FacilitiesData/>},
+    {path:'list-booking',element:<ListBooking/>},
+    {path:'list-users',element:<ListUsers/>},
+
+  ]
+}
 
   ])
   return(
