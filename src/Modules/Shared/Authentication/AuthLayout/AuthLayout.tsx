@@ -47,6 +47,15 @@ export default function AuthLayout() {
         buttonTitle: 'Reset',
         href:"/login"
         },
+        '/change-password': {
+        image: '/src/assets/images/auth/reset-password.png',
+        title: 'change Password',
+        description: 'If you already have an account ',
+        subDescription: 'You Can',
+        spanDescription: 'Login here',
+        buttonTitle: 'Reset',
+        href:"/login"
+        },
     };
 
     // Get the current route's props or set default props

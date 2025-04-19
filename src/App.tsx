@@ -8,6 +8,7 @@ import Register from './Modules/Authentication/Register/Register'
 import ForgetPassword from './Modules/Authentication/Forget-Password/Forget-Password'
 import ResetPassword from './Modules/Authentication/Reset-Password/Reset-Password'
 import { Bounce, ToastContainer } from 'react-toastify'
+import ChangePassword from './Modules/Authentication/Change-Password/Change-Password'
 
 
 
@@ -24,6 +25,7 @@ function App() {
         {path:'register',element:<Register/>},
         {path:'forget-password',element:<ForgetPassword/>},
         {path:'reset-password',element:<ResetPassword/>},
+        {path:'change-password',element:<ChangePassword/>},
   
       ]
     },
