@@ -25,6 +25,10 @@ import Dashboard from './Modules/Dashboard/Dashboard'
 import ChangePassword from './Modules/Authentication/Change-Password/Change-Password'
 
 
+
+
+
+
 function App() {
   // local
   const { t } = useTranslation();
@@ -51,7 +55,7 @@ function App() {
       ]
     },
     // dashboard layout
-{
+    {
   path:'dashboard',
   element:<MasterLayout/>,
   errorElement:<NotFound/>,
@@ -90,14 +94,6 @@ function App() {
   </>
 );
 
-  
+
 }
 export default App
-
-
-
-
-
-{/* <h2>{t('Welcome to React')}</h2>
-<button onClick={()=>{i18n.changeLanguage("ar")}}>Ar</button>
-<button  onClick={()=>{i18n.changeLanguage("en")}}>En</button> */}

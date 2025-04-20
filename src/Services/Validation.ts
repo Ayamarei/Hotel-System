@@ -1,3 +1,4 @@
+
 // SIGNUP_VALIDATIN
 export const USER_NAME_VALIDATION={
   required: "Username is required",
@@ -45,9 +46,6 @@ export const CONFIRMPASSWORD_VALIDATION={
 
   },
 }
-
-
-
 export const EmailValidation_Forget={
   required:'Email is Required',
   pattern:{
