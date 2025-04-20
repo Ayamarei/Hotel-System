@@ -13,12 +13,13 @@ import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import { useTogglePassword } from "../../../hooks/useTogglePassword.tsx";
+import CustomInput from "../../Shared/CustomInput/CustomInput.tsx";
 
 
 export default function Login() {
-  let navigate =useNavigate()
+  let navigate = useNavigate()
 
-  let { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<ILogin>({mode:"onTouched"})
+  let { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<ILogin>({ mode: "onTouched" })
 
   const context = useContext(AuthContext);
   if (!context) throw new Error("AuthContext must be used within AuthProvider");
@@ -56,72 +57,37 @@ export default function Login() {
   console.log(loginData);
 
 
-  // const [showPassword, setShowPassword] = React.useState(false);
+  const [showPassword, setShowPassword] = React.useState(false);
 
-  // const handleClickShowPassword = () => setShowPassword((show) => !show);
-  const {toggleVisiblePassword,visiablity}=useTogglePassword()
-
-  const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-  };
-
-  const handleMouseUpPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-  };
-
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
 
 
   return (
     <>
       <Box onSubmit={handleSubmit(onSubmit)} component="form" sx={{ width: "100%" }}>
 
-        <InputLabel sx={{ color: THEMECOLOR.LabelColor }} htmlFor="filled-basic" >Email Address</InputLabel>
-        <TextField id="filled-basic"
-          sx={{ display: "flex", mt: "10px", width: "100%" }}
-          {...register("email", EMAIL_VALIDATION)}
-          variant="filled"
+        <CustomInput
+          label="Email Address"
+          type="text"
           placeholder="Please type here"
-          error={!!errors.email}
+          register={register}
+          name="email"
+          error={errors.email?.message}
+          rules={EMAIL_VALIDATION}
         />
-        {errors.email && (
-          <span style={{ color: "red", fontSize: "14px", marginTop: "4px" }}>
-            {errors.email.message}
-          </span>
-        )}
 
-        <InputLabel sx={{ color: THEMECOLOR.LabelColor, mt: "30px" }} htmlFor="filled-basic" > Password</InputLabel>
-        <FormControl sx={{ width: "100%" }}
-          variant="filled">
-          <FilledInput
-            {...register("password", PASSWORD_VALIDATION)}
-            placeholder="Please type here"
-            error={!!errors.password}
-            id="filled-adornment-password"
-            type={visiablity.password ? 'text' : 'password'}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label={
-                    visiablity.password ? 'hide the password' : 'display the password'
-                  }
-                  onClick={()=>{toggleVisiblePassword("password")}}
-                  onMouseDown={handleMouseDownPassword}
-                  onMouseUp={handleMouseUpPassword}
-                  edge="end"
 
-                >
-                  {visiablity.password ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            }
-          />
-        </FormControl>
-
-        {errors.password && (
-          <span style={{ color: "red", fontSize: "14px", marginTop: "4px" }}>
-            {errors.password.message}
-          </span>
-        )}
+        <CustomInput
+          label="Password"
+          type="password"
+          placeholder="Please type your password"
+          register={register}
+          name="password"
+          error={errors.password?.message}
+          showPassword={showPassword}
+          onTogglePasswordVisibility={handleClickShowPassword}
+          rules={PASSWORD_VALIDATION}
+        />
 
         <Button
           variant="contained"
