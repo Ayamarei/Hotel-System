@@ -30,9 +30,13 @@ function App() {
   const { t } = useTranslation();
   const lng=cookies.get("i18next")||"en";
 
-  useEffect(()=>{
-      window.document.dir=i18n.dir();
-    },[lng])
+  // useEffect(()=>{
+  //     window.document.dir=i18n.dir();
+  //   },[lng])
+  useEffect(() => {
+    document.dir = i18n.dir(i18n.language);
+  }, [i18n.language]);
+  
 
   // routes
   const routes=createBrowserRouter([
@@ -81,7 +85,8 @@ function App() {
     hideProgressBar={false}
     newestOnTop={false}
     closeOnClick={false}
-    rtl={false}
+    // rtl={false}
+    rtl={lng === "ar"}
     pauseOnFocusLoss
     draggable
     pauseOnHover
@@ -97,7 +102,3 @@ export default App
 
 
 
-
-{/* <h2>{t('Welcome to React')}</h2>
-<button onClick={()=>{i18n.changeLanguage("ar")}}>Ar</button>
-<button  onClick={()=>{i18n.changeLanguage("en")}}>En</button> */}

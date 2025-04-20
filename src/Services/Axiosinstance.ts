@@ -9,6 +9,7 @@ export const publicUserAxiosInstance=axios.create({
 //private   need Token after login
 export const privateUserAxiosInstance=axios.create({
     baseURL:`${baseURL}${userURL}`,
+
 })
 
 

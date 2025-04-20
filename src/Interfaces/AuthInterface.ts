@@ -19,3 +19,8 @@ export interface IRegisterForm {
     confirmPassword:string
 
 }
+//login
+export interface ILogin{
+    email:string
+    password:string
+  }
