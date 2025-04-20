@@ -8,7 +8,7 @@ export const USER_NAME_VALIDATION={
   }
   
 }
-
+<<<<<<< HEAD
 export const PasswordValidation_Reset={
     required:'Password is Required',
     validate: {
@@ -23,7 +23,7 @@ export const PasswordValidation_Reset={
       minLength: (value: string) =>
         value.length >= 6 || "Password must be at least 6 characters long.",
     }
-  }
+=======
 export const COUNTRY_VALIDATION={
 required: "country  is required",
 pattern: {
@@ -68,6 +68,7 @@ export const EmailValidation_Forget={
     value:/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
     message:'Please Enter a valid Email'
    }
+>>>>>>> main
  }
 export const SeedValidation_Reset={
   required:'OTP is Required',
@@ -76,7 +77,13 @@ export const SeedValidation_Reset={
       message:"Enter min 4 characters"
      }
 }
-
+export const PasswordValidation_Reset={
+  required:'Password is Required',
+  pattern:{
+    value:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$/,
+   message:"The password must include at least one lowercase letter, one uppercase letter, one digit, one special character, and be at least 6 characters long."
+ }
+}
 
 export const PasswordComfirmValidation_Reset={
   required:'confirmPassword is Required'

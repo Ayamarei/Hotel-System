@@ -16,9 +16,11 @@ privateUserAxiosInstance.interceptors.request.use(
     (config) => {
       const token = localStorage.getItem("token");
       if (token) {
-
+<<<<<<< HEAD
         config.headers["Authorization"] =token
-
+=======
+        config.headers["Authorization"] = `${token}`;
+>>>>>>> main
       }
       return config;
     },
