@@ -1,5 +1,3 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-
 import './App.css'
 import AuthLayout from './Modules/Shared/Authentication/AuthLayout/AuthLayout'
 import NotFound from './Modules/Shared/NotFound/NotFound'
@@ -8,13 +6,20 @@ import Register from './Modules/Authentication/Register/Register'
 import ForgetPassword from './Modules/Authentication/Forget-Password/Forget-Password'
 import ResetPassword from './Modules/Authentication/Reset-Password/Reset-Password'
 import { Bounce, ToastContainer } from 'react-toastify'
-import ChangePassword from './Modules/Authentication/Change-Password/Change-Password'
-import ADSlist from './Modules/ADS/ADS-List/ADS-list'
 
 
 
 
 function App() {
+  // local
+  const { t } = useTranslation();
+  const lng=cookies.get("i18next")||"en";
+
+  useEffect(()=>{
+      window.document.dir=i18n.dir();
+    },[lng])
+
+  // routes
   const routes=createBrowserRouter([
     // auth layout
     {
@@ -26,35 +31,50 @@ function App() {
         {path:'register',element:<Register/>},
         {path:'forget-password',element:<ForgetPassword/>},
         {path:'reset-password',element:<ResetPassword/>},
-        
+  
       ]
     },
-    {path:'change-password',element:<ADSlist/>},
     
     // master layout
-    
-    // dashboard layout
+    {
+  path:'dashboard',
+  element:<MasterLayout/>,
+  errorElement:<NotFound/>,
+  children:[
+    {path:'',element:<Dashboard/>},
+    {path:'rooms',element:<RoomsList/>},
+    {path:'rooms-data',element:<RoomsData/>},
+    {path:'ads',element:<AdsList/>},
+    {path:'ads-data',element:<AdsData/>},
+    {path:'facilities',element:<FacilitiesList/>},
+    {path:'facilities-data',element:<FacilitiesData/>},
+    {path:'list-booking',element:<ListBooking/>},
+    {path:'list-users',element:<ListUsers/>},
 
-  ])
-
-  return (
-    <>
-    <RouterProvider router={routes}></RouterProvider>
-    <ToastContainer
-      position="top-right"
-      autoClose={3000}
-      hideProgressBar={false}
-      newestOnTop={false}
-      closeOnClick={false}
-      rtl={false}
-      pauseOnFocusLoss
-      draggable
-      pauseOnHover
-      theme="colored"
-      transition={Bounce}/>
-
-    </>
-  )
+  ]
 }
 
+  ])
+  return(
+ <>
+<button onClick={()=>{i18n.changeLanguage("ar")}}>Ar</button>
+<button  onClick={()=>{i18n.changeLanguage("en")}}>En</button>
+  <RouterProvider router={routes}></RouterProvider>
+  <ToastContainer
+    position="top-right"
+    autoClose={3000}
+    hideProgressBar={false}
+    newestOnTop={false}
+    closeOnClick={false}
+    rtl={false}
+    pauseOnFocusLoss
+    draggable
+    pauseOnHover
+    theme="colored"
+    transition={Bounce}/>
+  </>
+);
+
+
+}
 export default App

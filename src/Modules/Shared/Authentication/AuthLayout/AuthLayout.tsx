@@ -99,7 +99,7 @@ export default function AuthLayout() {
                         cation
                         </Typography>
                     </Typography>
-                    <Box sx={{ textAlign: 'left', marginLeft: {xs:'40px', sm:'123px'} ,  marginRight: {xs:'40px', sm:'123px'} }}>
+                    <Box sx={{ textAlign: 'start', marginLeft: {xs:'40px', sm:'123px'} ,  marginRight: {xs:'40px', sm:'123px'} }}>
                         <Typography variant="h5" sx={{fontWeight:'bold', marginTop: {xs:2,md:6}, marginBottom: {xs:2,md:3 }}}>
                             {title}
                         </Typography>
@@ -144,7 +144,7 @@ export default function AuthLayout() {
                 sx={{
                     display: {xs:'none',md:'block'} ,
                     width:'95%' ,
-                    height: '100vh', 
+                    height: '140vh', 
                     backgroundImage: `url(${image})`,
                     backgroundSize: 'cover', 
                     backgroundPosition: 'center',

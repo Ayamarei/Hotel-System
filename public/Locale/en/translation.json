@@ -1,0 +1,19 @@
+{
+    "RegisterForm":{
+        "Please-type":"Please type here ...",
+        "User-Name":"User Name",
+        "Phone-number":"Phone number",
+        "Country":"Country",
+        "Email":"Email",
+        "Password":"Password",
+        "Confirm-Password":"Confirm Password",
+        "Passwords-not-match":"Passwords do not match",
+        "Upload-Image":"Upload Image",
+        "Image-uploaded":"Image uploaded successfully!",
+        "Remove":"Remove",
+        "Register...":"Register...",
+        "Register":"Register"
+}
+
+
+}
