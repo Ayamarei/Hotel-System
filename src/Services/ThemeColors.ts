@@ -3,6 +3,8 @@ const MAIN_RED = "rgba(255, 22, 18, 1)";
 const LIGHT_BLACK = "rgba(0, 0, 0, 0.8)";
 const LIGHT_GRAG = "rgba(77, 77, 77, 1)";
 const LABEL_COLOR = "rgba(21, 44, 91, 1)";
+const HEAD_TABLE_COLOR = "rgba(226, 229, 235, 1)";
+
 
 export const THEMECOLOR ={
     mainBlue: `${MAIN_BLUE}`,
@@ -10,4 +12,5 @@ export const THEMECOLOR ={
     lightBlack: `${LIGHT_BLACK}`,
     lightGrag: `${LIGHT_GRAG}`,
     LabelColor: `${LABEL_COLOR}`,
+    HeadTableColor: `${HEAD_TABLE_COLOR}`,
 }

@@ -1,7 +1,7 @@
 import { Outlet, useLocation } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import { Button, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import { THEMECOLOR } from '../../../../Services/ThemeColors';
 import { IAuthProps } from '../../../../Interfaces/AuthProps';
 import Link from '@mui/material/Link';

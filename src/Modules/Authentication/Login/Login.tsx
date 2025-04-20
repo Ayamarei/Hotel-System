@@ -12,12 +12,13 @@ import { AuthContext } from "../../../context/AuthContext.tsx";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
+import { useTogglePassword } from "../../../hooks/useTogglePassword.tsx";
 
 
 export default function Login() {
   let navigate =useNavigate()
 
-  let { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<ILogin>()
+  let { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<ILogin>({mode:"onTouched"})
 
   const context = useContext(AuthContext);
   if (!context) throw new Error("AuthContext must be used within AuthProvider");
@@ -43,8 +44,6 @@ export default function Login() {
       }
 
 
-
-
     } catch (error) {
       const err = error as AxiosError<{ message: string }>;
       toast.error(err.response?.data?.message || "Login failed");
@@ -57,9 +56,10 @@ export default function Login() {
   console.log(loginData);
 
 
-  const [showPassword, setShowPassword] = React.useState(false);
+  // const [showPassword, setShowPassword] = React.useState(false);
 
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  // const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const {toggleVisiblePassword,visiablity}=useTogglePassword()
 
   const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -97,20 +97,20 @@ export default function Login() {
             placeholder="Please type here"
             error={!!errors.password}
             id="filled-adornment-password"
-            type={showPassword ? 'text' : 'password'}
+            type={visiablity.password ? 'text' : 'password'}
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
                   aria-label={
-                    showPassword ? 'hide the password' : 'display the password'
+                    visiablity.password ? 'hide the password' : 'display the password'
                   }
-                  onClick={handleClickShowPassword}
+                  onClick={()=>{toggleVisiblePassword("password")}}
                   onMouseDown={handleMouseDownPassword}
                   onMouseUp={handleMouseUpPassword}
                   edge="end"
 
                 >
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                  {visiablity.password ? <VisibilityOff /> : <Visibility />}
                 </IconButton>
               </InputAdornment>
             }
