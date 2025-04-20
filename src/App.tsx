@@ -9,6 +9,7 @@ import ForgetPassword from './Modules/Authentication/Forget-Password/Forget-Pass
 import ResetPassword from './Modules/Authentication/Reset-Password/Reset-Password'
 import { Bounce, ToastContainer } from 'react-toastify'
 import ChangePassword from './Modules/Authentication/Change-Password/Change-Password'
+import ADSlist from './Modules/ADS/ADS-List/ADS-list'
 
 
 
@@ -25,10 +26,10 @@ function App() {
         {path:'register',element:<Register/>},
         {path:'forget-password',element:<ForgetPassword/>},
         {path:'reset-password',element:<ResetPassword/>},
-        {path:'change-password',element:<ChangePassword/>},
-  
+        
       ]
     },
+    {path:'change-password',element:<ADSlist/>},
     
     // master layout
     
