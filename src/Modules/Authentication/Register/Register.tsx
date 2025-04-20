@@ -27,13 +27,16 @@ import { publicUserAxiosInstance } from "../../../Services/Axiosinstance";
 import { USERS_URLS } from "../../../Services/Urls";
 import ImageUpload from "../../Shared/Imageupload/ImageUpload";
 import CustomInput from "../../Shared/CustomInput/CustomInput";
-
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { AxiosError } from "axios";
+import { useTranslation } from "react-i18next";
 export default function Register() {
   const [uploadedImage, setUploadedImage] = React.useState<File | null>(null);
   const [uploadSuccess, setUploadSuccess] = React.useState(false);
   const [showPassword, setShowPassword] = React.useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
-
+  const navigate=useNavigate();
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleClickShowConfirmPassword = () =>
     setShowConfirmPassword((show) => !show);
@@ -83,15 +86,13 @@ const onSubmit = async (data: IRegisterForm) => {
       }
     );
 
-    console.log("✅ Registered successfully:", response.data.message);
-  } catch (error: any) {
-    if (error.response) {
-      console.error("❌ Server responded with error:", error.response.data);
-    } else if (error.request) {
-      console.error("❌ No response received from server");
-    } else {
-      console.error("❌ Error in setting up the request:", error.message);
-    }
+    toast.success(response.data?.message)
+   navigate('/login')
+  }catch (error) {
+    console.log(error)
+      if(error instanceof AxiosError){
+        toast.error(error?.response?.data?.message||'Something Went Wrong')
+      }
   }
 };
 
@@ -118,11 +119,10 @@ const onSubmit = async (data: IRegisterForm) => {
     setUploadSuccess(false);
     setUploadedImage(null);
   };
-
+const { t } = useTranslation();
   return (
     <>
-
-      <form onSubmit={handleSubmit(onSubmit)}>
+<form onSubmit={handleSubmit(onSubmit)}>
       <CustomInput
         label="Username"
         type="text"
@@ -132,7 +132,6 @@ const onSubmit = async (data: IRegisterForm) => {
         error={errors.userName?.message}
         rules={USER_NAME_VALIDATION}
       />
-
         <Box sx={{ width: "100%" }}>
           <Grid
             container
@@ -149,7 +148,6 @@ const onSubmit = async (data: IRegisterForm) => {
                 error={errors.phoneNumber?.message}
                 rules={PHONE_VALIDATION}
               />
-
             </Grid>
 
             <Grid size={6}>
@@ -162,7 +160,6 @@ const onSubmit = async (data: IRegisterForm) => {
                 error={errors.country?.message}
                 rules={COUNTRY_VALIDATION}
               />
-
             </Grid>
           </Grid>
         </Box>
@@ -187,7 +184,6 @@ const onSubmit = async (data: IRegisterForm) => {
         onTogglePasswordVisibility={handleClickShowPassword}
         rules={PASSWORD_VALIDATION}
       />
-
         <CustomInput
           label="Confirm Password"
           type={showConfirmPassword ? "text" : "password"}

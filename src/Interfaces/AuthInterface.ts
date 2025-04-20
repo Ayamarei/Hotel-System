@@ -1,13 +1,3 @@
-
-// Register
-export interface IRegisterForm {
-    userName:string,
-    phoneNumber:string,
-    country:string,
-    email:string,
-    password:string,
-    confirmPassword:string
-
 //forget
 export interface IForget{
     email:string
@@ -20,5 +10,13 @@ export interface IReset{
     confirmPassword:string
 
 }
+// Register
+export interface IRegisterForm {
+    userName:string,
+    phoneNumber:string,
+    country:string,
+    email:string,
+    password:string,
+    confirmPassword:string
 
-
+}
