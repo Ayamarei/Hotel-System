@@ -11,7 +11,8 @@ export default function BasicModal() {
 
   return (
     <>
-      <Button onClick={handleOpen}>Open modal</Button>
+    
+      <Button onClick={handleOpen}>Change Password</Button>
       <ChangePasswordModal handleClose={handleClose} open={open}></ChangePasswordModal>
    
     </>

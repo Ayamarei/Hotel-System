@@ -17,7 +17,12 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import CloseIcon from "@mui/icons-material/Close";
 
-type ChangePasswordData = any;
+type ADSFormProps = {
+    open: boolean;
+    handleClose: () => void;
+  };
+
+  type ChangePasswordData = any;
 
 const style = {
   position: "absolute",
@@ -30,62 +35,53 @@ const style = {
   borderRadius: "17px",
   width: "50%",
 };
-
-type ChangePassProps = {
-  open: boolean;
-  handleClose: () => void;
-};
 const passInputStyle = { py: "1px",width: "100%", m: "0" };
-export default function ChangePasswordModal({
-  handleClose,
-  open,
-}: ChangePassProps) {
-  const [showOldPassword, setShowOldPassword] = useState(false);
-  const [showNewPassword, setShowNewPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-    watch,
-    trigger,
-  } = useForm<ChangePasswordData>({
-    mode: "onChange",
-  });
-  const newPassword = watch("newPassword");
-  const confirmNewPassword = watch("confirmNewPassword");
-  useEffect(() => {
-    if (confirmNewPassword) {
-      trigger("confirmNewPassword");
-    }
-  }, [newPassword, confirmNewPassword, trigger]);
 
-  const onSubmit = async (values: ChangePasswordData) => {
-    try {
-      const { data } = await privateUserAxiosInstance.post(
-        USERS_URLS.CHANGE_PASSWORD,
-        values
-      );
-      if (data?.message != "error") {
-        toast.success(data?.message);
-        handleClose();
-      } else {
-        toast.error("Something Went Wrong");
-      }
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        toast.error(error.response?.data?.message || "Something Went Wrong");
-      } else if (error instanceof Error) {
-        toast.error(error.message || "Something Went Wrong");
-      } else {
-        toast.error("Something Went Wrong");
-      }
-    }
-  };
+
+
+export default function ADSFormModal({open,handleClose}:ADSFormProps) {
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors, isSubmitting },
+      } = useForm<ChangePasswordData>({
+        mode: "onChange",
+      });
+      
+      useEffect(() => {
+        // if () {
+        
+        // }
+      }, []);
+    
+      const onSubmit = async (values: ChangePasswordData) => {
+        console.log("submit");
+        // try {
+        //   const { data } = await privateUserAxiosInstance.post(
+        //     USERS_URLS.CHANGE_PASSWORD,
+        //     values
+        //   );
+        //   if (data?.message != "error") {
+        //     toast.success(data?.message);
+        //     handleClose();
+        //   } else {
+        //     toast.error("Something Went Wrong");
+        //   }
+        // } catch (error) {
+        //   if (error instanceof AxiosError) {
+        //     toast.error(error.response?.data?.message || "Something Went Wrong");
+        //   } else if (error instanceof Error) {
+        //     toast.error(error.message || "Something Went Wrong");
+        //   } else {
+        //     toast.error("Something Went Wrong");
+        //   }
+        // }
+      };
+    
 
   return (
-    <div>
-      <Modal
+    <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
@@ -220,6 +216,5 @@ export default function ChangePasswordModal({
           </form>
         </Box>
       </Modal>
-    </div>
-  );
+  )
 }
