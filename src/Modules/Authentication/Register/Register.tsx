@@ -1,3 +1,4 @@
+
 import {
   TextField,
   Grid,
@@ -121,12 +122,12 @@ const onSubmit = async (data: IRegisterForm) => {
   };
 const { t } = useTranslation();
   return (
-    <>
+   <>
 <form onSubmit={handleSubmit(onSubmit)}>
       <CustomInput
         label="Username"
         type="text"
-        placeholder="Please type here ..."
+        placeholder={t("RegisterForm.Please-type")}
         register={register}
         name="userName"
         error={errors.userName?.message}
