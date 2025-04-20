@@ -6,3 +6,8 @@ export const USERS_URLS={
   RESET_PASSWORD:'/users/reset-password',
   FORGET_PASSWORD:'/users/forgot-password',
 }
+// /room-facilities-url
+export const FACILITES_URLS={
+  GET_FACILITES:"/room-facilities"
+}
+
