@@ -10,4 +10,3 @@ export const USERS_URLS={
 export const FACILITES_URLS={
   GET_FACILITES:"/room-facilities"
 }
-

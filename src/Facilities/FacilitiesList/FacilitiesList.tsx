@@ -1,4 +1,4 @@
-import { Paper, styled, Table, TableBody, TableCell, tableCellClasses, TableContainer, TableHead, TableRow } from "@mui/material";
+import { Box, Button, Paper, styled, Table, TableBody, TableCell, tableCellClasses, TableContainer, TableHead, TableRow } from "@mui/material";
 import { THEMECOLOR } from "../../Services/ThemeColors";
 import { privateUserAxiosInstance } from "../../Services/Axiosinstance";
 import { FACILITES_URLS } from "../../Services/Urls";
@@ -52,7 +52,47 @@ export default function FacilitesList() {
 
   return (
     <>
-    <div className="content">
+    <Box className="content ">
+      {/* <Box sx={{display:"flex",justifyContent:"space-between",mx:"30px"}}>
+       <div>
+       <p>Facilities Table Details</p>
+       <p>You can check all details</p>
+       </div>
+       <Button sx={{backgroundColor:"#203FC7", height:"50px" }} variant="contained">Add New Facility</Button>
+      </Box> */}
+      <Box
+  sx={(theme) => ({
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    mx: "30px",
+    gap: 2,
+    flexDirection: "row", 
+
+    [theme.breakpoints.down("md")]: {
+      flexDirection: "column", 
+      alignItems: "center",
+      my:"30px"
+    },
+  })}
+>
+  <div>
+    <p>Facilities Table Details</p>
+    <p>You can check all details</p>
+  </div>
+  <Button
+    sx={{
+      backgroundColor: "#203FC7",
+      height: "50px",
+      mt: { xs: 1, sm: 0 }, 
+    }}
+    variant="contained"
+  >
+    Add New Facility
+  </Button>
+</Box>
+
+<Box sx={{ overflowX: "auto" ,width:"auto"}}>
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
@@ -77,7 +117,8 @@ export default function FacilitesList() {
         </TableBody>
       </Table>
     </TableContainer>
-    </div>
+    </Box>
+    </Box>
     
     </>
   )

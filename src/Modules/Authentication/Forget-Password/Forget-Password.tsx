@@ -38,7 +38,7 @@ try {
   return (
     <form onSubmit={handleSubmit(onSubmit)} style={{width:"100%"}}>
   <Box>
-  <InputLabel sx={{color:"rgba(21, 44, 91, 1)",mb:"8px"}}>Email</InputLabel>
+  <InputLabel sx={{color:THEMECOLOR.LabelColor,mb:"8px"}}>Email</InputLabel>
         <TextField
                  id="email"
                  label="Please type here ..."

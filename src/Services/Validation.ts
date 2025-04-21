@@ -1,5 +1,6 @@
 
-// SIGNUP_VALIDATIN
+
+  // SIGNUP_VALIDATIN
 export const USER_NAME_VALIDATION={
   required: "Username is required",
   pattern: {
@@ -69,5 +70,5 @@ export const PasswordValidation_Reset={
 }
 
 export const PasswordComfirmValidation_Reset={
-  required:'confirmPassword is Required'
- }
+    required:'confirmPassword is Required'
+   }

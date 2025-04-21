@@ -54,7 +54,7 @@ function App() {
   
       ]
     },
-    // dashboard layout
+    
     {
   path:'dashboard',
   element:<MasterLayout/>,
@@ -72,28 +72,27 @@ function App() {
 
   ]
 }
-
   ])
-  return(
- <>
-<button onClick={()=>{i18n.changeLanguage("ar")}}>Ar</button>
-<button  onClick={()=>{i18n.changeLanguage("en")}}>En</button>
-  <RouterProvider router={routes}></RouterProvider>
-  <ToastContainer
-    position="top-right"
-    autoClose={3000}
-    hideProgressBar={false}
-    newestOnTop={false}
-    closeOnClick={false}
-    rtl={false}
-    pauseOnFocusLoss
-    draggable
-    pauseOnHover
-    theme="colored"
-    transition={Bounce}/>
-  </>
-);
 
+  return (
+    <>
+    <button onClick={()=>{i18n.changeLanguage("ar")}}>Ar</button>
+    <button  onClick={()=>{i18n.changeLanguage("en")}}>En</button>
+    <RouterProvider router={routes}></RouterProvider>
+    <ToastContainer
+      position="top-right"
+      autoClose={3000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick={false}
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="colored"
+      transition={Bounce}/>
 
+    </>
+  )
 }
 export default App
