@@ -10,6 +10,7 @@ import { DASHBOARD_URLS } from "../../Services/Urls";
 import { AxiosError } from "axios";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export interface IBookings {
   completed: number;
@@ -30,20 +31,20 @@ export interface IDashboardData {
 }
 
 const Dashboard = () => {
-  const [dashboardData,setDashboardData]=useState<IDashboardData|null>(null);
-  console.log("dashboardData",dashboardData);
+  const [dashboardData, setDashboardData] = useState<IDashboardData | null>(null);
+  const { i18n } = useTranslation();
+  console.log("dashboardData", dashboardData);
 
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: "#fff",
     ...theme.typography.body2,
     padding: theme.spacing(2),
     textAlign: "center",
-    color: (theme.vars ?? theme).palette.text.secondary,
+    color: theme.palette.text.secondary,
     ...theme.applyStyles("dark", {
       backgroundColor: "#1A2027",
     }),
   }));
-
 
   // charts
   ChartJS.register(ArcElement, Tooltip, Legend);
@@ -51,8 +52,8 @@ const Dashboard = () => {
     labels: ["completed", "pending"],
     datasets: [
       {
-        label:"Booking",
-        data: [dashboardData?.bookings.completed??0,dashboardData?.bookings.pending??0],
+        label: "Booking",
+        data: [dashboardData?.bookings.completed ?? 0, dashboardData?.bookings.pending ?? 0],
         backgroundColor: ["rgba(157, 87, 213, .5)", "rgba(83, 104, 240, .5)"],
         borderColor: ["rgba(157, 87, 213, 1)", "rgba(83, 104, 240, 1)"],
         borderWidth: 1,
@@ -65,7 +66,7 @@ const Dashboard = () => {
     datasets: [
       {
         label: "Users",
-        data: [dashboardData?.users.user??0,dashboardData?.users.admin??0],
+        data: [dashboardData?.users.user ?? 0, dashboardData?.users.admin ?? 0],
         backgroundColor: ["rgba(84, 209, 77, .5)", "rgba(53, 194, 253, .5)"],
         borderColor: ["rgba(84, 209, 77, 1)", "rgba(53, 194, 253, 1)"],
         borderWidth: 1,
@@ -81,66 +82,60 @@ const Dashboard = () => {
       },
     },
   };
-//fetch data
-const DashboardData=async()=>{
-    try{
-      const response=await privateUserAxiosInstance.get(DASHBOARD_URLS.CHART);
+
+  // fetch data
+  const DashboardData = async () => {
+    try {
+      const response = await privateUserAxiosInstance.get(DASHBOARD_URLS.CHART);
       setDashboardData(response.data.data);
-    }catch(error){
-    if(error instanceof AxiosError){
-      toast.error(error.response?.data.message||"Something went wrong")
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast.error(error.response?.data.message || "Something went wrong");
+      }
     }
-    }
-}
-useEffect(()=>{
-  DashboardData()
-},[])
+  };
+
+  useEffect(() => {
+    DashboardData();
+  }, []);
 
   return (
-    <div>
+    <div dir={i18n.language === "ar" ? "rtl" : "ltr"}>
       <Box sx={{ flexGrow: 1, marginBottom: "80px" }}>
-        <Grid
-          container
-          spacing={{ xs: 2, md: 3 }}
-          columns={{ xs: 4, sm: 8, md: 12 }}
-        >
+        <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
           <Grid size={{ xs: 4, sm: 4, md: 4 }}>
-            <Item
-              sx={{ height: "180px", backgroundColor: THEMECOLOR.darkBlack }}
-            >
+            <Item sx={{ height: "180px", backgroundColor: THEMECOLOR.darkBlack }}>
               <Stack
-                direction="row"
-                spacing={20}
-                justifyContent="center"
+                direction={i18n.language === "ar" ? "row-reverse" : "row"}
+                spacing={5}
+                justifyContent="space-between"
                 alignItems="center"
                 sx={{ height: "150px", color: THEMECOLOR.White }}
               >
                 <div>
-                  <Typography >{dashboardData?.rooms}</Typography>
+                  <Typography>{dashboardData?.rooms}</Typography>
                   <Typography>Rooms</Typography>
                 </div>
                 <div>
                   <WorkOutline
                     sx={{
-                      color: THEMECOLOR.mainBlue,
+                      color: THEMECOLOR.Dark_Baby_Blue,
                       borderRadius: "50px",
                       p: 1.5,
                       fontSize: "50px",
                       backgroundColor: THEMECOLOR.lightBlue,
                     }}
-                  />{" "}
+                  />
                 </div>
               </Stack>
             </Item>
           </Grid>
           <Grid size={{ xs: 4, sm: 4, md: 4 }}>
-            <Item
-              sx={{ height: "180px", backgroundColor: THEMECOLOR.darkBlack }}
-            >
+            <Item sx={{ height: "180px", backgroundColor: THEMECOLOR.darkBlack }}>
               <Stack
-                direction="row"
-                spacing={20}
-                justifyContent="center"
+                direction={i18n.language === "ar" ? "row-reverse" : "row"}
+                spacing={5}
+                justifyContent="space-between"
                 alignItems="center"
                 sx={{ height: "150px", color: THEMECOLOR.White }}
               >
@@ -157,19 +152,17 @@ useEffect(()=>{
                       fontSize: "50px",
                       backgroundColor: THEMECOLOR.lightBlue,
                     }}
-                  />{" "}
+                  />
                 </div>
               </Stack>
             </Item>
           </Grid>
           <Grid size={{ xs: 4, sm: 4, md: 4 }}>
-            <Item
-              sx={{ height: "180px", backgroundColor: THEMECOLOR.darkBlack }}
-            >
+            <Item sx={{ height: "180px", backgroundColor: THEMECOLOR.darkBlack }}>
               <Stack
-                direction="row"
-                spacing={20}
-                justifyContent="center"
+                direction={i18n.language === "ar" ? "row-reverse" : "row"}
+                spacing={5}
+                justifyContent="space-between"
                 alignItems="center"
                 sx={{ height: "150px", color: THEMECOLOR.White }}
               >
@@ -186,7 +179,7 @@ useEffect(()=>{
                       fontSize: "50px",
                       backgroundColor: THEMECOLOR.lightBlue,
                     }}
-                  />{" "}
+                  />
                 </div>
               </Stack>
             </Item>
@@ -197,7 +190,6 @@ useEffect(()=>{
       <Grid size={{ xs: 4, sm: 4, md: 4 }}>
         <Stack
           direction={{ xs: "column", md: "row" }}
-          // spacing="350px"
           spacing={{ xs: 5, md: "350px" }}
           justifyContent="center"
           alignItems="center"
@@ -247,8 +239,7 @@ useEffect(()=>{
                       sx={{
                         width: 12,
                         height: 12,
-                        backgroundColor:
-                          data2.datasets[0].backgroundColor[index],
+                        backgroundColor: data2.datasets[0].backgroundColor[index],
                         borderRadius: "50%",
                         mr: 1.5,
                       }}
@@ -264,8 +255,10 @@ useEffect(()=>{
           </Box>
         </Stack>
       </Grid>
+      
     </div>
   );
 };
 
 export default Dashboard;
+

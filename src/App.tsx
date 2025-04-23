@@ -6,9 +6,8 @@ import Register from './Modules/Authentication/Register/Register'
 import ForgetPassword from './Modules/Authentication/Forget-Password/Forget-Password'
 import ResetPassword from './Modules/Authentication/Reset-Password/Reset-Password'
 import { Bounce, ToastContainer } from 'react-toastify'
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
-import { useTranslation, initReactI18next } from "react-i18next";
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import i18n from './i18n'
 import cookies from "js-cookie"
@@ -27,12 +26,9 @@ import ChangePassword from './Modules/Authentication/Change-Password/Change-Pass
 
 function App() {
   // local
-  const { t } = useTranslation();
+ 
   const lng=cookies.get("i18next")||"en";
 
-  // useEffect(()=>{
-  //     window.document.dir=i18n.dir();
-  //   },[lng])
   useEffect(() => {
     document.dir = i18n.dir(i18n.language);
   }, [i18n.language]);
@@ -76,8 +72,6 @@ function App() {
   ])
   return(
  <>
-<button onClick={()=>{i18n.changeLanguage("ar")}}>Ar</button>
-<button  onClick={()=>{i18n.changeLanguage("en")}}>En</button>
   <RouterProvider router={routes}></RouterProvider>
   <ToastContainer
     position="top-right"
@@ -85,7 +79,6 @@ function App() {
     hideProgressBar={false}
     newestOnTop={false}
     closeOnClick={false}
-    // rtl={false}
     rtl={lng === "ar"}
     pauseOnFocusLoss
     draggable
