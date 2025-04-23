@@ -8,5 +8,8 @@ export const USERS_URLS={
 }
 // /room-facilities-url
 export const FACILITES_URLS={
-  GET_FACILITES:"/room-facilities"
+  GET_FACILITES:"/room-facilities",
+  ADD_FACILITES:"/room-facilities",
+ DELETE_FACILITES:(id:string)=>`/room-facilities/${id}`,
+ EDIT_FACILITES:(id:string)=>`/room-facilities/${id}`,
 }
