@@ -72,3 +72,51 @@ export const PasswordValidation_Reset={
 export const PasswordComfirmValidation_Reset={
     required:'confirmPassword is Required'
    }
+// rooms validation
+export const RoomNumber_Validation = (t: Function) => ({
+  required: t("room.RoomNumberRequired"),
+  min: {
+    value: 1,
+    message: t("room.RoomNumberMin"),
+  },
+  max: {
+    value: 9999,
+    message: t("room.RoomNumberMax"),
+  },
+});
+
+export const RoomPrice_Validation = (t: Function) => ({
+  required: t("room.PriceRequired"),
+  min: {
+    value: 500,
+    message: t("room.PriceMin"),
+  },
+});
+
+export const Capacity_Validation = (t: Function) => ({
+  required: t("room.CapacityRequired"),
+  min: {
+    value: 1,
+    message: t("room.CapacityMin"),
+  },
+  max: {
+    value: 10,
+    message: t("room.CapacityMax"),
+  },
+});
+
+export const Discount_Validation = (t: Function) => ({
+  required: t("room.DiscountRequired"),
+  min: {
+    value: 0,
+    message: t("room.DiscountMin"),
+  },
+  max: {
+    value: 100,
+    message: t("room.DiscountMax"),
+  },
+});
+
+export const Facilities_Validation = (t: Function) => ({
+  required: t("room.FacilitiesRequired"),
+}); 

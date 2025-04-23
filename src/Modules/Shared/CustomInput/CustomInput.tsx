@@ -8,7 +8,7 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { UseFormRegister, FieldValues, Path, RegisterOptions } from "react-hook-form";
 
 interface CustomInputProps<T extends FieldValues> {
-  label: string;
+  label?: string;
   type: string;
   placeholder: string;
   register: UseFormRegister<T>;

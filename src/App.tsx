@@ -62,7 +62,8 @@ function App() {
   children:[
     {path:'',element:<Dashboard/>},
     {path:'rooms',element:<RoomsList/>},
-    {path:'rooms-data',element:<RoomsData/>},
+    {path:'rooms-data/:roomId',element:<RoomsData/>},
+    {path:'add-room',element:<RoomsData/>},
     {path:'ads',element:<AdsList/>},
     {path:'ads-data',element:<AdsData/>},
     {path:'facilities',element:<FacilitiesList/>},
