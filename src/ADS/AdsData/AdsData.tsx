@@ -1,11 +1,9 @@
-import React from 'react'
+// import React from 'react'
 
-const AdsData = () => {
+export default function AdsData() {
   return (
     <div>
-      <h1>AdsData</h1>
+      
     </div>
   )
 }
-
-export default AdsData
