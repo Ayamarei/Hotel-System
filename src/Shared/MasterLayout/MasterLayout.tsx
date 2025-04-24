@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -168,7 +168,10 @@ export default function PersistentDrawerLeft() {
     name: userDetails?.userName, 
     avatarUrl:userDetails?.profileImage, 
   };
-
+  useEffect(() => {
+    document.body.setAttribute('dir', i18n.language === 'ar' ? 'rtl' : 'ltr');
+  }, [i18n.language]);
+  
   return (
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
       <Box sx={{ display: "flex" }}>
@@ -232,7 +235,6 @@ export default function PersistentDrawerLeft() {
           variant="persistent"
           // anchor="left"
           anchor={i18n.language==="ar"?"right":"left"}
-
           open={open}
         >
           <DrawerHeader>
