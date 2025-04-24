@@ -1,11 +1,9 @@
-import React from 'react'
+// import React from 'react'
 
-const AdsList = () => {
+export default function AdsList() {
   return (
     <div>
-       <h1>AdsList</h1>
+      
     </div>
   )
 }
-
-export default AdsList

@@ -27,6 +27,9 @@ import { IRoomData, IRoomsResponse } from '../../Interfaces/RoomInterface';
 import { ROOMS_URLS } from '../../Services/Urls';
 import noimg from '../../assets/images/no-img.jpeg'
 import DeleteConfirmation from '../../Modules/Shared/DeleteConfirmation/DeleteConfirmation';
+import Heading from '../../Modules/Shared/Heading/Heading';
+import CustomTable from '../../Modules/Shared/CustomTable/CustomTable';
+import { IColumLable } from '../../Interfaces/CustomTableInterface';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -151,75 +154,41 @@ const deleteRoom=async()=>{
   React.useEffect(() => {
     getAllRooms(5,1);
   }, []);
+  const columnLabels:IColumLable[]= [
+    { label: "Room Number", align: "left" },
+  { label: "Images", align: "right" },
+  { label: "Price", align: "right" },
+  { label: "Capacity", align: "right" },
+  { label: "Discount", align: "right" },
+  { label: "Facilities", align: "right" },
+  { label: "Actions", align: "right" }
+  ];
 return (
     <>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: "center",flexDirection:{sm:'column',md:"row"} }}>
-        <Box>
-          <Typography sx={{ color: 'rgba(31, 38, 62, 1)', fontWeight: 500, fontSize: '20px' }}>Rooms Table Details</Typography>
-          <Typography sx={{ color: 'rgba(50, 60, 71, 1)', fontSize: "14px" }}>You can check all details</Typography>
-        </Box>
-        <Button
-          variant="contained"
-          color="primary"
-          component={Link}
-          to="/dashboard/add-room"
-          sx={{ px: '50px', py: "15px", backgroundColor: "rgba(32, 63, 199, 1)",mt:{sx:'20px',md:0} }}
-        >
-          Add new Room
-        </Button>
-      </Box>
-
-      <TableContainer component={Paper} sx={{ mt: '30px' }}>
      
-        <Table sx={{ minWidth: 700 }} aria-label="customized table">
-          {!loading  && 
-            <TableHead>
-              <TableRow>
-                <StyledTableCell>roomNumber</StyledTableCell>
-                <StyledTableCell align="right">images</StyledTableCell>
-                <StyledTableCell align="right">price</StyledTableCell>
-                <StyledTableCell align="right">capacity</StyledTableCell>
-                <StyledTableCell align="right">discount</StyledTableCell>
-                <StyledTableCell align="right">facilities</StyledTableCell>
-                <StyledTableCell align="right">Actions</StyledTableCell>
-              </TableRow>
-            </TableHead>
-          }
-          <TableBody>
-            {loading ? (
-              <StyledTableRow>
-                <StyledTableCell colSpan={7} align="center"><Loading /></StyledTableCell>
-              </StyledTableRow>
-            ) : rooms.length > 0 ? (
-              rooms.map((room) => (
-                <StyledTableRow key={room._id}>
-                  <StyledTableCell component="th" scope="row">{room.roomNumber}</StyledTableCell>
-                  <StyledTableCell align="right">
-                    <img src={room?.images[0] || noimg} style={{ width: '56px', height: '56px', borderRadius: '8px' }} />
-                  </StyledTableCell>
-                  <StyledTableCell align="right">{room.price}</StyledTableCell>
-                  <StyledTableCell align="right">{room.capacity}</StyledTableCell>
-                  <StyledTableCell align="right">{room.discount}</StyledTableCell>
-                  <StyledTableCell align="right">{room.facilities[0]?.name}</StyledTableCell>
-                  <StyledTableCell align="right">
-             <Actions handleMenuClick={(e)=>handleMenuClick(e,room)} 
-                 anchorEl={anchorEl} handleOpenModal={handleOpenModal}
-                 handleOpenEdit={handleOpenEdit} 
-                 handleOpenDelete={handleOpenDelete}
-                 handleMenuClose={handleMenuClose}
-                 room={room}
-                 selectedRoom={selectedRoom} />
-                  </StyledTableCell>
-                </StyledTableRow>
-              ))
-            ) : (
-              <StyledTableRow>
-                <StyledTableCell colSpan={7} align="center"><NoData /></StyledTableCell>
-              </StyledTableRow>
-            )}
-          </TableBody>
-        </Table>
-      </TableContainer>
+     <Heading to='/dashboard/add-room' title='Room' item='Room' />
+   
+
+     <CustomTable<IRoomData>
+columnsLables={columnLabels}
+loading={loading}
+data={rooms}
+room={true}
+
+renderActions={(room) => (
+  <Actions
+    handleMenuClick={(e) => handleMenuClick(e, room)}
+    anchorEl={anchorEl}
+    handleOpenModal={handleOpenModal}
+    handleOpenEdit={handleOpenEdit}
+    handleOpenDelete={handleOpenDelete}
+    handleMenuClose={handleMenuClose}
+    room={room}
+    selectedRoom={selectedRoom}
+  />)}
+
+/>
+  
 
       {!loading && <PaginationList page={page} getAllList={getAllRooms} totalCount={Math.ceil(totalCount / 5)}  setpage={setpage} />}
 

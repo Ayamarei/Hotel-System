@@ -63,10 +63,18 @@ export const SeedValidation_Reset={
 }
 export const PasswordValidation_Reset={
   required:'Password is Required',
-  pattern:{
-    value:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$/,
-   message:"The password must include at least one lowercase letter, one uppercase letter, one digit, one special character, and be at least 6 characters long."
- }
+  validate: {
+    hasLowerCase: (value: string) =>
+      /[a-z]/.test(value) || "Must include at least one lowercase letter.",
+    hasUpperCase: (value: string) =>
+      /[A-Z]/.test(value) || "Must include at least one uppercase letter.",
+    hasNumber: (value: string) =>
+      /\d/.test(value) || "Must include at least one digit.",
+    hasSpecialChar: (value: string) =>
+      /[\W_]/.test(value) || "Must include at least one special character.",
+    minLength: (value: string) =>
+      value.length >= 6 || "Password must be at least 6 characters long.",
+  }
 }
 
 export const PasswordComfirmValidation_Reset={
