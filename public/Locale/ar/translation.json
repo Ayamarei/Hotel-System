@@ -13,7 +13,35 @@
       "Remove": "إزالة",
       "Register...": "جاري التسجيل...",
       "Register": "تسجيل"
+},
+"room": {
+  "EnterRoomNumber": "أدخل رقم الغرفة",
+  "Price":"السعر",
+  "PricePositive": "السعر يجب أن يكون رقمًا موجبًا",
+"Capacity":"السعة",
+"Discount":"الخصم",
+"SelectFacilities": "اختر المرافق",
+"Drop": "اسحب وأفلت أو اختر صور الغرفة للتحميل",
+
+  "RoomNumberRequired": "رقم الغرفة مطلوب",
+  "RoomNumberMin": "رقم الغرفة يجب أن يكون على الأقل 1",
+  "RoomNumberMax": "رقم الغرفة يجب أن يكون أقل من 9999",
+  "PriceRequired": "السعر مطلوب",
+  "PriceMin": "السعر يجب أن يكون على الأقل 500 جنيه",
+  "CapacityRequired": "السعة مطلوبة",
+  "CapacityMin": "السعة يجب أن تكون على الأقل 1",
+  "CapacityMax": "السعة لا يمكن أن تتجاوز 10",
+  "DiscountRequired": "الخصم مطلوب",
+  "DiscountMin": "لا يمكن أن يكون الخصم أقل من 0%",
+  "DiscountMax": "لا يمكن أن يتجاوز الخصم 100%",
+  "FacilitiesRequired": "الخدمات مطلوبة",
+    "EditRoom":"تعديل الغرفة",
+  "Editing":"...يتم التعديل",
+   "AddRoom":"اضافة غرفة",
+  "Adding":"...يتم الاضافة",
+  "cancel":"إلغاء"
 }
+   
 
   }
   

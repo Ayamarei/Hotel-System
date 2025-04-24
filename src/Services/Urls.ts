@@ -8,5 +8,13 @@ export const USERS_URLS={
 }
 
 
-
+    // Rooms_URLS
+export const ROOMS_URLS={
+  CREATE_ROOM:'/rooms',
+  UPDATE_ROOM:(id:string)=>`/rooms/${id}`,
+  GET_ROOMS: '/rooms',
+  DELETE_ROOMS:(id:string)=>`/rooms/${id}`,
+  GET_ROOM:(id:string)=>`/rooms/${id}`,
+  GET_FACILITIES_ROOM:'/room-facilities'
+}
 
