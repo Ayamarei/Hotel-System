@@ -1,4 +1,3 @@
-
 import { Box, Link, Button, CircularProgress } from "@mui/material";
 import React, { useContext } from "react";
 import { THEMECOLOR } from "../../../Services/ThemeColors";
@@ -16,9 +15,7 @@ import CustomInput from "../../Shared/CustomInput/CustomInput.tsx";
 
 export default function Login() {
   let navigate = useNavigate()
-
   let { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<ILogin>({ mode: "onTouched" })
-
   const context = useContext(AuthContext);
   if (!context) throw new Error("AuthContext must be used within AuthProvider");
   const { loginData, saveLoginData } = context;
@@ -62,7 +59,7 @@ export default function Login() {
 
   return (
     <>
-      <Box onSubmit={handleSubmit(onSubmit)} component="form" sx={{ width: "100%" }}>
+    <Box onSubmit={handleSubmit(onSubmit)} component="form" sx={{ width: "100%" }}>
 
         <CustomInput
           label="Email Address"
@@ -109,3 +106,4 @@ export default function Login() {
     </>
   )
 }
+
