@@ -7,9 +7,8 @@ export const USERS_URLS={
   FORGET_PASSWORD:'/users/forgot-password',
 }
 
-
-    // Rooms_URLS
-export const ROOMS_URLS={
+ // Rooms_URLS
+ export const ROOMS_URLS={
   CREATE_ROOM:'/rooms',
   UPDATE_ROOM:(id:string)=>`/rooms/${id}`,
   GET_ROOMS: '/rooms',
@@ -17,4 +16,18 @@ export const ROOMS_URLS={
   GET_ROOM:(id:string)=>`/rooms/${id}`,
   GET_FACILITIES_ROOM:'/room-facilities'
 }
+
+// /room-facilities-url
+export const FACILITES_URLS={
+  GET_FACILITES:"/room-facilities",
+  ADD_FACILITES:"/room-facilities",
+ DELETE_FACILITES:(id:string)=>`/room-facilities/${id}`,
+ EDIT_FACILITES:(id:string)=>`/room-facilities/${id}`,
+}
+
+
+
+
+
+
 

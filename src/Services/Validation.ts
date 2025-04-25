@@ -34,7 +34,7 @@ export const EMAIL_VALIDATION={
 export const PASSWORD_VALIDATION={
   required: "Password is required",
   pattern: {
-    value: /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!&$%&? "]).{6,}$/,
+    value: /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!&$%&?@"]).{6,}$/,
     message: "Password must be at least 6 characters and include letters, numbers, and special characters",
   },
 }

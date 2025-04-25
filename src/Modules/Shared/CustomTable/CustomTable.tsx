@@ -13,10 +13,11 @@ import NoData from '../NoData/NoData';
 import noimg from '../../../assets/images/no-img.jpeg'
 import { IRoomData } from '../../../Interfaces/RoomInterface';
 import { CoulmnsLables } from '../../../Interfaces/CustomTableInterface';
+import { IFacility } from '../../../Interfaces/FacilitesInterface';
 
 
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
+const StyledTableCell = styled(TableCell)(() => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: "rgba(226, 229, 235, 1)",
     color: "rgba(31, 38, 62, 1)",
@@ -41,13 +42,15 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 
 
-function CustomTable<T extends IRoomData >({loading,columnsLables,data,room,renderActions}
+function CustomTable<T extends IRoomData|IFacility >({loading,columnsLables,data,facility,room,renderActions}
     :{
         loading:boolean,
         columnsLables:CoulmnsLables,
         data:T[],
         room?:boolean,
-        renderActions?: (row:T) => React.ReactNode;   
+        facility?:boolean,
+        renderActions?: (row:T) => React.ReactNode; 
+          
     }) {
   return (
     <TableContainer component={Paper} sx={{ mt: '30px' }}>
@@ -86,6 +89,21 @@ function CustomTable<T extends IRoomData >({loading,columnsLables,data,room,rend
                   <StyledTableCell align="right">{room.facilities[0]?.name}</StyledTableCell>
                   <StyledTableCell align="right">
         {renderActions  ? renderActions(room as T) : null}
+      </StyledTableCell>
+
+                          </StyledTableRow>
+            ))
+          ) :   
+          facility&&data.length > 0 ? (
+            (data as IFacility[]).map((facility:IFacility) => (
+                <StyledTableRow key={facility._id}>
+                  <StyledTableCell component="th" scope="row">{facility._id}</StyledTableCell>
+                  <StyledTableCell align="right">{facility.name}</StyledTableCell>
+                  <StyledTableCell align="right">{facility.createdAt}</StyledTableCell>
+                  <StyledTableCell align="right">{facility.updatedAt}</StyledTableCell>
+                  <StyledTableCell align="right">{facility.createdBy.userName}</StyledTableCell>
+                  <StyledTableCell align="right">
+        {renderActions  ? renderActions(facility as T) : null}
       </StyledTableCell>
 
                           </StyledTableRow>

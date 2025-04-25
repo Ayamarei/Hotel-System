@@ -1,7 +1,7 @@
 import { Box, Button, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
-export default function Heading({to,title,item}:{to:string,title:string,item:string}) {
+export default function Heading({to,title,item,handleClick}:{to?:string,title:string,item:string,handleClick?:()=>void}) {
   return <>
     <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: "center",flexDirection:{sm:'column',md:"row"} }}>
         <Box>
@@ -12,7 +12,16 @@ export default function Heading({to,title,item}:{to:string,title:string,item:str
           variant="contained"
           color="primary"
           component={Link}
-          to="/dashboard/add-room"
+          to= {to}
+          onClick={handleClick}
+          sx={{ px: '50px', py: "15px", backgroundColor: "rgba(32, 63, 199, 1)",mt:{sx:'20px',md:0} }}
+        >
+          Add new {item}
+        </Button>}
+       {handleClick && <Button
+          variant="contained"
+          color="primary"
+          onClick={handleClick}
           sx={{ px: '50px', py: "15px", backgroundColor: "rgba(32, 63, 199, 1)",mt:{sx:'20px',md:0} }}
         >
           Add new {item}

@@ -20,6 +20,8 @@ const style = {
   p: 4,
 };
 
+
+
 export default function DeleteConfirmation({open,setOpen,deleteFun,isDeleting,item}:
   {open:boolean,
     setOpen:(open:boolean)=>void,
