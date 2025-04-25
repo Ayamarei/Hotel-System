@@ -129,7 +129,7 @@ const Dashboard = () => {
               </Stack>
             </Item>
           </Grid>
-          <Grid item xs={4} sm={4} md={4} size={4} >
+          <Grid  xs={4} sm={4} md={4} size={4} >
             <Item sx={{ height: "180px", backgroundColor: "#1A2027" }}>
               <Stack
                 direction={i18n.language === "ar" ? "row-reverse" : "row"}
