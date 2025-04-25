@@ -14,6 +14,8 @@ import noimg from '../../../assets/images/no-img.jpeg'
 import { IRoomData } from '../../../Interfaces/RoomInterface';
 import { CoulmnsLables } from '../../../Interfaces/CustomTableInterface';
 import { IFacility } from '../../../Interfaces/FacilitesInterface';
+import { IBookingData } from '../../../Interfaces/BookingData';
+import { IUserData } from '../../../Interfaces/UserData';
 
 
 
@@ -42,13 +44,15 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 
 
-function CustomTable<T extends IRoomData|IFacility >({loading,columnsLables,data,facility,room,renderActions}
+function CustomTable<T extends IRoomData|IFacility|IBookingData|IUserData >({loading,columnsLables,data,facility,room,booking,user,renderActions}
     :{
         loading:boolean,
         columnsLables:CoulmnsLables,
         data:T[],
         room?:boolean,
         facility?:boolean,
+        booking?:boolean,
+        user?:boolean,
         renderActions?: (row:T) => React.ReactNode; 
           
     }) {
@@ -108,7 +112,54 @@ function CustomTable<T extends IRoomData|IFacility >({loading,columnsLables,data
 
                           </StyledTableRow>
             ))
-          ) :   
+          ) : 
+
+          //   in case of bookings
+          booking&&data.length > 0 ? (
+            (data as IBookingData[]).map((booking:IBookingData) => (
+                <StyledTableRow key={booking._id}>
+                  <StyledTableCell component="th" scope="row">{booking.room.roomNumber}</StyledTableCell>
+                  <StyledTableCell align="right">{booking.totalPrice} EGP</StyledTableCell> 
+                  <StyledTableCell align="right">{new Date(booking?.startDate).toLocaleDateString("en-GB", {
+                      day: "2-digit",
+                      month: "2-digit",
+                      year: "numeric",
+                    })}</StyledTableCell>
+                  <StyledTableCell align="right">{new Date(booking?.endDate).toLocaleDateString("en-GB", {
+                      day: "2-digit",
+                      month: "2-digit",
+                      year: "numeric",
+                    })}</StyledTableCell>
+                  <StyledTableCell align="right">{booking.user.userName}</StyledTableCell>
+                  <StyledTableCell align="right">
+                    {renderActions  ? renderActions(booking as T) : null}
+                  </StyledTableCell>
+                </StyledTableRow>
+            ))
+          ) : 
+
+          //   in case of users
+          user&&data.length > 0 ? (
+            (data as IUserData[]).map((user:IUserData) => (
+                <StyledTableRow key={user._id}>
+                  <StyledTableCell component="th" scope="row">{user.userName}</StyledTableCell>
+                  <StyledTableCell align="right">
+                    <img src={user?.profileImage || noimg} style={{ width: '56px', height: '56px', borderRadius: '8px' }} />
+                  </StyledTableCell>
+                  <StyledTableCell align="right">{user.email}</StyledTableCell>
+                  <StyledTableCell align="right">{user.phoneNumber}</StyledTableCell>
+                  <StyledTableCell align="right">{user.country}</StyledTableCell>
+                  <StyledTableCell align="right">{user.role}</StyledTableCell>
+                  <StyledTableCell align="right">
+        {renderActions  ? renderActions(user as T) : null}
+      </StyledTableCell>
+
+                          </StyledTableRow>
+            ))
+          ) : 
+          
+           
+           
         //   add reset data
            (
             <StyledTableRow>
