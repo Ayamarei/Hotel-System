@@ -1,11 +1,10 @@
+
 import { createContext, useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import { IAuthContext, ILoginData ,IUser} from "../Interfaces/ContextInterface";
 import { privateUserAxiosInstance } from "../Services/Axiosinstance";
 import { AxiosError } from "axios";
 import { toast } from "react-toastify";
-
-
 
 export const AuthContext = createContext<IAuthContext | null>(null);
 
@@ -51,6 +50,7 @@ const saveLoginData = () => {
   }, []);
 
   return (
+    
     <AuthContext.Provider value={{ saveLoginData, loginData, userDetails }}>
       {children}
     </AuthContext.Provider>

@@ -255,7 +255,9 @@ export default function PersistentDrawerLeft() {
         </Drawer>
         <Main open={open}  lang={i18n.language}>
           <DrawerHeader />
+          <Box sx={{overflowX:"auto"}}>
           <Outlet />
+          </Box>
         </Main>
       </Box>
     </ThemeProvider>

@@ -6,7 +6,7 @@ import Register from './Modules/Authentication/Register/Register'
 import ForgetPassword from './Modules/Authentication/Forget-Password/Forget-Password'
 import ResetPassword from './Modules/Authentication/Reset-Password/Reset-Password'
 import { Bounce, ToastContainer } from 'react-toastify'
-import { useEffect } from "react";
+import  { useEffect } from "react";
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import i18n from './i18n'
@@ -26,7 +26,7 @@ import ChangePassword from './Modules/Authentication/Change-Password/Change-Pass
 
 function App() {
   // local
- 
+
   const lng=cookies.get("i18next")||"en";
 
   useEffect(() => {
@@ -35,40 +35,36 @@ function App() {
   
 
   // routes
-  const routes=createBrowserRouter([
+  const routes = createBrowserRouter([
     // auth layout
     {
-      path:'',
-      element: <AuthLayout/>,
-      errorElement:<NotFound/>,
-      children:[
-        {path:'login',element:<Login/>},
-        {path:'register',element:<Register/>},
-        {path:'forget-password',element:<ForgetPassword/>},
-        {path:'reset-password',element:<ResetPassword/>},
-        {path:'Change-Password',element:<ChangePassword/>},
-  
-      ]
+      path: "",
+      element: <AuthLayout />,
+      errorElement: <NotFound />,
+      children: [
+        { path: "login", element: <Login /> },
+        { path: "register", element: <Register /> },
+        { path: "forget-password", element: <ForgetPassword /> },
+        { path: "reset-password", element: <ResetPassword /> },
+      ],
     },
-    // dashboard layout
-{
-  path:'dashboard',
-  element:<MasterLayout/>,
-  errorElement:<NotFound/>,
-  children:[
-    {path:'',element:<Dashboard/>},
-    {path:'rooms',element:<RoomsList/>},
-    {path:'rooms-data',element:<RoomsData/>},
-    {path:'ads',element:<AdsList/>},
-    {path:'ads-data',element:<AdsData/>},
-    {path:'facilities',element:<FacilitiesList/>},
-    {path:'facilities-data',element:<FacilitiesData/>},
-    {path:'list-booking',element:<ListBooking/>},
-    {path:'list-users',element:<ListUsers/>},
-
-  ]
-}
-
+    
+    {
+      path: "dashboard",
+      element: <MasterLayout />,
+      errorElement: <NotFound />,
+      children: [
+        { path: "", element: <Dashboard /> },
+        { path: "rooms", element: <RoomsList /> },
+        {path:'rooms-data/:roomId',element:<RoomsData/>},
+        {path:'add-room',element:<RoomsData/>},
+        { path: "ads", element: <AdsList /> },
+        { path: "facilities", element: <FacilitiesList /> },
+        { path: "facilities-data", element: <FacilitiesData /> },
+        { path: "list-booking", element: <ListBooking /> },
+        { path: "list-users", element: <ListUsers /> },
+      ],
+    },
   ])
   return(
  <>
@@ -79,7 +75,7 @@ function App() {
     hideProgressBar={false}
     newestOnTop={false}
     closeOnClick={false}
-    rtl={lng === "ar"}
+    rtl={lng==="ar"}
     pauseOnFocusLoss
     draggable
     pauseOnHover
@@ -91,7 +87,3 @@ function App() {
   
 }
 export default App
-
-
-
-

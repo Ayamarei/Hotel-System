@@ -1,16 +1,4 @@
-
-
-// export default function Login() {
-//   return (
-//     <>
-//       login
-//     </>
-//   )
-// }
-
-
-import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { Box, Link, Button, FilledInput, FormControl, IconButton, InputAdornment, TextField, CircularProgress, InputLabel } from "@mui/material";
+import { Box, Link, Button, CircularProgress } from "@mui/material";
 import React, { useContext } from "react";
 import { THEMECOLOR } from "../../../Services/ThemeColors";
 import { useForm } from "react-hook-form";
@@ -22,13 +10,12 @@ import { AuthContext } from "../../../context/AuthContext.tsx";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
+import CustomInput from "../../Shared/CustomInput/CustomInput.tsx";
 
 
 export default function Login() {
-  let navigate =useNavigate()
-
-  let { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<ILogin>()
-
+  let navigate = useNavigate()
+  let { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<ILogin>({ mode: "onTouched" })
   const context = useContext(AuthContext);
   if (!context) throw new Error("AuthContext must be used within AuthProvider");
   const { loginData, saveLoginData } = context;
@@ -69,67 +56,33 @@ export default function Login() {
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-  const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-  };
-
-  const handleMouseUpPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-  };
-
-
 
   return (
     <>
-      <Box onSubmit={handleSubmit(onSubmit)} component="form" sx={{ width: "100%" }}>
+    <Box onSubmit={handleSubmit(onSubmit)} component="form" sx={{ width: "100%" }}>
 
-        <InputLabel sx={{ color: THEMECOLOR.LabelColor }} htmlFor="filled-basic" >Email Address</InputLabel>
-        <TextField id="filled-basic"
-          sx={{ display: "flex", mt: "10px", width: "100%" }}
-          {...register("email", EMAIL_VALIDATION)}
-          variant="filled"
+        <CustomInput
+          label="Email Address"
+          type="text"
           placeholder="Please type here"
-          error={!!errors.email}
+          register={register}
+          name="email"
+          error={errors.email?.message}
+          rules={EMAIL_VALIDATION}
         />
-        {errors.email && (
-          <span style={{ color: "red", fontSize: "14px", marginTop: "4px" }}>
-            {errors.email.message}
-          </span>
-        )}
 
-        <InputLabel sx={{ color: THEMECOLOR.LabelColor, mt: "30px" }} htmlFor="filled-basic" > Password</InputLabel>
-        <FormControl sx={{ width: "100%" }}
-          variant="filled">
-          <FilledInput
-            {...register("password", PASSWORD_VALIDATION)}
-            placeholder="Please type here"
-            error={!!errors.password}
-            id="filled-adornment-password"
-            type={showPassword ? 'text' : 'password'}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label={
-                    showPassword ? 'hide the password' : 'display the password'
-                  }
-                  onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPassword}
-                  onMouseUp={handleMouseUpPassword}
-                  edge="end"
 
-                >
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            }
-          />
-        </FormControl>
-
-        {errors.password && (
-          <span style={{ color: "red", fontSize: "14px", marginTop: "4px" }}>
-            {errors.password.message}
-          </span>
-        )}
+        <CustomInput
+          label="Password"
+          type="password"
+          placeholder="Please type your password"
+          register={register}
+          name="password"
+          error={errors.password?.message}
+          showPassword={showPassword}
+          onTogglePasswordVisibility={handleClickShowPassword}
+          rules={PASSWORD_VALIDATION}
+        />
 
         <Button
           variant="contained"
@@ -153,3 +106,4 @@ export default function Login() {
     </>
   )
 }
+
