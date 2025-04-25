@@ -32,6 +32,7 @@ import Avatar from "@mui/material/Avatar";
 import { AuthContext } from "../../context/AuthContext";
 import { useTranslation } from "react-i18next";
 
+
 const drawerWidth = 240;
 
 const Main = styled("main", {
@@ -102,7 +103,7 @@ export default function PersistentDrawerLeft() {
   }
   const { userDetails } = authContext;
 
-  const{i18n}=useTranslation()
+  const{i18n,t}=useTranslation()
  // HANDLE LOGOUT
 //  const handleLogOut = () => {
 //   console.log("User logging out...");
@@ -111,18 +112,18 @@ export default function PersistentDrawerLeft() {
 // };
 
   const NAV_ITEMS = [
-    { text: "Home", icon: <DashboardIcon />, path: "/dashboard" },
-    { text: "Users", icon: <GroupIcon />, path: "/dashboard/list-users" },
-    { text: "Rooms", icon: <MeetingRoomIcon />, path: "/dashboard/rooms" },
-    { text: "Ads", icon: <AdsClickIcon />, path: "/dashboard/ads" },
+    { text: t("NavIconText.Home"), icon: <DashboardIcon />, path: "/dashboard" },
+    { text: t("NavIconText.Users") , icon: <GroupIcon />, path: "/dashboard/list-users" },
+    { text: t("NavIconText.Rooms"), icon: <MeetingRoomIcon />, path: "/dashboard/rooms" },
+    { text: t("NavIconText.Ads"), icon: <AdsClickIcon />, path: "/dashboard/ads" },
     {
-      text: "List Booking",
+      text: t("NavIconText.List-Booking"),
       icon: <EventIcon />,
       path: "/dashboard/list-booking",
     },
-    { text: "Facilities", icon: <BuildIcon />, path: "/dashboard/facilities" },
-    { text: "Change Password", icon: <LockIcon />, path: "/change-password" },
-    { text: "Logout", icon: <ExitToAppIcon />, path: "/login"},
+    { text: t("NavIconText.Facilities"), icon: <BuildIcon />, path: "/dashboard/facilities" },
+    { text: t("NavIconText.Change-Password"), icon: <LockIcon />, path: "/change-password" },
+    { text: t("NavIconText.Logout"), icon: <ExitToAppIcon />, path: "/login"},
   ];
 
   const lightTheme = createTheme({
@@ -263,6 +264,10 @@ export default function PersistentDrawerLeft() {
     </ThemeProvider>
   );
 }
+
+
+
+
 
 
 

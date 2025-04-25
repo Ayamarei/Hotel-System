@@ -7,12 +7,109 @@
         "Email":"Email",
         "Password":"Password",
         "Confirm-Password":"Confirm Password",
+        "Confirm-Password-placeholder":"Please confirm your password",
         "Passwords-not-match":"Passwords do not match",
         "Upload-Image":"Upload Image",
         "Image-uploaded":"Image uploaded successfully!",
         "Remove":"Remove",
         "Register...":"Register...",
         "Register":"Register"
+},
+    "LoginForm":{
+          "Please-type":"Please type here ...",
+          "Email":"Email",
+          "Password":"Password",
+          "Login...":"Login...",
+          "Login":"Login",
+          "Forget-Password":"Forget Password ?"
+    },
+    "ForgetForm":{
+        "Please-type":"Please type here ...",
+        "Email":"Email",
+        "Send-Mail":"Send Mail",
+        "Sending... ":"Sending..."
+       
+},
+    "RestForm":{
+        "Please-type":"Please type here ...",
+        "Email":"Email",
+        "OTP":"OTP",
+        "Password":"Password",
+        "Confirm-Password":"Confirm Password",
+        "Reset...":"Reset...",
+        "Reset":"Reset"
+    },
+    "AuthLogin":{
+     "title":"Login",
+     "description":"If you don’t have an account, please register.",
+     "subDescription":"Register here"
+    },
+    "AuthRegister":{
+      "title": "Register",
+      "description": "If you already have an account" ,
+      "subDescription": "You Can",
+      "spanDescription": "Login here",
+      "buttonTitle": "Register"
+
+    },
+    "AuthRest":{
+      "title":"Reset Password",
+      "description":"If you already have an account",
+      "subDescription":"You Can",
+      "spanDescription":"Login here"
+    },
+    "AuthForget":{
+      "title":"Forgot Password",
+      "description":"If you already have an account",
+      "subDescription":"You Can",
+      "spanDescription":"Login here"
+    },
+    "AuthLayout":{
+      "stay":"Stay",
+      "cation":"cation"
+    },
+    "Validation":{
+      "Username-required":"Username is required",
+      "Username-message":"Username must contain letters and end with a number without spaces",
+      "country-required":"country is required",
+      "country-message":"Country must contain only letters and spaces",
+      "Phone-required":"Phone is required",
+      "Phone-message":"Please enter a valid phone number in the format (123) 456-7890", 
+      "Email-required":"Email is required",
+      "Email-message": "Email is not valid",
+      "Password-required":"Password is required",
+      "Password-message":"Password must be at least 6 characters and include letters, numbers, and special characters",
+      "confirmPassword-required":"confirmPassword is required",
+      "confirmPassword-message":"confirmPassword must be at least 6 characters and include letters, numbers, and special characters",
+      "valid-email":"Please Enter a valid Email",
+      "OTP-required":"OTP is required",
+      "OTP-message":"Enter min 4 characters",
+      "Password-hasLowerCase":"Must include at least one lowercase letter.",
+      "Password-hasUpperCase":"Must include at least one uppercase letter.",
+      "Password-hasNumber":"Must include at least one digit.",
+      "Password-hasSpecialChar": "Must include at least one special character.",
+      "Password-minLength":"Password must be at least 6 characters long."
+    },
+    "NavIconText":{
+      "Home":"Home",
+      "Users":"Users",
+      "Rooms":"Rooms",
+      "Ads":"Ads",
+      "List-Booking":"List Booking",
+      "Facilities":"Facilities",
+      "Change-Password":"Change Password",
+      "Logout":"Logout"
+    
+    },
+"Dashboard":{
+  "completed":"completed",
+  "pending":"pending",
+  "Booking":"Booking",
+  "User":"User",
+  "Admin":"Admin",
+  "Ads":"Ads",
+  "Facilities":"Facilities",
+  "Rooms":"Rooms"
 },
 "room": {
     "EnterRoomNumber": "Enter Room Number",

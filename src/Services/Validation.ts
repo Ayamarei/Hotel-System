@@ -1,85 +1,84 @@
-
-
   // SIGNUP_VALIDATIN
-export const USER_NAME_VALIDATION={
-  required: "Username is required",
+export const USER_NAME_VALIDATION=(t: Function)=>({
+  required:t("Validation.Username-required"),
   pattern: {
     value: /^(?=.*[A-Za-z])[A-Za-z0-9]*[0-9]$/,
-    message: "Username must contain letters and end with a number without spaces"
+    message:t("Validation.Username-message")
   }
   
-}
-export const COUNTRY_VALIDATION={
-required: "country  is required",
+})
+export const COUNTRY_VALIDATION=(t: Function)=>({
+required:t("Validation.country-message"),
 pattern: {
   value: /^[A-Za-z\s]+$/,
-  message: "Country must contain only letters and spaces",
+  message:("Validation.country-required"),
 },
-}
+})
 
-export const PHONE_VALIDATION={
-required: "Phone is required",
+export const PHONE_VALIDATION=(t: Function)=>({
+required:t("Validation.Phone-required"),
 pattern: {
   value: /^\(?([0-9]{4})\)?[-.\s]?([0-9]{3})[-.\s]?([0-9]{4})$/,
-  message: "Please enter a valid phone number in the format (123) 456-7890",                        },
-}
-export const EMAIL_VALIDATION={
-  required: "Email is required",
+  message: t("Validation.Phone-message"), },
+})
+export const EMAIL_VALIDATION=(t: Function)=>({
+  required:t("Validation.Email-required"),
   pattern: {
     value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/,
-    message: "Email is not valid",
+    message:t("Validation.Email-message"),
   },
-}
+})
 
-export const PASSWORD_VALIDATION={
-  required: "Password is required",
+export const PASSWORD_VALIDATION=(t: Function)=>({
+  required: t("Validation.Password-required"),
   pattern: {
     value: /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!&$%&?@"]).{6,}$/,
-    message: "Password must be at least 6 characters and include letters, numbers, and special characters",
+    message:t("Validation.Password-message"),
   },
-}
-export const CONFIRMPASSWORD_VALIDATION={
-  required: "confirmPassword is required",
+})
+export const CONFIRMPASSWORD_VALIDATION=(t: Function)=>({
+  required:  t("Validation.confirmPassword-required"),
   pattern: {
     value: /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!&$%&? "]).{6,}$/,
     // message: "confirmPassword must match Password ",
-    message: "confirmPassword must be at least 6 characters and include letters, numbers, and special characters",
+    message: t("Validation.confirmPassword-message"),
 
   },
-}
-export const EmailValidation_Forget={
-  required:'Email is Required',
+})
+export const EmailValidation_Forget=(t: Function)=>({
+  required: t("Validation.Email-required"),
   pattern:{
     value:/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-    message:'Please Enter a valid Email'
+    message: t("Validation.valid-email")
    }
- }
-export const SeedValidation_Reset={
-  required:'OTP is Required',
+ })
+export const SeedValidation_Reset=(t: Function)=>({
+  required: t("Validation.OTP-required"),
   minLength:{
       value:4,
-      message:"Enter min 4 characters"
+      message: t("Validation.OTP-message")
      }
-}
-export const PasswordValidation_Reset={
-  required:'Password is Required',
+})
+export const PasswordValidation_Reset=(t: Function)=>({
+  required:t("Validation.Password-required"),
   validate: {
     hasLowerCase: (value: string) =>
-      /[a-z]/.test(value) || "Must include at least one lowercase letter.",
+      /[a-z]/.test(value) || t("Validation.Password-hasLowerCase"),
     hasUpperCase: (value: string) =>
-      /[A-Z]/.test(value) || "Must include at least one uppercase letter.",
+      /[A-Z]/.test(value) || t("Validation.Password-hasUpperCase"),
     hasNumber: (value: string) =>
-      /\d/.test(value) || "Must include at least one digit.",
+      /\d/.test(value) || t("Validation.Password-hasNumber"),
     hasSpecialChar: (value: string) =>
-      /[\W_]/.test(value) || "Must include at least one special character.",
+      /[\W_]/.test(value) || t("Validation.Password-hasSpecialChar"),
     minLength: (value: string) =>
-      value.length >= 6 || "Password must be at least 6 characters long.",
+      value.length >= 6 ||t("Validation.Password-minLength"),
   }
-}
+})
 
-export const PasswordComfirmValidation_Reset={
-    required:'confirmPassword is Required'
-   }
+export const PasswordComfirmValidation_Reset=(t: Function)=>({
+    required:t("Validation.confirmPassword-required")
+   })
+
 // rooms validation
 export const RoomNumber_Validation = (t: Function) => ({
   required: t("room.RoomNumberRequired"),
