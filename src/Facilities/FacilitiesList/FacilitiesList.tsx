@@ -10,6 +10,7 @@ import FacilitiesData from "../FacilitiesData/FacilitiesData";
 import { AxiosError } from "axios";
 import Actions from "../../Modules/Shared/Actions/Actions";
 import ViewFacility from "../ViewFacility/ViewFacility";
+import PaginationList from "../../Modules/Shared/PaginationList/PaginationList";
 
  const StyledTableCell = styled(TableCell)(({ theme }) => ({
        [`&.${tableCellClasses.head}`]: {
@@ -34,12 +35,15 @@ import ViewFacility from "../ViewFacility/ViewFacility";
 const FacilitesList = () => {
   const [allFacilites, setAllFacilites] = useState<IFacility[]>([]);
   const [facilityId, setFacilityId] = useState<string | null>(null);
+  const [totalCount, setTotalCount] = useState<number>(1);
+  const [page, setPage] = useState(1);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openViewModal, setOpenViewModal] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [selectedFacility, setSelectedFacility] = React.useState<IFacility | null>(null);
+  const [loading, setLoading] = useState(true);
 
   const handleMenuClick = (event: React.MouseEvent<HTMLButtonElement>, facility: IFacility) => {
     setAnchorEl(event.currentTarget);
@@ -63,16 +67,26 @@ const FacilitesList = () => {
   };
 
   // getAllFacilites
-  const getAllFacilites = useCallback(async () => {
+  const getAllFacilites = useCallback(async (size:number,page:number) => {
+    setLoading(true)
     try {
-      const response = await privateUserAxiosInstance.get(FACILITES_URLS.GET_FACILITES);
+      const response = await privateUserAxiosInstance.get(FACILITES_URLS.GET_FACILITES,{
+        params: {
+          page,
+          size
+        },
+      });
       setAllFacilites(response?.data?.data?.facilities);
+      setTotalCount(response?.data?.data?.totalCount);
       console.log(response?.data?.data?.facilities);
     } catch (error) {
       console.error("Failed to fetch facilities:", error);
       toast.error("Failed to fetch facilities. Please try again.");
+    }finally{
+      setLoading(false)
     }
   }, []);
+
 
   // addFacility
   const addFacility = async (data: { name: string }) => {
@@ -81,7 +95,7 @@ const FacilitesList = () => {
       console.log(res);
       toast.success(res.data.message);
       setOpenAddModal(false);
-      getAllFacilites();
+      getAllFacilites(5,1);
     } catch (error) {
       const err = error as AxiosError<{ message: string }>;
       toast.error(err?.response?.data?.message || "Something went wrong");
@@ -96,7 +110,7 @@ const FacilitesList = () => {
       console.log(res);
       toast.success(res.data.message);
       setOpenAddModal(false);
-      getAllFacilites();
+      getAllFacilites(5,1);
     } catch (error) {
       const err = error as AxiosError<{ message: string }>;
       toast.error(err?.response?.data?.message || "Something went wrong");
@@ -120,7 +134,7 @@ const FacilitesList = () => {
       toast.success(res.data.message);
       setOpenDeleteModal(false);
       setFacilityId(null);
-      getAllFacilites();
+      getAllFacilites(5,1);
     } catch (error) {
       console.error("Failed to delete facility:", error);
       toast.error("Failed to delete facility. Please try again.");
@@ -130,7 +144,7 @@ const FacilitesList = () => {
   };
 
   useEffect(() => {
-    getAllFacilites();
+    getAllFacilites(5,1);
   }, [getAllFacilites]);
 
   return (
@@ -206,6 +220,7 @@ const FacilitesList = () => {
               </TableBody>
             </Table>
           </TableContainer>
+          <PaginationList page={page} getAllList={getAllFacilites} totalCount={Math.ceil(totalCount / 5)}  setpage={setPage} />
         </Box>
         <DeleteConfirmation
           open={openDeleteModal}
