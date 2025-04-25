@@ -12,21 +12,20 @@ export interface IReset {
 
 // Register
 export interface IRegisterForm {
-  userName: string;
-  phoneNumber: string;
-  country: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-}
+    userName:string,
+    phoneNumber:string,
+    country:string,
+    email:string,
+    password:string,
+    confirmPassword:string
 
+}
 // login
 
 export interface ILogin {
   email: string;
   password: string;
 }
-
 // change-password
 
 export interface ChangePassProps {
