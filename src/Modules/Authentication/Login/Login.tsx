@@ -1,6 +1,5 @@
 
-import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { Box, Link, Button, FilledInput, FormControl, IconButton, InputAdornment, TextField, CircularProgress, InputLabel } from "@mui/material";
+import { Box, Link, Button, CircularProgress } from "@mui/material";
 import React, { useContext } from "react";
 import { THEMECOLOR } from "../../../Services/ThemeColors";
 import { useForm } from "react-hook-form";
@@ -12,7 +11,6 @@ import { AuthContext } from "../../../context/AuthContext.tsx";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
-import { useTogglePassword } from "../../../hooks/useTogglePassword.tsx";
 import CustomInput from "../../Shared/CustomInput/CustomInput.tsx";
 
 

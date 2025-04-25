@@ -45,7 +45,7 @@ function App() {
         { path: "reset-password", element: <ResetPassword /> },
       ],
     },
-
+    
     {
       path: "dashboard",
       element: <MasterLayout />,
@@ -53,7 +53,8 @@ function App() {
       children: [
         { path: "", element: <Dashboard /> },
         { path: "rooms", element: <RoomsList /> },
-        { path: "rooms-data", element: <RoomsData /> },
+        {path:'rooms-data/:roomId',element:<RoomsData/>},
+        {path:'add-room',element:<RoomsData/>},
         { path: "ads", element: <AdsList /> },
         { path: "facilities", element: <FacilitiesList /> },
         { path: "facilities-data", element: <FacilitiesData /> },
@@ -61,7 +62,7 @@ function App() {
         { path: "list-users", element: <ListUsers /> },
       ],
     },
-  ]);
+  ])
 
   return (
     <>

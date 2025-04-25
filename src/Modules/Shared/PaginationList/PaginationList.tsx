@@ -9,7 +9,7 @@ export default function PaginationList({getAllList,page,totalCount,setpage}:
   }) {
 
 
-   const handlePagination=(event: React.ChangeEvent<unknown>, value: number)=>{
+   const handlePagination=(_event: React.ChangeEvent<unknown>, value: number)=>{
     setpage(value); 
   getAllList(5,value)
    }
