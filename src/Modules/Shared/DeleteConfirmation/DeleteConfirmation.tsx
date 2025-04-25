@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import deleteImg from '../../assets/images/delete.png'
+import deleteImg from '../../../assets/images/delete.png'
 import CloseIcon from '@mui/icons-material/Close';
 import { Avatar, CircularProgress } from '@mui/material';
  

@@ -62,7 +62,6 @@ export default function Adslist() {
   const confirmDelete = async () => {
     setIsDeleting(true);
     try {
-      console.log(selectedAdId);
       await privateUserAxiosInstance.delete(ADS_URLS.DELETE_ADS(selectedAdId));
       setAdsList((prev) => prev.filter((ad) => ad._id !== selectedAdId));
       toast.success("Ad deleted successfully");
@@ -76,7 +75,7 @@ export default function Adslist() {
 
   const getAllAds = async () => {
     try {
-      const { data } = await privateUserAxiosInstance.get(ADS_URLS.GET_ALL_ADS);
+      const { data } = await privateUserAxiosInstance.get(ADS_URLS.GET_ALL_ADS,{ page:3,size:3});
       setAdsList(data.data.ads);
     } catch (error) {
       toast.error("Something went wrong while fetching ads");
@@ -151,6 +150,7 @@ export default function Adslist() {
         open={openFormModal}
         handleClose={handleCloseForm}
         selectedItem={selectedItem}
+        getAllAds={getAllAds}
       />
 
       <DeleteConfirmation
@@ -158,6 +158,7 @@ export default function Adslist() {
         setOpen={setOpenDeleteModal}
         deleteFun={confirmDelete}
         isDeleting={isDeleting}
+        item={"Ad"}
       />
     </div>
   );

@@ -3,15 +3,16 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
-import { InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import { MenuItem, Select, TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { useEffect } from "react";
-import { ADS_URLS } from "../../Services/Urls";
+import { useEffect, useState } from "react";
+import { ADS_URLS, ROOMS_URLS } from "../../Services/Urls";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { privateUserAxiosInstance } from "../../Services/Axiosinstance";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
+import { SelectChangeEvent } from "@mui/material/Select";
 
 type AdItem = {
   _id: string;
@@ -24,12 +25,13 @@ type AdsFormProps = {
   open: boolean;
   handleClose: () => void;
   selectedItem: AdItem | null;
+  getAllAds: () => {};
 };
 
 type AdsData = {
-  room: string;
+  room?: string;
   discount: number;
-  isActive: boolean;
+  isActive: boolean | string;
 };
 
 const style = {
@@ -49,11 +51,15 @@ export default function AdsFormModal({
   open,
   handleClose,
   selectedItem,
+  getAllAds,
 }: AdsFormProps) {
+  const [rooms, setRooms] = useState([]);
+  const [selectedRoomNumber, setSelectedRoomNumber] = useState("");
   const {
     register,
     handleSubmit,
     setValue,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm<AdsData>({
     mode: "onChange",
@@ -64,6 +70,7 @@ export default function AdsFormModal({
       await privateUserAxiosInstance.post(ADS_URLS.CREATE_NEW_ADS, values);
       toast.success("Ad added successfully");
       handleClose();
+      getAllAds();
     } catch (error) {
       const err = error as AxiosError<{ message: string }>;
       toast.error(err.response?.data?.message || "Something went wrong");
@@ -78,6 +85,7 @@ export default function AdsFormModal({
       );
       toast.success("Ad updated successfully");
       handleClose();
+      getAllAds();
     } catch (error) {
       const err = error as AxiosError<{ message: string }>;
       toast.error(err.response?.data?.message || "Something went wrong");
@@ -91,32 +99,49 @@ export default function AdsFormModal({
       );
 
       const data = response.data.data.ads;
-      console.log(data);
-      setValue("room", data.room.roomNumber);
-      setValue("discount", data.room.discount);
-      setValue("isActive", data.isActive);
+      setSelectedRoomNumber(data?.room?.roomNumber);
+      reset({
+        discount: data.room.discount,
+        isActive: data.isActive ? "true" : "false",
+      });
     } catch (error) {
       const err = error as AxiosError<{ message: string }>;
       toast.error(err.response?.data?.message || "Failed to load ad data");
+    }
+  };
+  const getAllRooms = async () => {
+    try {
+      const response = await privateUserAxiosInstance.get(ROOMS_URLS.GET_ROOMS);
+      setRooms(response.data.data.rooms);
+      console.log(response.data.data.rooms);
+    } catch (error) {
+      const err = error as AxiosError<{ message: string }>;
+      toast.error(err.response?.data?.message || "Failed to load rooms");
     }
   };
 
   useEffect(() => {
     if (selectedItem) {
       getAdDataById(selectedItem._id);
+    } else {
+      reset({
+        discount: 0,
+        isActive: "true",
+      });
+      getAllRooms();
     }
   }, [selectedItem]);
 
   const onSubmit = async (values: AdsData) => {
-    const correctedValues = {
+    const transformedValues = {
       ...values,
       isActive: values.isActive === "true",
     };
-
     if (selectedItem) {
-      editAd(values);
+      delete transformedValues.room;
+      editAd(transformedValues);
     } else {
-      addNewAd(values);
+      addNewAd(transformedValues);
     }
   };
 
@@ -137,7 +162,7 @@ export default function AdsFormModal({
           }}
         >
           <Typography id="modal-modal-title" variant="h5" component="h2">
-            Ads
+            {selectedItem ? "Edit this Ad" : "Add New Ad"}
           </Typography>
           <IconButton edge="end" onClick={() => handleClose()}>
             <CloseIcon sx={{ fontSize: 30 }} />
@@ -146,21 +171,35 @@ export default function AdsFormModal({
 
         {/* Inputs */}
         <form onSubmit={handleSubmit(onSubmit)}>
-          <FormControl sx={{ display: "block", mt: "0.5rem" }}>
-            <TextField
-              {...register("room", {
-                required: "room is required",
-              })}
-              type="text"
-              placeholder="Room Name"
-              sx={passInputStyle}
-            />
-            {errors.room && (
-              <Typography color="error">
-                {errors.room.message?.toString()}
-              </Typography>
-            )}
-          </FormControl>
+          {selectedItem ? (
+            <Typography sx={passInputStyle}>
+              Room Number : {selectedRoomNumber}
+            </Typography>
+          ) : (
+            <FormControl sx={{ display: "block", mt: "0.5rem" }}>
+              <Select
+                sx={passInputStyle}
+                inputProps={{ "aria-label": "Without label" }}
+                onChange={(event: SelectChangeEvent) => {
+                  setValue("room", event.target.value);
+                }}
+                displayEmpty
+              >
+                <MenuItem value="" disabled>
+                  <em>Room Number</em>
+                </MenuItem>
+
+                {rooms.map((room: any) => (
+                  <MenuItem value={room._id}>{room.roomNumber}</MenuItem>
+                ))}
+              </Select>
+              {errors.room && (
+                <Typography color="error">
+                  {errors.room.message?.toString()}
+                </Typography>
+              )}
+            </FormControl>
+          )}
 
           <FormControl sx={{ display: "block", mt: "0.5rem" }}>
             <TextField
@@ -178,37 +217,18 @@ export default function AdsFormModal({
             )}
           </FormControl>
 
-          {/* <FormControl sx={{ display: "block", mt: "0.5rem" }}>
-            <TextField
-              {...register("isActive", {
-                required: "status is required",
-              })}
-              type="text"
-              placeholder="Active"
-              sx={passInputStyle}
-            />
-
-            {errors.isActive && (
-              <Typography color="error">
-                {errors.isActive.message?.toString()}
-              </Typography>
-            )}
-          </FormControl> */}
           <FormControl fullWidth sx={{ display: "block", mt: "0.5rem" }}>
-            <InputLabel id="demo-simple-select-label">Status</InputLabel>
             <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              defaultValue={selectedItem ? String(selectedItem.isActive) : ""}
-              value={"isActive"}
-              label="Status"
+              value={selectedItem?.isActive === true ? "true" : "false"}
+              onChange={(event: SelectChangeEvent) => {
+                setValue("isActive", event.target.value === "true");
+              }}
               sx={passInputStyle}
-              {...register("isActive", {
-                required: "status is required",
-              })}
+              displayEmpty
+              inputProps={{ "aria-label": "Without label" }}
             >
-              <MenuItem value={true}>active</MenuItem>
-              <MenuItem value={false}>inactive</MenuItem>
+              <MenuItem value={"true"}>active</MenuItem>
+              <MenuItem value={"false"}>inactive</MenuItem>
             </Select>
             {errors.isActive && (
               <Typography color="error">
@@ -216,6 +236,7 @@ export default function AdsFormModal({
               </Typography>
             )}
           </FormControl>
+
           {/* Button to submit or close */}
           <Button
             variant="contained"
