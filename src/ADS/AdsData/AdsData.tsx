@@ -3,27 +3,34 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
-import { TextField } from "@mui/material";
+import { InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
-import { USERS_URLS } from "../../Services/Urls";
+import { useEffect } from "react";
+import { ADS_URLS } from "../../Services/Urls";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { privateUserAxiosInstance } from "../../Services/Axiosinstance";
-import { PasswordValidation_Reset } from "../../Services/Validation";
-import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import VisibilityIcon from "@mui/icons-material/Visibility";
 import CloseIcon from "@mui/icons-material/Close";
+
+type AdItem = {
+  _id: string;
+  room: string;
+  discount: number;
+  isActive: boolean;
+};
 
 type AdsFormProps = {
   open: boolean;
   handleClose: () => void;
-  selectedItem : string
+  selectedItem: AdItem | null;
 };
 
-type AdsData = any;
+type AdsData = {
+  room: string;
+  discount: number;
+  isActive: boolean;
+};
 
 const style = {
   position: "absolute",
@@ -38,42 +45,79 @@ const style = {
 };
 const passInputStyle = { py: "1px", width: "100%", m: "0" };
 
-export default function AdsFormModal({ open, handleClose }: AdsFormProps) {
+export default function AdsFormModal({
+  open,
+  handleClose,
+  selectedItem,
+}: AdsFormProps) {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<AdsData>({
     mode: "onChange",
   });
 
+  const addNewAd = async (values: AdsData) => {
+    try {
+      await privateUserAxiosInstance.post(ADS_URLS.CREATE_NEW_ADS, values);
+      toast.success("Ad added successfully");
+      handleClose();
+    } catch (error) {
+      const err = error as AxiosError<{ message: string }>;
+      toast.error(err.response?.data?.message || "Something went wrong");
+    }
+  };
+
+  const editAd = async (values: AdsData) => {
+    try {
+      await privateUserAxiosInstance.put(
+        ADS_URLS.EDIT_ADS(selectedItem!._id),
+        values
+      );
+      toast.success("Ad updated successfully");
+      handleClose();
+    } catch (error) {
+      const err = error as AxiosError<{ message: string }>;
+      toast.error(err.response?.data?.message || "Something went wrong");
+    }
+  };
+
+  const getAdDataById = async (_id: string) => {
+    try {
+      const response = await privateUserAxiosInstance.get(
+        ADS_URLS.GET_ADS_DETAILS_BY_ID(_id!)
+      );
+
+      const data = response.data.data.ads;
+      console.log(data);
+      setValue("room", data.room.roomNumber);
+      setValue("discount", data.room.discount);
+      setValue("isActive", data.isActive);
+    } catch (error) {
+      const err = error as AxiosError<{ message: string }>;
+      toast.error(err.response?.data?.message || "Failed to load ad data");
+    }
+  };
+
   useEffect(() => {
-    // if () {
-    // }
-  }, []);
+    if (selectedItem) {
+      getAdDataById(selectedItem._id);
+    }
+  }, [selectedItem]);
 
   const onSubmit = async (values: AdsData) => {
-    console.log("submit");
-    // try {
-    //   const { data } = await privateUserAxiosInstance.post(
-    //     USERS_URLS.CHANGE_PASSWORD,
-    //     values
-    //   );
-    //   if (data?.message != "error") {
-    //     toast.success(data?.message);
-    //     handleClose();
-    //   } else {
-    //     toast.error("Something Went Wrong");
-    //   }
-    // } catch (error) {
-    //   if (error instanceof AxiosError) {
-    //     toast.error(error.response?.data?.message || "Something Went Wrong");
-    //   } else if (error instanceof Error) {
-    //     toast.error(error.message || "Something Went Wrong");
-    //   } else {
-    //     toast.error("Something Went Wrong");
-    //   }
-    // }
+    const correctedValues = {
+      ...values,
+      isActive: values.isActive === "true",
+    };
+
+    if (selectedItem) {
+      editAd(values);
+    } else {
+      addNewAd(values);
+    }
   };
 
   return (
@@ -111,9 +155,9 @@ export default function AdsFormModal({ open, handleClose }: AdsFormProps) {
               placeholder="Room Name"
               sx={passInputStyle}
             />
-            {errors.oldPassword && (
+            {errors.room && (
               <Typography color="error">
-                {errors.oldPassword.message?.toString()}
+                {errors.room.message?.toString()}
               </Typography>
             )}
           </FormControl>
@@ -127,14 +171,14 @@ export default function AdsFormModal({ open, handleClose }: AdsFormProps) {
               placeholder="Discount"
               sx={passInputStyle}
             />
-            {errors.newPassword && (
+            {errors.discount && (
               <Typography color="error">
-                {errors.newPassword.message?.toString()}
+                {errors.discount.message?.toString()}
               </Typography>
             )}
           </FormControl>
 
-          <FormControl sx={{ display: "block", mt: "0.5rem" }}>
+          {/* <FormControl sx={{ display: "block", mt: "0.5rem" }}>
             <TextField
               {...register("isActive", {
                 required: "status is required",
@@ -144,9 +188,31 @@ export default function AdsFormModal({ open, handleClose }: AdsFormProps) {
               sx={passInputStyle}
             />
 
-            {errors.confirmPassword && (
+            {errors.isActive && (
               <Typography color="error">
-                {errors.confirmPassword.message?.toString()}
+                {errors.isActive.message?.toString()}
+              </Typography>
+            )}
+          </FormControl> */}
+          <FormControl fullWidth sx={{ display: "block", mt: "0.5rem" }}>
+            <InputLabel id="demo-simple-select-label">Status</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              defaultValue={selectedItem ? String(selectedItem.isActive) : ""}
+              value={"isActive"}
+              label="Status"
+              sx={passInputStyle}
+              {...register("isActive", {
+                required: "status is required",
+              })}
+            >
+              <MenuItem value={true}>active</MenuItem>
+              <MenuItem value={false}>inactive</MenuItem>
+            </Select>
+            {errors.isActive && (
+              <Typography color="error">
+                {errors.isActive.message?.toString()}
               </Typography>
             )}
           </FormControl>

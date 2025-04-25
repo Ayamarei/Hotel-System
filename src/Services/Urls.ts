@@ -14,3 +14,4 @@ export const ADS_URLS={
   EDIT_ADS:(id:string)=>`/ads/${id}`,
   DELETE_ADS:(id:string)=>`/ads/${id}`,
 }
+
