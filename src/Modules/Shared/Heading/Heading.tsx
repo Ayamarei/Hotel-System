@@ -1,7 +1,7 @@
 import { Box, Button, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
-export default function Heading({to,title,item}:{to:string,title:string,item:string}) {
+export default function Heading({to,title,item}:{to?:string,title:string,item?:string}) {
   return <>
     <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: "center",flexDirection:{sm:'column',md:"row"} }}>
         <Box>

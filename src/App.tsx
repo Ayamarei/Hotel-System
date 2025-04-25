@@ -18,8 +18,8 @@ import RoomsData from "./Rooms/RoomsData/RoomsData";
 import AdsList from "./ADS/AdsList/AdsList";
 import FacilitiesData from "./Facilities/FacilitiesData/FacilitiesData";
 import FacilitiesList from "./Facilities/FacilitiesList/FacilitiesList";
-import ListBooking from "./Booking/ListBooking";
-import ListUsers from "./Users/ListUsers";
+import ListBooking from "./Booking/ListBooking/ListBooking";
+import ListUsers from "./Users/ListUsers/ListUsers";
 import Dashboard from "./Modules/Dashboard/Dashboard";
 
 function App() {

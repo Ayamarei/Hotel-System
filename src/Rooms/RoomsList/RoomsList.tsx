@@ -1,60 +1,18 @@
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-
-import { Box, Button,   Typography } from '@mui/material';
-
-
-import { Link, useNavigate } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AxiosError } from 'axios';
-
 import { privateUserAxiosInstance } from '../../Services/Axiosinstance';
 import PaginationList from '../../Modules/Shared/PaginationList/PaginationList';
 import ViewDetails from '../ViewDetails';
-
-import NoData from '../../Modules/Shared/NoData/NoData';
 import Actions from '../../Modules/Shared/Actions/Actions';
-import Loading from '../../Modules/Shared/Loading/Loading';
 import { IRoomData, IRoomsResponse } from '../../Interfaces/RoomInterface';
 import { ROOMS_URLS } from '../../Services/Urls';
-import noimg from '../../assets/images/no-img.jpeg'
 import DeleteConfirmation from '../../Modules/Shared/DeleteConfirmation/DeleteConfirmation';
 import Heading from '../../Modules/Shared/Heading/Heading';
 import CustomTable from '../../Modules/Shared/CustomTable/CustomTable';
-import { IColumLable } from '../../Interfaces/CustomTableInterface';
-
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: "rgba(226, 229, 235, 1)",
-    color:" rgba(31, 38, 62, 1)",
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
-}));
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(odd)': {
-    backgroundColor: theme.palette.action.hover,
-  },
-  // hide last border
-  '&:last-child td, &:last-child th': {
-    border: 0,
-  },
-}));
-
-
-
-
-
+import { IColumnLabel } from '../../Interfaces/CustomTableInterface';
+import noimg from '../../assets/images/no-img.jpeg'
 
 export default function RoomsList() {
   const [rooms, setRooms] = React.useState<IRoomData[]>([]);
@@ -137,6 +95,7 @@ const deleteRoom=async()=>{
         },
       });
       setRooms(response?.data?.data?.rooms);
+      console.log(response?.data?.data?.rooms);
       setTotalCount(response?.data?.data?.totalCount);
     } catch (error) {
       console.log(error);
@@ -154,45 +113,88 @@ const deleteRoom=async()=>{
   React.useEffect(() => {
     getAllRooms(5,1);
   }, []);
-  const columnLabels:IColumLable[]= [
-    { label: "Room Number", align: "left" },
-  { label: "Images", align: "right" },
-  { label: "Price", align: "right" },
-  { label: "Capacity", align: "right" },
-  { label: "Discount", align: "right" },
-  { label: "Facilities", align: "right" },
-  { label: "Actions", align: "right" }
-  ];
+  // const columnLabels:IColumLable[]= [
+  //   { label: "Room Number", align: "left" },
+  // { label: "Images", align: "right" },
+  // { label: "Price", align: "right" },
+  // { label: "Capacity", align: "right" },
+  // { label: "Discount", align: "right" },
+  // { label: "Facilities", align: "right" },
+  // { label: "Actions", align: "right" }
+  // ];
+
+  const columnLabels : IColumnLabel<IRoomData>[]= [
+  { label: "Room Number", align: "left", accessor: (row) => row.roomNumber },
+  { label: "Price", align: "right", accessor: (row) => `$${row.price}` },
+  { label: "Capacity", align: "right", accessor: (row) => row.capacity },
+  { label: "Discount", align: "right", accessor: (row) => `${row.discount}%` },
+  { label: "Facilities", align: "left", accessor: (row) => row.facilities?.map((f) => f.name).join(", ") },
+  { label: "Created By", align: "left", accessor: (row) => row.createdBy?.userName },
+  {
+    label: "Image",
+    align: "center",
+    accessor: (row) => (
+      <img
+        src={row.images?.[0] || noimg}
+        alt="Room"
+        style={{ width: "56px", height: "56px", borderRadius: "8px" }}
+      />
+    ),
+  },
+];
+
+
 return (
     <>
      
      <Heading to='/dashboard/add-room' title='Room' item='Room' />
    
-
      <CustomTable<IRoomData>
-columnsLables={columnLabels}
-loading={loading}
-data={rooms}
-room={true}
-
-renderActions={(room) => (
-  <Actions
-    handleMenuClick={(e) => handleMenuClick(e, room)}
-    anchorEl={anchorEl}
-    handleOpenModal={handleOpenModal}
-    handleOpenEdit={handleOpenEdit}
-    handleOpenDelete={handleOpenDelete}
-    handleMenuClose={handleMenuClose}
-    room={room}
-    selectedRoom={selectedRoom}
-  />)}
+      columnsLabels={columnLabels}
+      loading={loading}
+      data={rooms}
+      renderActions={(room) => (
+        <Actions
+          entityType="room"
+          handleMenuClick={(e) => handleMenuClick(e, room)}
+          anchorEl={anchorEl}
+          handleOpenModal={handleOpenModal}
+          handleOpenEdit={handleOpenEdit}
+          handleOpenDelete={handleOpenDelete}
+          handleMenuClose={handleMenuClose}
+          selectedEntity={selectedRoom}
+          entity={room}
+        />)}
+        
 
 />
   
 
       {!loading && <PaginationList page={page} getAllList={getAllRooms} totalCount={Math.ceil(totalCount / 5)}  setpage={setpage} />}
 
-   {selectedRoom &&   <ViewDetails handleCloseModal={handleCloseModal} openModal={openModal} room={selectedRoom} />}
+   {selectedRoom && <ViewDetails
+      open={openModal}
+      onClose={handleCloseModal}
+      data={selectedRoom}
+      title={`User: ${selectedRoom.roomNumber}`}
+      fields={[
+        { label: "Price", accessor: (data) => `${data.price} EGP` },
+        { label: "Capacity", accessor: (data) => data.capacity },
+        { label: "Discount", accessor: (data) => `${data.discount}%` },
+        { label: "Created By", accessor: (data) => data?.createdBy?.userName },
+        {
+        label: "Facilities",
+        accessor: (data) => {
+          if (data?.facilities && data.facilities.length > 0) {
+            return data.facilities.map((f) => f.name).join(", ");
+          }
+          return "No facilities available";
+        },
+      }
+
+      ]}
+      images={selectedRoom.images}
+    />}
       <DeleteConfirmation item='Room' open={openDeleteModal} setOpen={setOpenDeleteModal} deleteFun={deleteRoom} isDeleting={isDeleting}/>
     </>
   );
