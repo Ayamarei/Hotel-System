@@ -3,8 +3,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-// import deleteImg from '../../assets/images/delete.png'
-import deleteImg from '../../../assets/images/Email.png'
+import deleteImg from '../../../assets/images/delete.png'
 import CloseIcon from '@mui/icons-material/Close';
 import { Avatar, CircularProgress } from '@mui/material';
  
@@ -23,11 +22,13 @@ const style = {
 
 
 
-export default function DeleteConfirmation({open,setOpen,deleteFun,isDeleting}:
+export default function DeleteConfirmation({open,setOpen,deleteFun,isDeleting,item}:
   {open:boolean,
     setOpen:(open:boolean)=>void,
     deleteFun:() => Promise<void>,
-    isDeleting:boolean}) {
+    isDeleting:boolean,
+    item:string
+  }) {
 
   const handleClose = () => setOpen(false);
 
@@ -54,7 +55,7 @@ export default function DeleteConfirmation({open,setOpen,deleteFun,isDeleting}:
          <Box sx={{display:"flex",flexDirection:"column",alignItems:"center",textAlign:"center"}}>
          <Avatar src={deleteImg} sx={{width:"128px",height:"128px"}}/>
           <Typography id="modal-modal-description" sx={{ mt: 2,color:"rgba(73, 73, 73, 1)" }}>
-          Delete This Room?
+          Delete This {item}?
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 ,color:'rgba(73, 73, 73, 0.6)'}}>
           Are you sure you want to delete this item? If you are sure, just click on delete.

@@ -232,7 +232,9 @@ const lightTheme = createTheme({
 
         <Main open={open}>
           <DrawerHeader />
+          <Box sx={{overflowX:"auto"}}>
           <Outlet />
+          </Box>
         </Main>
       </Box>
     </ThemeProvider>

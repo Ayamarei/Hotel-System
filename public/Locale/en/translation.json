@@ -13,7 +13,34 @@
         "Remove":"Remove",
         "Register...":"Register...",
         "Register":"Register"
-}
+},
+"room": {
+    "EnterRoomNumber": "Enter Room Number",
+    "RoomNumberRequired": "Room number is required",
+  "Price":"Price",
+  "PricePositive": "Price must be a positive number",
+  "Capacity":"Capacity",
+  "Discount":"Discount",
+  "SelectFacilities":"Select Facilities",
+  "Drop":"Drag & Drop or Choose a Room Images to Upload",
+  
+    "RoomNumberMin": "Room number must be at least 1",
+    "RoomNumberMax": "Room number must be less than 9999",
+    "PriceRequired": "Price is required",
+    "PriceMin": "Price must be at least 500 EGP",
+    "CapacityRequired": "Capacity is required",
+    "CapacityMin": "Capacity must be at least 1",
+    "CapacityMax": "Capacity cannot exceed 10",
+    "DiscountRequired": "Discount is required",
+    "DiscountMin": "Discount cannot be less than 0%",
+    "DiscountMax": "Discount cannot exceed 100%",
+    "FacilitiesRequired": "Facilities are required",
+    "EditRoom":"Edit Room",
+    "Editing":"Editing...",
+    "AddRoom":"Add Room",
+    "Adding":"Adding...",
+    "cancel":"Cancel"
+  }
 
 
 }
