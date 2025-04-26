@@ -24,10 +24,23 @@ export const FACILITES_URLS={
  DELETE_FACILITES:(id:string)=>`/room-facilities/${id}`,
  EDIT_FACILITES:(id:string)=>`/room-facilities/${id}`,
 }
-//Dashboard
+
+
+
+
+
+export const ADS_URLS={
+  GET_ALL_ADS:'/ads',
+  CREATE_NEW_ADS:'/ads',
+  GET_ADS_DETAILS_BY_ID:(id:string)=>`/ads/${id}`,
+  EDIT_ADS:(id:string)=>`/ads/${id}`,
+  DELETE_ADS:(id:string)=>`/ads/${id}`,
+}
+
 export const DASHBOARD_URLS={
   CHART:'/dashboard'
 }
+
 
 // booking_URLS
 export const ADMIN_BOOKINGS_URLS={
@@ -35,3 +48,4 @@ export const ADMIN_BOOKINGS_URLS={
   GET_BOOKING_DETAILS : (id:string) => `booking/${id}`,
   DELETE_BOOKING : (id:string) => `booking/${id}`,
 }
+

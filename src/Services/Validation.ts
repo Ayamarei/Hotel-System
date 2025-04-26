@@ -1,4 +1,4 @@
-  // SIGNUP_VALIDATIN
+// SIGNUP_VALIDATIN
 export const USER_NAME_VALIDATION=(t: Function)=>({
   required:t("Validation.Username-required"),
   pattern: {
