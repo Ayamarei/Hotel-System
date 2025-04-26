@@ -40,7 +40,13 @@
     "AddRoom":"Add Room",
     "Adding":"Adding...",
     "cancel":"Cancel"
+    },
+
+    "alerts": 
+    {
+    "loggedOutSuccessfully": "User Logged Out Successfully."
+    }
+
   }
 
 
-}

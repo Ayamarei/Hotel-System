@@ -22,4 +22,5 @@ export interface IAuthContext {
   loginData: ILoginData | null;
   saveLoginData: () => void;
   userDetails: IUser | null;
+  isAuthLoading: boolean;
 }
