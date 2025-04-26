@@ -130,7 +130,7 @@ export default function PersistentDrawerLeft() {
     palette: {
       mode: "light",
       primary: {
-        main: "#203FC7",
+        main: "rgba(50, 82, 223, 1)",
       },
       secondary: {
         main: "#F8F9FB",
@@ -149,7 +149,7 @@ export default function PersistentDrawerLeft() {
     palette: {
       mode: "dark",
       primary: {
-        main: "#203FC7",
+        main: "rgba(50, 82, 223, 1)",
       },
       secondary: {
         main: "#F8F9FB",

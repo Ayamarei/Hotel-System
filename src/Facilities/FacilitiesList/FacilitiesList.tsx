@@ -142,37 +142,6 @@ const FacilitesList = () => {
   return (
     <>
       <Box className="content">
-        {/* <Box
-          sx={(theme) => ({
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            mx: "30px",
-            gap: 2,
-            flexDirection: "row",
-            [theme.breakpoints.down("md")]: {
-              flexDirection: "column",
-              alignItems: "center",
-              my: "30px"
-            },
-          })}
-        >
-          <div>
-            <p>Facilities Table Details</p>
-            <p>You can check all details</p>
-          </div>
-          <Button
-            sx={{
-              backgroundColor: "#203FC7",
-              height: "50px",
-              mt: { xs: 1, sm: 0 },
-            }}
-            variant="contained"
-            onClick={() => { setOpenAddModal(true); setSelectedFacility(null); }}
-          >
-            Add New Facility
-          </Button>
-        </Box> */}
 
 <Heading handleClick={() => { setOpenAddModal(true); setSelectedFacility(null); }} title='Facility' item='facility' />
 

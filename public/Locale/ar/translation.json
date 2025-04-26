@@ -108,6 +108,15 @@
     "Facilities": "المرافق",
      "Rooms":"الغرف"
   },
+"List-User": {
+  "User": "مستخدم"
+},
+"Heading": {
+  "Table-Details": "تفاصيل الجدول",
+  "Table-description": "يمكنك مراجعة جميع التفاصيل",
+  "Add-new-room": "إضافة جديد",
+  "Add-new-facilities": "إضافة جديد"
+},
 
 "room": {
   "EnterRoomNumber": "أدخل رقم الغرفة",

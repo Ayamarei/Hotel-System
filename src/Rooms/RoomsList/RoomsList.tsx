@@ -18,11 +18,6 @@ import Heading from '../../Modules/Shared/Heading/Heading';
 import CustomTable from '../../Modules/Shared/CustomTable/CustomTable';
 import { IColumLable } from '../../Interfaces/CustomTableInterface';
 
-
-
-
-
-
 export default function RoomsList() {
   const [rooms, setRooms] = React.useState<IRoomData[]>([]);
   const [totalCount, setTotalCount] = React.useState<number>(1);

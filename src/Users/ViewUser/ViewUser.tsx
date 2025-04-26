@@ -3,6 +3,9 @@ import { Box, Button, Modal, Typography } from "@mui/material";
   import CloseIcon from '@mui/icons-material/Close';
   import noimg from '../../assets/images/no-img.jpeg'
 import { IUserData } from "../../Interfaces/UserData";
+import { useContext } from "react";
+import { ThemeContext } from "../../context/ThemeContext";
+import { THEMECOLOR } from "../../Services/ThemeColors";
 
 
   
@@ -16,6 +19,7 @@ const style = {
   color:"black",
     boxShadow: 24,
     p: 4,
+    borderRadius: '10px', 
   
   };
 export default function ViewUser({handleCloseModal,openModal,user}:
@@ -26,7 +30,9 @@ export default function ViewUser({handleCloseModal,openModal,user}:
 
   }) {
 
-   
+    const ContextColor = useContext(ThemeContext);
+    if (!ContextColor) throw new Error("AuthContext must be used within AuthProvider");
+    const { theme } = ContextColor;
   return <>
   <Modal
           open={openModal}
@@ -34,33 +40,41 @@ export default function ViewUser({handleCloseModal,openModal,user}:
         >
           <Box sx={style}>
        {user&&<>
-        <Box sx={{display:"flex",justifyContent:'space-between',mb:"30px"}}>
-          <Typography  variant="h6" component="h2" >
-             user Name: {user?.userName}
+
+          <Box sx={{ display: "flex", justifyContent: 'space-between', mb: "30px", color: theme === 'dark' ? 'white' : 'black' }}>
+            <Typography variant="h6" component="h2">
+              <Box component="span" sx={{ color: theme === 'dark' ? THEMECOLOR.mainBlue : 'black' }}>
+                User Name:
+              </Box>
+              <Box component="span" sx={{ color: theme === 'dark' ? 'white' : 'black', ml: 1 }}>
+                {user?.userName}
+              </Box>
             </Typography>
-         <Box component={'button'} sx={{backgroundColor:"transparent",border:"none",cursor:"pointer"}} onClick={handleCloseModal}>
-             <CloseIcon /></Box>
+            <Box component={'button'} sx={{ backgroundColor: "transparent", border: "none", cursor: "pointer",color: theme === 'dark' ? THEMECOLOR.mainBlue: 'black' }} onClick={handleCloseModal}>
+              <CloseIcon />
+            </Box>
           </Box>
+
 
           <Box sx={{display:"flex",justifyContent:"space-between"}}>
        <Box sx={{width:'50%'}}>
-       <Typography  sx={{ mt: 2 }} component={'div'}>
-         <Typography component={'span'} sx={{fontWeight:700}}>Email:</Typography>  {user?.email} 
+       <Typography  sx={{ mt: 2 ,color: theme === 'dark' ? 'white': 'black'}} component={'div'}>
+         <Typography component={'span'} sx={{fontWeight:700,color: theme === 'dark' ? THEMECOLOR.mainBlue: 'black'}}>Email:</Typography>  {user?.email} 
          </Typography>
-          <Typography  sx={{ mt: 2 }} component={'div'}>
-         <Typography component={'span'} sx={{fontWeight:700}}>Phone Number:</Typography>  {user?.phoneNumber}
+          <Typography  sx={{ mt: 2,color: theme === 'dark' ? 'white': 'black' }} component={'div'}>
+         <Typography component={'span'} sx={{fontWeight:700,color: theme === 'dark' ? THEMECOLOR.mainBlue: 'black'}}>Phone Number:</Typography>  {user?.phoneNumber}
          </Typography>
-          <Typography  sx={{ mt: 2 }} component={'div'}>
-         <Typography component={'span'} sx={{fontWeight:700}}>Country:</Typography>  {user?.country}
+          <Typography  sx={{ mt: 2,color: theme === 'dark' ? 'white': 'black' }} component={'div'}>
+         <Typography component={'span'} sx={{fontWeight:700,color: theme === 'dark' ? THEMECOLOR.mainBlue: 'black'}}>Country:</Typography>  {user?.country}
          </Typography>
-          <Typography sx={{ mt: 2 }} component={'div'}>
-         <Typography component={'span'} sx={{fontWeight:700}}>User Type:</Typography>  {user?.role}
+          <Typography sx={{ mt: 2 ,color: theme === 'dark' ? 'white': 'black'}} component={'div'}>
+         <Typography component={'span'} sx={{fontWeight:700,color: theme === 'dark' ? THEMECOLOR.mainBlue: 'black'}}>User Type:</Typography>  {user?.role}
          </Typography>
        
  
        </Box>
-       <Box sx={{width:"50%",textAlign:'end'}}>
-       <Typography>Profile Picture</Typography>
+       <Box sx={{width:"50%",textAlign:'end',color: theme === 'dark' ? THEMECOLOR.mainBlue: 'black'}}>
+       <Typography sx={{ mb: 1 ,fontWeight: 'bold'}}>Profile Picture</Typography>
        <Box>
        {user?.profileImage ?
                 
@@ -77,13 +91,35 @@ export default function ViewUser({handleCloseModal,openModal,user}:
        </Box>
        </Box>
       
+      
           </Box>
        </>}
 
 
-  
+            <Box sx={{ mt: '20px', display: "flex", justifyContent: "center" }}>
+            <Button 
+              onClick={handleCloseModal} 
+              variant='outlined'
+              sx={{
+                color: theme === 'dark' ?  THEMECOLOR.mainBlue : THEMECOLOR.mainBlue ,
+                borderColor: theme === 'dark' ?  THEMECOLOR.mainBlue :  THEMECOLOR.mainBlue,
+                '&:hover': {
+                  backgroundColor: theme === 'dark' ?  THEMECOLOR.mainBlue : THEMECOLOR.mainBlue,
+                  color: theme === 'dark' ? 'white' : 'white',
+                  borderColor: theme === 'dark' ?  THEMECOLOR.mainBlue:  THEMECOLOR.mainBlue,
+                },
+                fontWeight: 'bold',
+                borderRadius: '12px',
+                padding: '10px 30px',
+                fontSize: '16px',
+                transition: '0.3s',
+              }}
+            >
+              Close
+            </Button>
+          </Box>
+          
 
-          <Box sx={{mt:'20px',display:"flex",justifyContent:"flex-end"}}>  <Button onClick={handleCloseModal} variant='outlined' >Close</Button></Box>
           </Box>
         </Modal>
   </>;

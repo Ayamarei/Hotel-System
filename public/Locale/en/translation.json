@@ -111,6 +111,15 @@
   "Facilities":"Facilities",
   "Rooms":"Rooms"
 },
+"List-User":{
+  "User":"User"
+},
+"Heading":{
+  "Table-Details":"Table Details",
+  "Table-description":"You can check all details",
+  "Add-new-room":" Add new",
+  "Add-new-facilities":" Add new"
+},
 "room": {
     "EnterRoomNumber": "Enter Room Number",
     "RoomNumberRequired": "Room number is required",
