@@ -32,7 +32,11 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
 import { useTranslation } from "react-i18next";
+import { ThemeContext } from "../../../context/ThemeContext";
 export default function Register() {
+  const ContextColor = React.useContext(ThemeContext);
+  if (!ContextColor) throw new Error("AuthContext must be used within AuthProvider");
+  const { theme } = ContextColor;
   const [uploadedImage, setUploadedImage] = React.useState<File | null>(null);
   const [uploadSuccess, setUploadSuccess] = React.useState(false);
   const [showPassword, setShowPassword] = React.useState(false);
@@ -125,13 +129,24 @@ const { t } = useTranslation();
    <>
 <form onSubmit={handleSubmit(onSubmit)}>
       <CustomInput
-        label="Username"
+        label={t("RegisterForm.User-Name")}
         type="text"
         placeholder={t("RegisterForm.Please-type")}
         register={register}
         name="userName"
         error={errors.userName?.message}
-        rules={USER_NAME_VALIDATION}
+        rules={USER_NAME_VALIDATION(t)}
+        sx={{
+          input: {
+            color: theme === 'dark' ? 'white' : 'black',
+            backgroundColor: theme === 'dark' ? '#333' : '#f0f0f0', 
+            borderColor: theme === 'dark' ? 'gray' : '#ccc', 
+          },
+          label: {
+            color: theme === 'dark' ? 'white' : 'black',
+          },
+        }}
+        
       />
         <Box sx={{ width: "100%" }}>
           <Grid
@@ -141,54 +156,94 @@ const { t } = useTranslation();
           >
             <Grid size={6}>
               <CustomInput
-                label="Phone number"
+                label={t("RegisterForm.Phone-number")}
                 type="text"
-                placeholder="Please type here ..."
+                placeholder={t("RegisterForm.Please-type")}
                 register={register}
                 name="phoneNumber"
                 error={errors.phoneNumber?.message}
-                rules={PHONE_VALIDATION}
+                rules={PHONE_VALIDATION(t)}
+                sx={{
+                  input: {
+                    color: theme === 'dark' ? 'white' : 'black',
+                    backgroundColor: theme === 'dark' ? '#333' : '#f0f0f0', 
+                    borderColor: theme === 'dark' ? 'gray' : '#ccc', 
+                  },
+                  label: {
+                    color: theme === 'dark' ? 'white' : 'black',
+                  },
+                }}
               />
             </Grid>
 
             <Grid size={6}>
               <CustomInput
-                label="Country"
+                label={t("RegisterForm.Country")}
                 type="text"
-                placeholder="Please type here ..."
+                placeholder={t("RegisterForm.Please-type")}
                 register={register}
                 name="country"
                 error={errors.country?.message}
-                rules={COUNTRY_VALIDATION}
+                rules={COUNTRY_VALIDATION(t)}
+                sx={{
+                  input: {
+                    color: theme === 'dark' ? 'white' : 'black',
+                    backgroundColor: theme === 'dark' ? '#333' : '#f0f0f0', 
+                    borderColor: theme === 'dark' ? 'gray' : '#ccc', 
+                  },
+                  label: {
+                    color: theme === 'dark' ? 'white' : 'black',
+                  },
+                }}
               />
             </Grid>
           </Grid>
         </Box>
         <CustomInput
-        label="Email"
+        label={t("RegisterForm.Email")}
         type="email"
-        placeholder="Please type here ..."
+        placeholder={t("RegisterForm.Please-type")}
         register={register}
         name="email"
         error={errors.email?.message}
-        rules={EMAIL_VALIDATION}
+        rules={EMAIL_VALIDATION(t)}
+        sx={{
+          input: {
+            color: theme === 'dark' ? 'white' : 'black',
+            backgroundColor: theme === 'dark' ? '#333' : '#f0f0f0', 
+            borderColor: theme === 'dark' ? 'gray' : '#ccc', 
+          },
+          label: {
+            color: theme === 'dark' ? 'white' : 'black',
+          },
+        }}
       />
 
       <CustomInput
-        label="Password"
+        label={t("RegisterForm.Password")}
         type="password"
-        placeholder="Please type your password"
+        placeholder={t("RegisterForm.Please-type")}
         register={register}
         name="password"
         error={errors.password?.message}
         showPassword={showPassword}
         onTogglePasswordVisibility={handleClickShowPassword}
-        rules={PASSWORD_VALIDATION}
+        rules={PASSWORD_VALIDATION(t)}
+        sx={{
+          input: {
+            color: theme === 'dark' ? 'white' : 'black',
+            backgroundColor: theme === 'dark' ? '#333' : '#f0f0f0', 
+            borderColor: theme === 'dark' ? 'gray' : '#ccc', 
+          },
+          label: {
+            color: theme === 'dark' ? 'white' : 'black',
+          },
+        }}
       />
         <CustomInput
-          label="Confirm Password"
+          label={t("RegisterForm.Confirm-Password")}
           type={showConfirmPassword ? "text" : "password"}
-          placeholder="Please confirm your password"
+          placeholder={t("RegisterForm.Confirm-Password-placeholder")}
           register={register}
           name="confirmPassword"
           error={errors.confirmPassword?.message}
@@ -197,7 +252,17 @@ const { t } = useTranslation();
           rules={{
             ...CONFIRMPASSWORD_VALIDATION,
             validate: (confirmPassword) =>
-              confirmPassword === watch("password") || "Passwords do not match",
+              confirmPassword === watch("password") || t("RegisterForm.Passwords-not-match"),
+          }}
+          sx={{
+            input: {
+              color: theme === 'dark' ? 'white' : 'black',
+              backgroundColor: theme === 'dark' ? '#333' : '#f0f0f0', 
+              borderColor: theme === 'dark' ? 'gray' : '#ccc', 
+            },
+            label: {
+              color: theme === 'dark' ? 'white' : 'black',
+            },
           }}
         />
 
@@ -213,7 +278,7 @@ const { t } = useTranslation();
           variant="contained"
           sx={{ backgroundColor: THEMECOLOR.mainBlue }}
         >
-          {isSubmitting ? "Register..." : "Register"}
+          {isSubmitting ? t("RegisterForm.Register...") :t("RegisterForm.Register")}
         </Button>
       </form>
 

@@ -1,81 +1,10 @@
-// import { Box, Button, FilledInput, Modal, Typography } from "@mui/material";
-// import CloseIcon from '@mui/icons-material/Close';
-// import { useForm } from "react-hook-form";
-
-// const style = {
-//   position: 'absolute',
-//   top: '50%',
-//   left: '50%',
-//   transform: 'translate(-50%, -50%)',
-//   width: 400,
-//   bgcolor: 'background.paper',
-//   borderRadius: '16px',
-// // textAlign:"center",
-//   boxShadow: 24,
-//   p: 4,
-// };
-// type IFacilityFormValues = {
-//   name: string;
-// };
-
-
-
-// export default function FacilitiesData({open,setOpenAddModal,onSubmit}:{
-//   open:boolean,
-//   setOpenAddModal:(open:boolean)=>void,
-//   onSubmit:  (data: { name: string }) => Promise<void>
- 
-// }) {
-
-//     const handleClose = () => setOpenAddModal(false);
-//     const {
-//       register,
-//       handleSubmit,
-//       formState: { isSubmitting }
-//     } = useForm<IFacilityFormValues>();
-    
-//   return (
-//     <>
-      
-//        <Modal
-//               open={open}
-//               onClose={handleClose} 
-//               aria-labelledby="modal-modal-title"
-//               aria-describedby="modal-modal-description"
-//             >
-
-       
-//               <Box sx={style}>
-
-//               <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-//                 <Typography>Add Facility</Typography>
-//             <CloseIcon 
-//               sx={{ color: "black", cursor: 'pointer' }} 
-//               onClick={handleClose} 
-//             />
-//           </Box>       
-             
-//                <form  onSubmit={handleSubmit(onSubmit)}>
-//                < FilledInput {...register("name")} placeholder="Name" sx={{width:"100%",my:"20px"}}/>
-//                <Box  sx={{mt:"24px",width:"30%" , backgroundColor: "#203FC7" , display: 'flex',alignItems:"center " ,justifyContent:"center"}}>
-//                 <Button disabled={isSubmitting} variant='outlined' sx={{color:"#fff"}}
-//                       //  startIcon={isSaving ? <CircularProgress color="inherit" size={20} /> : null}
-//                  type="submit">{isSubmitting?"Saveing..." :"save"}</Button>
-//                  </Box>
-//                 </form>
-//                </Box>
-        
-//             </Modal>
-//     </>
-//   )
-// }
-
-
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { Box, Button, FilledInput, Modal, Typography } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import { useForm } from "react-hook-form";
 import { IFacility } from '../../Interfaces/FacilitesInterface';
+import { THEMECOLOR } from '../../Services/ThemeColors';
+import { ThemeContext } from '../../context/ThemeContext';
 
 const style = {
   position: 'absolute',
@@ -115,21 +44,45 @@ export default function FacilitiesData({ open, setOpenAddModal, onSubmit, onEdit
     }
     return onSubmit(data);
   };
-
+  const ContextColor = useContext(ThemeContext);
+  if (!ContextColor) throw new Error("AuthContext must be used within AuthProvider");
+  const { theme } = ContextColor;
   return (
     <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
       <Box sx={style}>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Typography>{facility ? "Edit Facility" : "Add Facility"}</Typography>
-          <CloseIcon sx={{ color: "black", cursor: 'pointer' }} onClick={handleClose} />
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <Typography fontWeight="bold" fontSize="20px">
+            {facility ? "Edit Facility" : "Add Facility"}
+          </Typography>
+          <CloseIcon sx={{ color:theme === 'dark' ? THEMECOLOR.mainBlue : "dark", cursor: 'pointer' }} onClick={handleClose} />
         </Box>
-        <form onSubmit={handleSubmit(handleFormSubmit)}>
-          <FilledInput {...register("name")} placeholder="Name" sx={{ width: "100%", my: "20px" }} />
-          <Box sx={{ mt: "24px", width: "30%", backgroundColor: "#203FC7", display: 'flex', alignItems: "center", justifyContent: "center" }}>
-            <Button disabled={isSubmitting} variant='outlined' sx={{ color: "#fff" }} type="submit">
+        <form onSubmit={handleSubmit(handleFormSubmit)} style={{ marginTop: '20px' }}>
+          <FilledInput {...register("name")} placeholder="Name" sx={{ width: "100%", mb: 3 }} />
+
+          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+            <Button
+              disabled={isSubmitting}
+              variant="outlined"
+              type="submit"
+              sx={{
+                color: "#203FC7", 
+                borderColor: "#203FC7", 
+                fontWeight: 'bold',
+                fontSize: '16px',
+                padding: '10px 30px',
+                borderRadius: '10px',
+                textTransform: 'capitalize',
+                '&:hover': {
+                  backgroundColor: "#203FC7", 
+                  color: "#fff",
+                  borderColor: "#203FC7",
+                },
+              }}
+            >
               {isSubmitting ? "Saving..." : "Save"}
             </Button>
           </Box>
+
         </form>
       </Box>
     </Modal>

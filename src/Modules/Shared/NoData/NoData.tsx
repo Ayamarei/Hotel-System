@@ -10,8 +10,9 @@ export default function NoData() {
      src={nodata}
      sx={{
        width: {
-         xs: '200px', 
-         md: '500px',  
+         xs: '150px', 
+         md: '300px',  
+         borderRadius:"10px"
        },
    
      }}

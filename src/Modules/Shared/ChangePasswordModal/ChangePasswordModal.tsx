@@ -18,6 +18,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import CloseIcon from "@mui/icons-material/Close";
 import { useTogglePassword } from "../../../hooks/useTogglePassword";
 import {ChangePassProps,  ChangePasswordData} from '../../../Interfaces/AuthInterface'
+import { useTranslation } from "react-i18next";
 
 
 const style = {
@@ -80,7 +81,7 @@ export default function ChangePasswordModal({
       }
     }
   };
-
+const{t}=useTranslation();
   return (
     <div>
       <Modal
@@ -144,7 +145,7 @@ export default function ChangePasswordModal({
             <FormControl sx={{ display: "block", mt: "0.5rem" }}>
               <Typography sx={{ mb: "0.5rem" }}>new password</Typography>
               <TextField
-                {...register("newPassword", PasswordValidation_Reset)}
+                {...register("newPassword", PasswordValidation_Reset(t))}
                 type={visiablity.password ? "text" : "password"}
                 placeholder="enter your new password"
                 sx={passInputStyle}

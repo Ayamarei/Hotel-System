@@ -1,12 +1,20 @@
 import { Box, Button, Typography } from "@mui/material";
+import { useContext } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-
+import { ThemeContext } from "../../../context/ThemeContext";
+import { THEMECOLOR } from "../../../Services/ThemeColors";
 export default function Heading({to,title,item,handleClick}:{to?:string,title:string,item:string,handleClick?:()=>void}) {
+  const{t}=useTranslation()
+      const ContextColor = useContext(ThemeContext);
+      if (!ContextColor) throw new Error("AuthContext must be used within AuthProvider");
+      const { theme } = ContextColor;
   return <>
     <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: "center",flexDirection:{sm:'column',md:"row"} }}>
         <Box>
-          <Typography sx={{ color: 'rgba(31, 38, 62, 1)', fontWeight: 500, fontSize: '20px' }}>{title} Table Details</Typography>
-          <Typography sx={{ color: 'rgba(50, 60, 71, 1)', fontSize: "14px" }}>You can check all details</Typography>
+          <Typography sx={{color: theme === 'dark' ? 'rgba(50, 82, 223, 1)' : 'black', fontWeight: 500, fontSize: '20px' }}>{title} {t("Heading.Table-Details")}</Typography>
+          <Typography sx={{ color: theme === 'dark' ? 'white' : 'black', fontSize: "14px" }}>{t("Heading.Table-description")}</Typography>
+          {/* color: theme === 'dark' ? 'white' : 'black', */}
         </Box>
        {to && <Button
           variant="contained"
@@ -14,17 +22,17 @@ export default function Heading({to,title,item,handleClick}:{to?:string,title:st
           component={Link}
           to= {to}
           onClick={handleClick}
-          sx={{ px: '50px', py: "15px", backgroundColor: "rgba(32, 63, 199, 1)",mt:{sx:'20px',md:0} }}
+          sx={{ px: '50px', py: "15px", backgroundColor:THEMECOLOR.mainBlue,mt:{sx:'20px',md:0} }}
         >
-          Add new {item}
+         {t("Heading.Add-new-room")} {item}
         </Button>}
        {handleClick && <Button
           variant="contained"
           color="primary"
           onClick={handleClick}
-          sx={{ px: '50px', py: "15px", backgroundColor: "rgba(32, 63, 199, 1)",mt:{sx:'20px',md:0} }}
+          sx={{ px: '50px', py: "15px", backgroundColor: THEMECOLOR.mainBlue,mt:{sx:'20px',md:0} }}
         >
-          Add new {item}
+         {t("Heading.Add-new-facilities")}{item}
         </Button>}
       </Box>
   </>;

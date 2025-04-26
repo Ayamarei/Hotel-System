@@ -1,5 +1,5 @@
 {
-   "RegisterForm": {
+  "RegisterForm": {
       "Please-type": "من فضلك اكتب هنا...",
       "User-Name": "اسم المستخدم",
       "Phone-number": "رقم الهاتف",
@@ -7,6 +7,7 @@
       "Email": "البريد الإلكتروني",
       "Password": "كلمة المرور",
       "Confirm-Password": "تأكيد كلمة المرور",
+      "Confirm-Password-placeholder": "من فضلك أكد كلمة المرور",
       "Passwords-not-match": "كلمتا المرور غير متطابقتين",
       "Upload-Image": "تحميل الصورة",
       "Image-uploaded": "تم تحميل الصورة بنجاح!",
@@ -14,6 +15,109 @@
       "Register...": "جاري التسجيل...",
       "Register": "تسجيل"
 },
+  "LoginForm": {
+      "Please-type": "من فضلك اكتب هنا ...",
+      "Email": "البريد الإلكتروني",
+      "Password": "كلمة المرور",
+      "Login...": "تسجيل الدخول...",
+      "Login": "تسجيل الدخول",
+      "Forget-Password": "هل نسيت كلمة المرور؟"
+  },
+  "ForgetForm": {
+      "Please-type": "من فضلك اكتب هنا ...",
+      "Email": "البريد الإلكتروني",
+      "Send-Mail": "إرسال البريد",
+      "Sending...": "جاري الإرسال..."
+},
+"RestForm": {
+      "Please-type": "من فضلك اكتب هنا ...",
+      "Email": "البريد الإلكتروني",
+      "OTP": "رمز التحقق",
+      "Password": "كلمة المرور",
+      "Confirm-Password": "تأكيد كلمة المرور",
+      "Reset...": "جاري إعادة التعيين...",
+      "Reset": "إعادة التعيين"
+},
+"AuthLogin": {
+  "title": "تسجيل الدخول",
+  "description": "إذا لم يكن لديك حساب، يرجى التسجيل.",
+  "subDescription": "سجّل من هنا"
+},
+"AuthRegister": {
+  "title": "إنشاء حساب",
+  "description": "إذا كان لديك حساب بالفعل",
+  "subDescription": "بإمكانك",
+  "spanDescription": "تسجيل الدخول من هنا",
+  "buttonTitle": "إنشاء حساب"
+},
+"AuthRest": {
+  "title": "إعادة تعيين كلمة المرور",
+  "description": "إذا كان لديك حساب بالفعل",
+  "subDescription": "بإمكانك",
+  "spanDescription": "تسجيل الدخول من هنا"
+},
+"AuthForget": {
+  "title": "نسيت كلمة المرور",
+  "description": "إذا كان لديك حساب بالفعل",
+  "subDescription": "بإمكانك",
+  "spanDescription": "تسجيل الدخول من هنا"
+},
+"AuthLayout": {
+  "stay": "ابقَ ",
+  "cation":"منتبه"
+},
+"Validation": {
+  "Username-required": "اسم المستخدم مطلوب",
+  "Username-message": "يجب أن يحتوي اسم المستخدم على أحرف وينتهي برقم بدون مسافات",
+  "country-required": "الدولة مطلوبة",
+  "country-message": "يجب أن تحتوي الدولة على أحرف ومسافات فقط",
+  "Phone-required": "الهاتف مطلوب",
+  "Phone-message": "يرجى إدخال رقم هاتف صالح بالصيغة (123) 456-7890",
+  "Email-required": "البريد الإلكتروني مطلوب",
+  "Email-message": "البريد الإلكتروني غير صالح",
+  "Password-required": "كلمة المرور مطلوبة",
+  "Password-message": "يجب أن تحتوي كلمة المرور على 6 أحرف على الأقل وتحتوي على أحرف وأرقام وحروف خاصة",
+  "confirmPassword-required": "تأكيد كلمة المرور مطلوب",
+  "confirmPassword-message": "يجب أن يحتوي تأكيد كلمة المرور على 6 أحرف على الأقل ويشمل أحرفًا وأرقامًا وحروفًا خاصة",
+  "valid-email": "يرجى إدخال بريد إلكتروني صالح",
+  "OTP-required": "الرمز المطلوب (OTP) مطلوب",
+  "OTP-message": "أدخل 4 أحرف على الأقل",
+  "Password-hasLowerCase": "يجب أن تحتوي على حرف صغير واحد على الأقل",
+  "Password-hasUpperCase": "يجب أن تحتوي على حرف كبير واحد على الأقل",
+  "Password-hasNumber": "يجب أن تحتوي على رقم واحد على الأقل",
+  "Password-hasSpecialChar": "يجب أن تحتوي على حرف خاص واحد على الأقل",
+  "Password-minLength": "يجب أن تكون كلمة المرور على الأقل 6 أحرف طويلة"
+},
+"NavIconText": {
+    "Home": "الرئيسية",
+    "Users": "المستخدمون",
+    "Rooms": "الغرف",
+    "Ads": "الإعلانات",
+    "List-Booking": "قائمة الحجوزات",
+    "Facilities": "المرافق",
+    "Change-Password": "تغيير كلمة المرور",
+    "Logout": "تسجيل الخروج"
+  },
+  "Dashboard": {
+    "completed": "مكتمل",
+    "pending": "قيد الانتظار",
+    "Booking": "الحجوزات",
+    "User": "مستخدم",
+    "Admin": "مشرف",
+    "Ads": "الإعلانات",
+    "Facilities": "المرافق",
+     "Rooms":"الغرف"
+  },
+"List-User": {
+  "User": "مستخدم"
+},
+"Heading": {
+  "Table-Details": "تفاصيل الجدول",
+  "Table-description": "يمكنك مراجعة جميع التفاصيل",
+  "Add-new-room": "إضافة جديد",
+  "Add-new-facilities": "إضافة جديد"
+},
+
 "room": {
   "EnterRoomNumber": "أدخل رقم الغرفة",
   "Price":"السعر",

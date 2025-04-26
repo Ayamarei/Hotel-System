@@ -8,6 +8,7 @@ import Actions from '../../Modules/Shared/Actions/Actions';
 import ViewUser from '../ViewUser/ViewUser';
 import { IUserData, IUserResponseData } from '../../Interfaces/UserData';
 import { USERS_URLS } from '../../Services/Urls';
+import { useTranslation } from 'react-i18next';
 
 
 
@@ -80,10 +81,11 @@ export default function ListUser() {
     { label: "User Type", align: "right" },
     { label: "Actions", align: "right" }
   ];
+  const{t}=useTranslation();
   return (
     <>
 
-      <Heading title='User' item='User' />
+      <Heading title={t("List-User.User")} item='User' />
 
 
       <CustomTable<IUserData>
