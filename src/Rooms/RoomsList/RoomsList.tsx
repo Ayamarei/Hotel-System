@@ -1,16 +1,11 @@
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import { toast } from 'react-toastify';
 import { AxiosError } from 'axios';
-
 import { privateUserAxiosInstance } from '../../Services/Axiosinstance';
 import PaginationList from '../../Modules/Shared/PaginationList/PaginationList';
 import ViewDetails from '../ViewDetails';
-
-
 import Actions from '../../Modules/Shared/Actions/Actions';
-
 import { IRoomData, IRoomsResponse } from '../../Interfaces/RoomInterface';
 import { ROOMS_URLS } from '../../Services/Urls';
 import DeleteConfirmation from '../../Modules/Shared/DeleteConfirmation/DeleteConfirmation';

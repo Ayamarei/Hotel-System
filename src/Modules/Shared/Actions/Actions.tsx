@@ -5,9 +5,11 @@ import CreateIcon from '@mui/icons-material/Create';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { IRoomData } from "../../../Interfaces/RoomInterface";
 import { IFacility } from "../../../Interfaces/FacilitesInterface";
+import {Iad} from '../../../Interfaces/AdsInterface'
+
   
 
-type List = IRoomData| IFacility
+type List = IRoomData| IFacility |Iad
 
 
 
@@ -15,7 +17,7 @@ export default function Actions({
     handleMenuClick,anchorEl,
     handleOpenModal,handleOpenEdit,
     handleOpenDelete,handleMenuClose,
-    selectedRoom,room,facility
+    selectedRoom,room,facility,ads
 }:{
     handleMenuClick:(event: React.MouseEvent<HTMLButtonElement>, room: List) => void,
     anchorEl?:null|HTMLElement,
@@ -26,6 +28,7 @@ export default function Actions({
     selectedRoom?:List|null,
     room?:IRoomData,
     facility?:IFacility,
+    ads?:Iad
 
 }) {
   return <>
@@ -37,6 +40,7 @@ export default function Actions({
                       onClick={(event) => {
                         if (room) handleMenuClick(event, room);
                         if (facility) handleMenuClick(event, facility);
+                        if (ads) handleMenuClick(event, ads);
                       }}
                     >
                       <MoreVertIcon />
@@ -45,7 +49,7 @@ export default function Actions({
                     <Menu
                       id="basic-menu"
                       anchorEl={anchorEl}
-                      open={Boolean(anchorEl&& selectedRoom===room)||Boolean(anchorEl&&selectedRoom==facility)}
+                      open={Boolean(anchorEl&& selectedRoom===room)||Boolean(anchorEl&&selectedRoom==facility)||Boolean(anchorEl&&selectedRoom==ads)}
                       onClose={handleMenuClose}
                       slotProps={{
                         paper: {
@@ -69,6 +73,17 @@ export default function Actions({
                       </MenuItem>
                       </>}
                       {facility && <>
+                        <MenuItem onClick={handleOpenModal} sx={{ gap: "10px" }}>
+                        <RemoveRedEyeIcon sx={{ color: "rgba(32, 63, 199, 1)" }} /> View
+                      </MenuItem>
+                      <MenuItem onClick={handleOpenEdit} sx={{ gap: "10px" }}>
+                        <CreateIcon sx={{ color: "rgba(32, 63, 199, 1)" }} /> Edit
+                      </MenuItem>
+                      <MenuItem onClick={handleOpenDelete} sx={{ gap: "10px" }}>
+                        <DeleteIcon sx={{ color: "rgba(32, 63, 199, 1)" }} /> Delete
+                      </MenuItem>
+                      </>}
+                      {ads && <>
                         <MenuItem onClick={handleOpenModal} sx={{ gap: "10px" }}>
                         <RemoveRedEyeIcon sx={{ color: "rgba(32, 63, 199, 1)" }} /> View
                       </MenuItem>

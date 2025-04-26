@@ -13,26 +13,9 @@ import { privateUserAxiosInstance } from "../../Services/Axiosinstance";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { SelectChangeEvent } from "@mui/material/Select";
+import {  AdsFormProps,  AdsData} from '../../Interfaces/AdsInterface'
 
-type AdItem = {
-  _id: string;
-  room: string;
-  discount: number;
-  isActive: boolean;
-};
 
-type AdsFormProps = {
-  open: boolean;
-  handleClose: () => void;
-  selectedItem: AdItem | null;
-  getAllAds: () => {};
-};
-
-type AdsData = {
-  room?: string;
-  discount: number;
-  isActive: boolean | string;
-};
 
 const style = {
   position: "absolute",
@@ -70,7 +53,7 @@ export default function AdsFormModal({
       await privateUserAxiosInstance.post(ADS_URLS.CREATE_NEW_ADS, values);
       toast.success("Ad added successfully");
       handleClose();
-      getAllAds();
+      getAllAds(5,1);
     } catch (error) {
       const err = error as AxiosError<{ message: string }>;
       toast.error(err.response?.data?.message || "Something went wrong");
@@ -85,7 +68,7 @@ export default function AdsFormModal({
       );
       toast.success("Ad updated successfully");
       handleClose();
-      getAllAds();
+      getAllAds(5,1);
     } catch (error) {
       const err = error as AxiosError<{ message: string }>;
       toast.error(err.response?.data?.message || "Something went wrong");
@@ -93,12 +76,14 @@ export default function AdsFormModal({
   };
 
   const getAdDataById = async (_id: string) => {
+   
     try {
       const response = await privateUserAxiosInstance.get(
         ADS_URLS.GET_ADS_DETAILS_BY_ID(_id!)
       );
 
       const data = response.data.data.ads;
+      console.log(data);
       setSelectedRoomNumber(data?.room?.roomNumber);
       reset({
         discount: data.room.discount,
@@ -111,7 +96,7 @@ export default function AdsFormModal({
   };
   const getAllRooms = async () => {
     try {
-      const response = await privateUserAxiosInstance.get(ROOMS_URLS.GET_ROOMS);
+      const response = await privateUserAxiosInstance.get(ROOMS_URLS.GET_ROOMS,{params:{size:50}});
       setRooms(response.data.data.rooms);
       console.log(response.data.data.rooms);
     } catch (error) {

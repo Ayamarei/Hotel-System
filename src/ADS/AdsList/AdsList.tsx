@@ -1,69 +1,79 @@
-
-
 import * as React from "react";
-import Button from "@mui/material/Button";
-import { styled } from "@mui/material/styles";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
 import { toast } from "react-toastify";
-
 import AdsFormModal from "../AdsData/AdsData";
 import DeleteConfirmation from "../../Modules/Shared/DeleteConfirmation/DeleteConfirmation";
 import { ADS_URLS } from "../../Services/Urls";
 import { privateUserAxiosInstance } from "../../Services/Axiosinstance";
+import PaginationList from '../../Modules/Shared/PaginationList/PaginationList';
+import Actions from '../../Modules/Shared/Actions/Actions';
+import Heading from '../../Modules/Shared/Heading/Heading';
+import CustomTable from '../../Modules/Shared/CustomTable/CustomTable';
+import { IColumLable } from '../../Interfaces/CustomTableInterface';
+import {Iad} from '../../Interfaces/AdsInterface'
+import AdsCard from "../AdsCard/AdsCard";
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
-}));
 
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  "&:nth-of-type(odd)": {
-    backgroundColor: theme.palette.action.hover,
-  },
-  "&:last-child td, &:last-child th": {
-    border: 0,
-  },
-}));
+
 
 export default function Adslist() {
-  const [AdsList, setAdsList] = React.useState<any[]>([]);
-  const [selectedItem, setSelectedItem] = React.useState<any>(null);
+  const [AdsList, setAdsList] = React.useState<Iad[]>([]);
+  const [selectedItem, setSelectedItem] = React.useState<Iad|null>(null);
   const [openFormModal, setOpenFormModal] = React.useState(false);
   const [openDeleteModal, setOpenDeleteModal] = React.useState(false);
-  const [selectedAdId, setSelectedAdId] = React.useState("");
   const [isDeleting, setIsDeleting] = React.useState(false);
 
-  const handleOpenForm = (item: any = null) => {
+  const [totalCount, setTotalCount] = React.useState<number>(1);
+  const [loading, setLoading] = React.useState(true);
+  const [openModal, setOpen] = React.useState(false);
+  const [page, setpage] = React.useState(1);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
+ 
+
+  const handleMenuClick = (
+    event: React.MouseEvent<HTMLButtonElement>,
+    item: Iad
+  ) => {
+    setAnchorEl(event.currentTarget); 
     setSelectedItem(item);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleOpenModal = async () => {
+    if (selectedItem) {
+      setOpen(true);
+      handleMenuClose();
+    }
+  };
+
+  const handleCloseModal = () => {
+    setOpen(false);
+    setSelectedItem(null);
+  };
+
+  const handleOpenForm = () => {
     setOpenFormModal(true);
   };
 
   const handleCloseForm = () => {
-    setSelectedItem(null);
+    // setSelectedItem(null);
     setOpenFormModal(false);
   };
 
-  const handleDelete = (ad: any) => {
-    setSelectedAdId(ad._id);
+  const handleDelete = () => {
     setOpenDeleteModal(true);
   };
 
   const confirmDelete = async () => {
     setIsDeleting(true);
-    try {
-      await privateUserAxiosInstance.delete(ADS_URLS.DELETE_ADS(selectedAdId));
-      setAdsList((prev) => prev.filter((ad) => ad._id !== selectedAdId));
+    if(selectedItem){
+          try {
+
+      await privateUserAxiosInstance.delete(ADS_URLS.DELETE_ADS(selectedItem?._id));
+      setAdsList((prev:Iad[]) => prev.filter((ad:Iad) =>( ad._id !== selectedItem?._id)) );
       toast.success("Ad deleted successfully");
       setOpenDeleteModal(false);
     } catch (error) {
@@ -71,80 +81,70 @@ export default function Adslist() {
     } finally {
       setIsDeleting(false);
     }
+    }
+
   };
 
-  const getAllAds = async () => {
+  const getAllAds = async (size: number, page: number) => {
+    setLoading(true);
     try {
-      const { data } = await privateUserAxiosInstance.get(ADS_URLS.GET_ALL_ADS,{ page:3,size:3});
+      const { data } = await privateUserAxiosInstance.get(
+        ADS_URLS.GET_ALL_ADS,
+        {
+          params: {
+            page,
+            size,
+          },
+        }
+      );
       setAdsList(data.data.ads);
+      setTotalCount(data?.data?.totalCount);
     } catch (error) {
       toast.error("Something went wrong while fetching ads");
+    } finally {
+      setLoading(false);
     }
   };
 
   React.useEffect(() => {
-    getAllAds();
+    getAllAds(5, 1);
   }, []);
 
-  return (
-    <div>
-      <Button variant="contained" onClick={() => handleOpenForm()}>
-        Add New Ads
-      </Button>
+   const columnLabels: IColumLable[] = [
+      { label: "Status", align: "left" },
+      { label: "Room Number", align: "right" },
+      { label: "Capacity", align: "right" },
+      { label: "Discount", align: "right" },
+      { label: "Date", align: "right" },
+      { label: "Actions", align: "right" },
+    ];
 
-      <TableContainer component={Paper} sx={{ mt: 2 }}>
-        <Table sx={{ minWidth: 700 }} aria-label="customized table">
-          <TableHead>
-            <TableRow>
-              <StyledTableCell>#</StyledTableCell>
-              <StyledTableCell align="right">Status</StyledTableCell>
-              <StyledTableCell align="right">Room Number</StyledTableCell>
-              <StyledTableCell align="right">Capacity</StyledTableCell>
-              <StyledTableCell align="right">Discount</StyledTableCell>
-              <StyledTableCell align="right">Date</StyledTableCell>
-              <StyledTableCell align="right">Actions</StyledTableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {AdsList.map((AdsItem, index) => (
-              <StyledTableRow key={AdsItem._id}>
-                <StyledTableCell>{index + 1}</StyledTableCell>
-                <StyledTableCell align="right">
-                  {AdsItem.isActive ? "Active" : "Inactive"}
-                </StyledTableCell>
-                <StyledTableCell align="right">
-                  {AdsItem.room?.roomNumber}
-                </StyledTableCell>
-                <StyledTableCell align="right">
-                  {AdsItem.room?.capacity}
-                </StyledTableCell>
-                <StyledTableCell align="right">
-                  {AdsItem.room?.discount}
-                </StyledTableCell>
-                <StyledTableCell align="right">
-                  {AdsItem.createdAt?.slice(0, 10)}
-                </StyledTableCell>
-                <StyledTableCell align="right">
-                  <span
-                    onClick={() => handleOpenForm(AdsItem)}
-                    style={{ cursor: "pointer", marginRight: 10 }}
-                    title="View / Edit"
-                  >
-                    ✏️
-                  </span>
-                  <span
-                    onClick={() => handleDelete(AdsItem)}
-                    style={{ cursor: "pointer" }}
-                    title="Delete"
-                  >
-                    🗑️
-                  </span>
-                </StyledTableCell>
-              </StyledTableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+  return (
+    <>
+     <Heading handleClick={()=>{setOpenFormModal(true);}} title='Ads' item='Ads' />
+
+     <CustomTable<Iad>
+        columnsLables={columnLabels}
+        loading={loading}
+        data={AdsList}
+        ads={true}
+
+        renderActions={(ads) => (
+          <Actions
+            handleMenuClick={(e) => handleMenuClick(e, ads)}
+            anchorEl={anchorEl}
+            handleOpenModal={handleOpenModal}
+            handleOpenEdit={handleOpenForm}
+            handleOpenDelete={handleDelete}
+            handleMenuClose={handleMenuClose}
+            ads={ads}
+            selectedRoom={selectedItem}
+          />)}
+          />
+
+
+ {!loading && <PaginationList page={page} getAllList={getAllAds} totalCount={Math.ceil(totalCount / 5)} setpage={setpage} />}
+{selectedItem && <AdsCard handleCloseModal={handleCloseModal} openModal={openModal} ad={selectedItem} />}
 
       <AdsFormModal
         open={openFormModal}
@@ -160,6 +160,7 @@ export default function Adslist() {
         isDeleting={isDeleting}
         item={"Ad"}
       />
-    </div>
+
+    </>
   );
 }
