@@ -22,6 +22,7 @@ import ListBooking from './Booking/ListBooking/ListBooking'
 import ListUsers from './Users/ListUser/ListUsers'
 import Dashboard from './Modules/Dashboard/Dashboard'
 import ChangePassword from './Modules/Authentication/Change-Password/Change-Password'
+import ProtectedRoute from './Modules/Shared/Dashboard/ProtectedRoute/ProtectedRoute'
 
 
 function App() {
@@ -54,15 +55,15 @@ function App() {
       element: <MasterLayout />,
       errorElement: <NotFound />,
       children: [
-        { path: "", element: <Dashboard /> },
-        { path: "rooms", element: <RoomsList /> },
-        {path:'rooms-data/:roomId',element:<RoomsData/>},
-        {path:'add-room',element:<RoomsData/>},
-        { path: "ads", element: <AdsList /> },
-        { path: "facilities", element: <FacilitiesList /> },
-        { path: "facilities-data", element: <FacilitiesData /> },
-        { path: "list-booking", element: <ListBooking /> },
-        { path: "list-users", element: <ListUsers /> },
+        { path: "", element: <ProtectedRoute> <Dashboard /></ProtectedRoute> },
+        { path: "rooms", element: <ProtectedRoute><RoomsList/> </ProtectedRoute> },
+        { path:'rooms-data/:roomId',element: <ProtectedRoute><RoomsData/></ProtectedRoute>},
+        { path:'add-room',element:<ProtectedRoute><RoomsData/></ProtectedRoute>},
+        { path: "ads", element: <ProtectedRoute><AdsList /></ProtectedRoute> },
+        { path: "facilities", element:<ProtectedRoute><FacilitiesList /> </ProtectedRoute> },
+        { path: "facilities-data", element: <ProtectedRoute><FacilitiesData /> </ProtectedRoute>},
+        { path: "list-booking", element: <ProtectedRoute><ListBooking /></ProtectedRoute> },
+        { path: "list-users", element:<ProtectedRoute> <ListUsers /> </ProtectedRoute>},
       ],
     },
   ])
