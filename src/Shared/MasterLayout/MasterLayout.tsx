@@ -32,6 +32,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Avatar from "@mui/material/Avatar";
 import { AuthContext } from "../../context/AuthContext";
 import { useTranslation } from "react-i18next";
+import ChangePasswordModal from "../../Modules/Shared/ChangePasswordModal/ChangePasswordModal";
 import { toast } from "react-toastify";
 
 const drawerWidth = 240;
@@ -93,6 +94,9 @@ export default function PersistentDrawerLeft() {
   const toggleTheme = context?.toggleTheme;
 
   const [open, setOpen] = React.useState(false);
+   const [openChangePasswordModal, setOpenChangePasswordModal] = React.useState(false);
+    const handleOpenChangePasswordModal = () => setOpenChangePasswordModal(true);
+    const handleCloseChangePasswordModal = () => setOpenChangePasswordModal(false);
 
   const handleDrawerOpen = () => setOpen(true);
   const handleDrawerClose = () => setOpen(false);
@@ -131,7 +135,7 @@ export default function PersistentDrawerLeft() {
       path: "/dashboard/list-booking",
     },
     { text: "Facilities", icon: <BuildIcon />, path: "/dashboard/facilities" },
-    { text: "Change Password", icon: <LockIcon />, path: "/change-password" },
+    { text: "Change Password", icon: <LockIcon />, path: "" ,onClick :handleOpenChangePasswordModal },
     { text: "Logout", icon: <ExitToAppIcon />, onClick:handleLogout},
   ];
 
@@ -229,6 +233,7 @@ export default function PersistentDrawerLeft() {
               <Avatar alt={user.name} src={user.avatarUrl} sx={{ mr: 1 }} />
               <Typography variant="body1">{user.name}</Typography>
             </Box>
+            
           </Toolbar>
         </AppBar>
         <Drawer
@@ -256,8 +261,9 @@ export default function PersistentDrawerLeft() {
           <button  onClick={()=>{i18n.changeLanguage("en")}}>En</button>
           {NAV_ITEMS.map((item) => (
             <ListItem key={item.text} disablePadding>
+              
               {item.path ? (
-              <ListItemButton component={Link} to={item.path}>
+              <ListItemButton component={Link} to={item.path} onClick={item.onclick}>
                 <ListItemIcon sx={{ color: "white" }}>{item.icon}</ListItemIcon>
                 <ListItemText primary={item.text} />
               </ListItemButton>
@@ -275,6 +281,10 @@ export default function PersistentDrawerLeft() {
           <Outlet />
           </Box>
         </Main>
+        <ChangePasswordModal
+        handleClose={handleCloseChangePasswordModal}
+        open={openChangePasswordModal}
+      ></ChangePasswordModal>
       </Box>
     </ThemeProvider>
   );
