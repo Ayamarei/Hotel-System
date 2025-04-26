@@ -135,7 +135,7 @@ export default function PersistentDrawerLeft() {
       path: "/dashboard/list-booking",
     },
     { text: "Facilities", icon: <BuildIcon />, path: "/dashboard/facilities" },
-    { text: "Change Password", icon: <LockIcon />, path: "" ,onclick :handleOpenChangePasswordModal },
+    { text: "Change Password", icon: <LockIcon />, path: "" ,onClick :handleOpenChangePasswordModal },
     { text: "Logout", icon: <ExitToAppIcon />, onClick:handleLogout},
   ];
 
