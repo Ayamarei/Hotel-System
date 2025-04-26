@@ -1,3 +1,4 @@
+
 import React, { useContext, useEffect } from "react";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -14,7 +15,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import GroupIcon from "@mui/icons-material/Group";
 import MeetingRoomIcon from "@mui/icons-material/MeetingRoom";
@@ -31,6 +32,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Avatar from "@mui/material/Avatar";
 import { AuthContext } from "../../context/AuthContext";
 import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 
 const drawerWidth = 240;
 
@@ -95,6 +97,17 @@ export default function PersistentDrawerLeft() {
   const handleDrawerOpen = () => setOpen(true);
   const handleDrawerClose = () => setOpen(false);
 
+  const{i18n} = useTranslation()
+ //HANDLE LOGOUT
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    console.log("User logged out"); 
+    navigate("/login");
+    toast.success("User Logged Out Successfully")
+  };
+
+
   const authContext = useContext(AuthContext);
 
   if (!authContext) {
@@ -102,13 +115,10 @@ export default function PersistentDrawerLeft() {
   }
   const { userDetails } = authContext;
 
-  const{i18n}=useTranslation()
- // HANDLE LOGOUT
-//  const handleLogOut = () => {
-//   console.log("User logging out...");
-//   localStorage.removeItem("tkn");
-//   navigate("/login");
-// };
+
+
+
+
 
   const NAV_ITEMS = [
     { text: "Home", icon: <DashboardIcon />, path: "/dashboard" },
@@ -122,7 +132,7 @@ export default function PersistentDrawerLeft() {
     },
     { text: "Facilities", icon: <BuildIcon />, path: "/dashboard/facilities" },
     { text: "Change Password", icon: <LockIcon />, path: "/change-password" },
-    { text: "Logout", icon: <ExitToAppIcon />, path: "/login"},
+    { text: "Logout", icon: <ExitToAppIcon />, onClick:handleLogout},
   ];
 
   const lightTheme = createTheme({
@@ -246,12 +256,18 @@ export default function PersistentDrawerLeft() {
           <button  onClick={()=>{i18n.changeLanguage("en")}}>En</button>
           {NAV_ITEMS.map((item) => (
             <ListItem key={item.text} disablePadding>
+              {item.path ? (
               <ListItemButton component={Link} to={item.path}>
                 <ListItemIcon sx={{ color: "white" }}>{item.icon}</ListItemIcon>
                 <ListItemText primary={item.text} />
               </ListItemButton>
+              ): ( <ListItemButton onClick={item.onClick}>
+                <ListItemIcon sx={{ color: "white" }}>{item.icon}</ListItemIcon>
+                <ListItemText primary={item.text} />
+              </ListItemButton>)}
             </ListItem>
           ))}
+
         </Drawer>
         <Main open={open}  lang={i18n.language}>
           <DrawerHeader />
@@ -263,7 +279,3 @@ export default function PersistentDrawerLeft() {
     </ThemeProvider>
   );
 }
-
-
-
-

@@ -40,7 +40,12 @@
    "AddRoom":"اضافة غرفة",
   "Adding":"...يتم الاضافة",
   "cancel":"إلغاء"
-}
+
+  },
+  "alerts": {
+    "loggedOutSuccessfully": "تم تسجيل الخروج بنجاح"
+  }
+
    
 
   }
