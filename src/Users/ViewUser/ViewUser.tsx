@@ -1,8 +1,9 @@
 import { Box, Button, Modal, Typography } from "@mui/material";
 
   import CloseIcon from '@mui/icons-material/Close';
-  import noimg from '../assets/images/no-img.jpeg'
-import { IRoomData } from "../Interfaces/RoomInterface";
+  import noimg from '../../assets/images/no-img.jpeg'
+import { IUserData } from "../../Interfaces/UserData";
+
 
   
 const style = {
@@ -17,11 +18,11 @@ const style = {
     p: 4,
   
   };
-export default function ViewDetails({handleCloseModal,openModal,room}:
+export default function ViewUser({handleCloseModal,openModal,user}:
 
   {handleCloseModal:()=>void,
     openModal:boolean,
-    room?:IRoomData,
+    user?:IUserData,
 
   }) {
 
@@ -32,10 +33,10 @@ export default function ViewDetails({handleCloseModal,openModal,room}:
           onClose={handleCloseModal}
         >
           <Box sx={style}>
-       {room&&<>
+       {user&&<>
         <Box sx={{display:"flex",justifyContent:'space-between',mb:"30px"}}>
           <Typography  variant="h6" component="h2" >
-             Room Number: {room?.roomNumber}
+             user Name: {user?.userName}
             </Typography>
          <Box component={'button'} sx={{backgroundColor:"transparent",border:"none",cursor:"pointer"}} onClick={handleCloseModal}>
              <CloseIcon /></Box>
@@ -44,46 +45,35 @@ export default function ViewDetails({handleCloseModal,openModal,room}:
           <Box sx={{display:"flex",justifyContent:"space-between"}}>
        <Box sx={{width:'50%'}}>
        <Typography  sx={{ mt: 2 }} component={'div'}>
-         <Typography component={'span'} sx={{fontWeight:700}}>Price:</Typography>  {room?.price} EGP
+         <Typography component={'span'} sx={{fontWeight:700}}>Email:</Typography>  {user?.email} 
          </Typography>
           <Typography  sx={{ mt: 2 }} component={'div'}>
-         <Typography component={'span'} sx={{fontWeight:700}}>Capacity:</Typography>  {room?.capacity}
+         <Typography component={'span'} sx={{fontWeight:700}}>Phone Number:</Typography>  {user?.phoneNumber}
          </Typography>
           <Typography  sx={{ mt: 2 }} component={'div'}>
-         <Typography component={'span'} sx={{fontWeight:700}}>Discount:</Typography>  {room?.discount}%
+         <Typography component={'span'} sx={{fontWeight:700}}>Country:</Typography>  {user?.country}
          </Typography>
           <Typography sx={{ mt: 2 }} component={'div'}>
-         <Typography component={'span'} sx={{fontWeight:700}}>Created By:</Typography>  {room?.createdBy.userName}
+         <Typography component={'span'} sx={{fontWeight:700}}>User Type:</Typography>  {user?.role}
          </Typography>
-          <Typography sx={{ mt: 2 }} component={'div'}>
-          <Typography component={'span'} sx={{fontWeight: 700}}>Facilities:</Typography> 
-{room?.facilities && room.facilities.length > 0 ? (
-  room.facilities.map(facility => (
-    <Box key={facility._id}>
-      {' '}<Typography>{facility.name}</Typography>
-    </Box>
-  ))
-) : (
-  <Typography>No facilities available</Typography>
-)}
-         </Typography>
-       </Box>
-       <Box sx={{width:"50%"}}>
-       <Typography>Images:</Typography>
-       <Box sx={{display:"flex",flexWrap:"wrap",gap:"5px"}}>
-       {room?.images && room.images.length > 0 ? 
-  room.images.map(img => (
+       
  
-  <img src={img}  
-   style={{ objectFit: 'cover', borderRadius: '8px' }}
-  height={120} width={120} />
+       </Box>
+       <Box sx={{width:"50%",textAlign:'end'}}>
+       <Typography>Profile Picture</Typography>
+       <Box>
+       {user?.profileImage ?
+                
+                <img src={user?.profileImage}  
+                style={{ objectFit: 'cover', borderRadius: '8px' }}
+                height={120} width={120} />
 
-  ))
- : (
-  <img src={noimg}
-     style={{ objectFit: 'cover', borderRadius: '8px' }}
-  height={120} width={120} />
-)}
+    
+                : (
+                <img src={noimg}
+                    style={{ objectFit: 'cover', borderRadius: '8px' }}
+                height={120} width={120} />
+                )}
        </Box>
        </Box>
       
