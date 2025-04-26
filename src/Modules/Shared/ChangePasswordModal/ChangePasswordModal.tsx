@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
 import { TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { USERS_URLS } from "../../../Services/Urls";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";

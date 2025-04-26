@@ -1,18 +1,19 @@
 import * as React from "react";
 import Button from "@mui/material/Button";
 import ChangePasswordModal from "../ChangePasswordModal/ChangePasswordModal";
+import { Link } from "react-router-dom";
 
 export default function ChangePasswordButton() {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [openChangePasswordModal, setOpenChangePasswordModal] = React.useState(false);
+  const handleOpenChangePasswordModal = () => setOpenChangePasswordModal(true);
+  const handleCloseChangePasswordModal = () => setOpenChangePasswordModal(false);
 
   return (
     <>
-      <Button onClick={handleOpen}>Change Password</Button>
+      <Link to="" onClick={handleOpenChangePasswordModal}>Change Password</Link>
       <ChangePasswordModal
-        handleClose={handleClose}
-        open={open}
+        handleClose={handleCloseChangePasswordModal}
+        open={openChangePasswordModal}
       ></ChangePasswordModal>
     </>
   );
