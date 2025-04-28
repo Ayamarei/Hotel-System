@@ -108,14 +108,71 @@
     "Facilities": "المرافق",
      "Rooms":"الغرف"
   },
+  "ListUser": {
+  "UserName": "اسم المستخدم",
+  "Picture": "الصورة الشخصيه",
+  "Email": "البريد الإلكتروني",
+  "Number": "رقم الهاتف",
+  "Country": "رقم الهاتف",
+  "UserType": "نوع المستخدم",
+  "Actions": "الإجراءات"
+},
+
+"Actions":{
+  "view":"عرض",
+  "Edit":"تعديل ",
+  "Delete":" حذف"
+},
+"Rooms-list": {
+    "Room-Number": "رقم الغرفة",
+    "Images": "الصوره",
+    "Price": "السعر",
+    "Capacity": "السعة",
+    "Discount": "الخصم",
+    "Facilities": "المرافق",
+    "Actions": "الإجراءات",
+    "title":"الغرف",
+    "item":"غرفه"
+
+},
+
 "List-User": {
-  "User": "مستخدم"
+  "User": " المستخدم"
 },
 "Heading": {
-  "Table-Details": "تفاصيل الجدول",
+  "Table-Details": "تفاصيل  ",
   "Table-description": "يمكنك مراجعة جميع التفاصيل",
-  "Add-new-room": "إضافة جديد",
-  "Add-new-facilities": "إضافة جديد"
+  "Add-new-room": "إضافة ",
+  "Add-new-facilities": "إضافة "
+},
+"ads-list": {
+  "Status": "الحالة",
+  "Room-Number": "رقم الغرفة",
+  "Capacity": "السعة",
+  "Discount": "الخصم",
+  "Date": "التاريخ",
+  "Actions":"الإجراءات",
+  "title":"الاعلاتات",
+  "item":"اعلان"
+},
+"List-booking": {
+  "Room-Number": "رقم الغرفة",
+  "Total-Price": "إجمالي السعر",
+  "Start-Date": "تاريخ البدء",
+  "End-Date": "تاريخ الانتهاء",
+  "User": "المستخدم",
+  "Actions":"الإجراءات",
+  "title":"الحجوزات"
+},
+"Facilities-List": {
+  "Id": "المعرف",
+  "Name": "الاسم",
+  "Created-At": "تاريخ الإنشاء",
+  "Updated-At": "تاريخ التحديث",
+  "Created-By": "تم الإنشاء بواسطة",
+  "Actions":"الإجراءات",
+   "title":"المرافق",
+  "item":"مرافق"
 },
 
 "room": {
@@ -148,7 +205,47 @@
   },
   "alerts": {
     "loggedOutSuccessfully": "تم تسجيل الخروج بنجاح"
-  }
+  },
+  "LanguageSwitcher": 
+  {
+  "arabic": "العربيه",
+  "english": "الانجليزيه"
+  },
+  "Change-Password-Modal": {
+  "ChangePassword": "تغيير كلمة المرور",
+  "current-password": "كلمة المرور الحالية",
+  "new-password": "كلمة المرور الجديدة",
+  "enter-your-current-password": "أدخل كلمة المرور الحالية",
+  "enter-your-new-password": "أدخل كلمة المرور الجديدة",
+  "confirm-new-password": "تأكيد كلمة المرور الجديدة",
+  "Passwords-donot-match": "كلمتا المرور غير متطابقتين",
+  "Loading": "...جاري التحميل",
+  "old-password-required": "كلمة المرور القديمة مطلوبة",
+"confirm-new": "يرجى تأكيد كلمة المرور الجديدة"
+
+},
+"DeleteConfirmation": {
+  "DeleteThis": "حذف هذه",
+  "content": "هل أنت متأكد أنك تريد حذف هذا العنصر؟ إذا كنت متأكدًا، فقط اضغط على زر الحذف.",
+  "Delete": "حذف",
+  "Deleting": "جارٍ الحذف"
+},
+"AdsData": {
+  "AddNew": "إضافة إعلان جديد",
+  "EditAd": "تعديل هذا الإعلان",
+  "save": "حفظ",
+  "Saving": "جارٍ الحفظ...",
+  "RoomNumber": "رقم الغرفه"
+},
+"FacilitiesData": {
+  "AddNew": "إضافة مرفق",
+  "Edit": "تعديل المرفق",
+  "save": "حفظ",
+  "Saving": "جارٍ الحفظ...",
+  "placeholder": "الاسم"
+}
+
+
 
    
 

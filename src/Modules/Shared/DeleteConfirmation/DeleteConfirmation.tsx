@@ -9,6 +9,7 @@ import { Avatar, CircularProgress } from '@mui/material';
 import { ThemeContext } from '../../../context/ThemeContext';
 import { useContext } from 'react';
 import { THEMECOLOR } from '../../../Services/ThemeColors';
+import i18n from '../../../i18n';
  
 const style = {
   position: 'absolute',
@@ -23,7 +24,7 @@ const style = {
   p: 4,
 };
 
-
+ const {t}= i18n
 
 export default function DeleteConfirmation({open,setOpen,deleteFun,isDeleting,item}:
   {open:boolean,
@@ -60,10 +61,10 @@ export default function DeleteConfirmation({open,setOpen,deleteFun,isDeleting,it
          <Box sx={{display:"flex",flexDirection:"column",alignItems:"center",textAlign:"center"}}>
          <Avatar src={deleteImg} sx={{width:"128px",height:"128px"}}/>
           <Typography id="modal-modal-description" sx={{ mt: 2 ,color: theme === 'dark' ?  THEMECOLOR.mainRed :" rgba(73, 73, 73, 1)" ,}}>
-          Delete This {item}?
+           {t("DeleteConfirmation.DeleteThis")} {item}?
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 ,color: theme === 'dark' ?  "white":" rgba(73, 73, 73, 1)" ,}}>
-          Are you sure you want to delete this item? If you are sure, just click on delete.
+           {t("DeleteConfirmation.content")}
           </Typography>
 
            <Button
@@ -82,7 +83,7 @@ export default function DeleteConfirmation({open,setOpen,deleteFun,isDeleting,it
               }}
               onClick={deleteFun}
             >
-              {isDeleting ? "Deleting..." : "Delete"}
+              {isDeleting ? t("DeleteConfirmation.Deleting") : t("DeleteConfirmation.Delete")}
             </Button>
 
           </Box>

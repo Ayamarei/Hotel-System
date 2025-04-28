@@ -92,7 +92,7 @@ const onSubmit = async (data: IRegisterForm) => {
     );
 
     toast.success(response.data?.message)
-   navigate('/login')
+   navigate('/auth/login')
   }catch (error) {
     console.log(error)
       if(error instanceof AxiosError){

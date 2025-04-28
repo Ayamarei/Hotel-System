@@ -8,9 +8,7 @@ import Link from '@mui/material/Link';
 import { useTranslation } from 'react-i18next';
 import { ThemeContext } from '../../../../context/ThemeContext';
 import { useContext } from 'react';
-import IconButton from "@mui/material/IconButton";
-import Brightness4Icon from "@mui/icons-material/Brightness4";
-import Brightness7Icon from "@mui/icons-material/Brightness7";
+
 
 export default function AuthLayout() {
     const{t}=useTranslation();
@@ -18,45 +16,45 @@ export default function AuthLayout() {
 
   const ContextColor=useContext(ThemeContext);
   if (!ContextColor) throw new Error("AuthContext must be used within AuthProvider");
-  const { theme,toggleTheme } = ContextColor;
+  const { theme } = ContextColor;
 
     // Define props for each route dynamically
     const routePropsMap: Record<string, IAuthProps> = {
-        '/login': {
+        '/auth/login': {
         image: '/src/assets/images/auth/login.png',
         title: t("AuthLogin.title"),
         description: t("AuthLogin.description"),
         subDescription:t("AuthLogin.subDescription"),
         spanDescription:t("AuthLogin.subDescription"),
         // buttonTitle: 'Login',
-        href:"/register"
+        href:"/auth/register"
         },
-        '/register': {
+        '/auth/register': {
         image: '/src/assets/images/auth/register.png',
         title: t("AuthRegister.title"),
         description:t("AuthRegister.description"),
         subDescription:t("AuthRegister.subDescription"),
         spanDescription:t("AuthRegister.spanDescription"),
         buttonTitle:t("AuthRegister.buttonTitle"),
-        href:"/login"
+        href:"/auth/login"
         },
-        '/forget-password': {
+        '/auth/forget-password': {
         image: '/src/assets/images/auth/forget-password.png',
         title: t("AuthForget.title"),
         description:  t("AuthForget.description"),
         subDescription: t("AuthForget.subDescription"),
         spanDescription: t("AuthForget.spanDescription"),
         buttonTitle: t("AuthForget.buttonTitle"),
-        href:"/login"
+        href:"/auth/login"
         },
-        '/reset-password': {
+        '/auth/reset-password': {
         image: '/src/assets/images/auth/reset-password.png',
         title: t("AuthRest.title"),
         description:t("AuthRest.description"),
         subDescription:t("AuthRest.subDescription"),
         spanDescription:t("AuthRest.spanDescription"),
         buttonTitle:t("AuthRest.buttonTitle"),
-        href:"/login"
+        href:"/auth/login"
         },
     };
 
@@ -73,15 +71,7 @@ export default function AuthLayout() {
     
     return (
         <>
-          {/* <IconButton
-              color="inherit"
-              onClick={toggleTheme}
-              edge="end"
-              sx={{ ml: 2 }}
-            >
-              {theme === "light" ? <Brightness4Icon /> : <Brightness7Icon />}
-            </IconButton> */}
-        <Grid container spacing={0}  sx={{display:'flex' ,justifyContent:'center',backgroundColor: theme === "light" ? "white" : "#121212"}}>
+        <Grid  container spacing={0}  sx={{display:'flex' ,justifyContent:'center',backgroundColor: theme === "light" ? "white" : "#121212"}}>
             <Grid size={{ xs: 12, md: 6 }} >
                 <Box sx={{
                     display: 'flex',
@@ -128,10 +118,6 @@ export default function AuthLayout() {
                         <Typography variant="h5" sx={{fontWeight:'bold', marginTop: {xs:2,md:6}, marginBottom: {xs:2,md:3 },color: theme === 'dark' ? 'white' : 'black',}}>
                             {title}
                         </Typography>
-
-                        {/* <Typography component="p" sx={{lineHeight:{xs:'10px',sm:'12px'},color:THEMECOLOR.lightBlack, marginBottom: {xs:1,md:2} ,fontSize:{xs:'14px',sm:'22px'}}}>
-                            {description}
-                        </Typography> */}
                         <Typography component="p" sx={{ lineHeight: { xs: '18px', sm: '22px' }, color: theme === 'dark' ? 'white' : 'black', marginBottom: { xs: 2, md: 2 }, fontSize: { xs: '16px', sm: '20px' } }}>
                         {description}
                         </Typography>

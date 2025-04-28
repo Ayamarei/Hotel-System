@@ -73,7 +73,7 @@ export default function ResetPassword() {
       );
       console.log(data);
       toast.success(data?.message);
-      navigate("/login");
+      navigate("/auth/login");
     } catch (error) {
       console.log(error);
       if (error instanceof AxiosError) {

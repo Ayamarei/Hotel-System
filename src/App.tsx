@@ -7,22 +7,19 @@ import ForgetPassword from './Modules/Authentication/Forget-Password/Forget-Pass
 import ResetPassword from './Modules/Authentication/Reset-Password/Reset-Password'
 import { Bounce, ToastContainer } from 'react-toastify'
 import  { useEffect } from "react";
-
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import i18n from './i18n'
 import cookies from "js-cookie"
-import MasterLayout from './Shared/MasterLayout/MasterLayout'
+import MasterLayout from './Modules/Shared/MasterLayout/MasterLayout'
 import RoomsList from './Rooms/RoomsList/RoomsList'
 import RoomsData from './Rooms/RoomsData/RoomsData'
 import AdsList from './ADS/AdsList/AdsList'
-import AdsData from './ADS/AdsData/AdsData'
-import FacilitiesData from './Facilities/FacilitiesData/FacilitiesData'
 import FacilitiesList from './Facilities/FacilitiesList/FacilitiesList'
 import ListBooking from './Booking/ListBooking/ListBooking'
 import ListUsers from './Users/ListUser/ListUsers'
 import Dashboard from './Modules/Dashboard/Dashboard'
-import ChangePassword from './Modules/Authentication/Change-Password/Change-Password'
 import ProtectedRoute from './Modules/Shared/Dashboard/ProtectedRoute/ProtectedRoute'
+
 
 
 function App() {
@@ -37,9 +34,10 @@ function App() {
 
   // routes
   const routes = createBrowserRouter([
+   
     // auth layout
     {
-      path: "",
+      path: "auth",
       element: <AuthLayout />,
       errorElement: <NotFound />,
       children: [
@@ -55,13 +53,12 @@ function App() {
       element: <MasterLayout />,
       errorElement: <NotFound />,
       children: [
-        { path: "", element: <ProtectedRoute> <Dashboard /></ProtectedRoute> },
+        { path: "", element:<ProtectedRoute>  <Dashboard /></ProtectedRoute>},
         { path: "rooms", element: <ProtectedRoute><RoomsList/> </ProtectedRoute> },
         { path:'rooms-data/:roomId',element: <ProtectedRoute><RoomsData/></ProtectedRoute>},
         { path:'add-room',element:<ProtectedRoute><RoomsData/></ProtectedRoute>},
         { path: "ads", element: <ProtectedRoute><AdsList /></ProtectedRoute> },
         { path: "facilities", element:<ProtectedRoute><FacilitiesList /> </ProtectedRoute> },
-        { path: "facilities-data", element: <ProtectedRoute><FacilitiesData /> </ProtectedRoute>},
         { path: "list-booking", element: <ProtectedRoute><ListBooking /></ProtectedRoute> },
         { path: "list-users", element:<ProtectedRoute> <ListUsers /> </ProtectedRoute>},
       ],

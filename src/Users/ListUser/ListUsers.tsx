@@ -68,20 +68,20 @@ export default function ListUser() {
     }
   };
 
-
+  const{t}=useTranslation();
   React.useEffect(() => {
     getAllUsers(5, 1);
   }, []);
   const columnLabels: IColumLable[] = [
-    { label: "User Name", align: "left" },
-     { label: "Profile Picture", align: "right" },
-    { label: "Email", align: "right" },
-    { label: "Phone Number", align: "right" },
-    { label: "Country", align: "right" },
-    { label: "User Type", align: "right" },
-    { label: "Actions", align: "right" }
+    { label: t("ListUser.UserName"), align: "left" },
+     { label:t("ListUser.Picture") , align: "right" },
+    { label: t("ListUser.Email"), align: "right" },
+    { label: t("ListUser.Number"), align: "right" },
+    { label: t("ListUser.Country"), align: "right" },
+    { label: t("ListUser.UserType"), align: "right" },
+    { label: t("ListUser.Actions"), align: "right" }
   ];
-  const{t}=useTranslation();
+ 
   return (
     <>
 

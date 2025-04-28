@@ -12,6 +12,7 @@ import DeleteConfirmation from '../../Modules/Shared/DeleteConfirmation/DeleteCo
 import Heading from '../../Modules/Shared/Heading/Heading';
 import CustomTable from '../../Modules/Shared/CustomTable/CustomTable';
 import { IColumLable } from '../../Interfaces/CustomTableInterface';
+import { useTranslation } from 'react-i18next';
 
 export default function RoomsList() {
   const [rooms, setRooms] = React.useState<IRoomData[]>([]);
@@ -107,23 +108,24 @@ export default function RoomsList() {
     handleMenuClose()
     navigate(`/dashboard/rooms-data/${selectedRoom?._id}`)
   }
+  const{t}=useTranslation();
 
   React.useEffect(() => {
     getAllRooms(5, 1);
   }, []);
   const columnLabels: IColumLable[] = [
-    { label: "Room Number", align: "left" },
-    { label: "Images", align: "right" },
-    { label: "Price", align: "right" },
-    { label: "Capacity", align: "right" },
-    { label: "Discount", align: "right" },
-    { label: "Facilities", align: "right" },
-    { label: "Actions", align: "right" }
-  ];
+    { label:t("Rooms-list.Room-Number"), align: "left" },
+    { label: t("Rooms-list.Images"), align: "right" },
+    { label: t("Rooms-list.Price"), align: "right" },
+    { label:t("Rooms-list.Capacity"), align: "right" },
+    { label: t("Rooms-list.Discount"), align: "right" },
+    { label:t("Rooms-list.Facilities"), align: "right" },
+    { label:t("Rooms-list.Actions"), align: "right" }
+  ];
   return (
     <>
 
-      <Heading to='/dashboard/add-room' title='Room' item='Room' />
+      <Heading to='/dashboard/add-room' title={t("Rooms-list.title")} item={t("Rooms-list.item")} />
 
 
       <CustomTable<IRoomData>

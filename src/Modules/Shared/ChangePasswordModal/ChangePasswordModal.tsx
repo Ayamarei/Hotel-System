@@ -100,7 +100,7 @@ const{t}=useTranslation();
             }}
           >
             <Typography id="modal-modal-title" variant="h5" component="h2">
-              Change Password
+              {t("Change-Password-Modal.ChangePassword")}
             </Typography>
             <IconButton edge="end" onClick={() => handleClose()}>
               <CloseIcon sx={{ fontSize: 30 }} />
@@ -110,13 +110,13 @@ const{t}=useTranslation();
           {/* Inputs */}
           <form onSubmit={handleSubmit(onSubmit)}>
             <FormControl sx={{ display: "block", mt: "0.5rem" }}>
-              <Typography sx={{ mb: "0.5rem" }}>current password</Typography>
+              <Typography sx={{ mb: "0.5rem" }}> {t("Change-Password-Modal.current-password")}</Typography>
               <TextField
                 {...register("oldPassword", {
-                  required: "old password is required",
+                  required:t("Change-Password-Modal.old-password-required"),
                 })}
                 type={visiablity.oldPassword ? "text" : "password"}
-                placeholder="enter your current password"
+                placeholder={t("Change-Password-Modal.enter-your-current-password")}
                 sx={passInputStyle}
                 InputProps={{
                   endAdornment: (
@@ -143,11 +143,11 @@ const{t}=useTranslation();
             </FormControl>
 
             <FormControl sx={{ display: "block", mt: "0.5rem" }}>
-              <Typography sx={{ mb: "0.5rem" }}>new password</Typography>
+              <Typography sx={{ mb: "0.5rem" }}> {t("Change-Password-Modal.new-password")}</Typography>
               <TextField
                 {...register("newPassword", PasswordValidation_Reset(t))}
                 type={visiablity.password ? "text" : "password"}
-                placeholder="enter your new password"
+                placeholder= {t("Change-Password-Modal.enter-your-new-password")}
                 sx={passInputStyle}
                 InputProps={{
                   endAdornment: (
@@ -175,16 +175,16 @@ const{t}=useTranslation();
 
             <FormControl sx={{ display: "block", mt: "0.5rem" }}>
               <Typography sx={{ mb: "0.5rem" }}>
-                confirm new password
+              {t("Change-Password-Modal.confirm-new-password")}
               </Typography>
               <TextField
                 {...register("confirmPassword", {
-                  required: "please confirm your new password",
+                  required: t("Change-Password-Modal.confirm-new"),
                   validate: (val: string) =>
-                    val === newPassword || "Passwords do not match",
+                    val === newPassword || t("Change-Password-Modal.Passwords-donot-match"),
                 })}
                 type={visiablity.confirmPassword ? "text" : "password"}
-                placeholder="confirm your new password"
+                placeholder={t("Change-Password-Modal.confirm-new-password")}
                 sx={passInputStyle}
                 InputProps={{
                   endAdornment: (
@@ -216,7 +216,7 @@ const{t}=useTranslation();
               sx={{ mt: 2, width: "100%" }}
               disabled={isSubmitting}
             >
-              {isSubmitting ? "...Loading" : "Change Password"}
+              {isSubmitting ?  t("Change-Password-Modal.Loading") : t("Change-Password-Modal.ChangePassword")}
             </Button>
           </form>
         </Box>

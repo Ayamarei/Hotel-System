@@ -42,7 +42,7 @@ export default function ForgetPassword() {
         values
       );
       toast.success(data?.message);
-      navigate("/reset-password", { state: { email: values.email } });
+      navigate("/auth/reset-password", { state: { email: values.email } });
     } catch (error) {
       console.log(error);
       if (error instanceof AxiosError) {

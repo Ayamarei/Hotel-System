@@ -16,7 +16,7 @@ export default function ProtectedRoute({
     ) {
       return children;
     } else {
-      return <Navigate to={"/login"}/>;
+      return <Navigate to={"/auth/login"}/>;
 }
 }
 }

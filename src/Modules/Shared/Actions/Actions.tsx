@@ -8,6 +8,7 @@ import { IFacility } from "../../../Interfaces/FacilitesInterface";
 import { Iad } from "../../../Interfaces/AdsInterface";
 import { IBookingData } from "../../../Interfaces/BookingData";
 import { IUserData } from "../../../Interfaces/UserData";
+import { useTranslation } from "react-i18next";
 
 type List = IRoomData | IFacility | IBookingData | IUserData | Iad;
 
@@ -41,6 +42,7 @@ export default function Actions({
   booking?: IBookingData;
   user?: IUserData;
 }) {
+  const{t}=useTranslation();
   return (
     <>
       <Button
@@ -83,38 +85,36 @@ export default function Actions({
         }}
       >
         <MenuItem onClick={handleOpenModal} sx={{ gap: "10px" }}>
-          <RemoveRedEyeIcon sx={{ color: "rgba(32, 63, 199, 1)" }} /> View
+          <RemoveRedEyeIcon sx={{ color: "rgba(32, 63, 199, 1)" }} /> {t("Actions.view")}
         </MenuItem>
         {room && (
           <>
             <MenuItem onClick={handleOpenEdit} sx={{ gap: "10px" }}>
-              <CreateIcon sx={{ color: "rgba(32, 63, 199, 1)" }} /> Edit
+              <CreateIcon sx={{ color: "rgba(32, 63, 199, 1)" }} /> {t("Actions.Edit")}
             </MenuItem>
             <MenuItem onClick={handleOpenDelete} sx={{ gap: "10px" }}>
-              <DeleteIcon sx={{ color: "rgba(32, 63, 199, 1)" }} /> Delete
+              <DeleteIcon sx={{ color: "rgba(32, 63, 199, 1)" }} /> {t("Actions.Delete")}
             </MenuItem>
           </>
         )}
         {facility && (
           <>
             <MenuItem onClick={handleOpenEdit} sx={{ gap: "10px" }}>
-              <CreateIcon sx={{ color: "rgba(32, 63, 199, 1)" }} /> Edit
+              <CreateIcon sx={{ color: "rgba(32, 63, 199, 1)" }} /> {t("Actions.Edit")}
             </MenuItem>
             <MenuItem onClick={handleOpenDelete} sx={{ gap: "10px" }}>
-              <DeleteIcon sx={{ color: "rgba(32, 63, 199, 1)" }} /> Delete
+              <DeleteIcon sx={{ color: "rgba(32, 63, 199, 1)" }} /> {t("Actions.Delete")}
             </MenuItem>
           </>
         )}
         {ads && (
           <>
-            <MenuItem onClick={handleOpenModal} sx={{ gap: "10px" }}>
-              <RemoveRedEyeIcon sx={{ color: "rgba(32, 63, 199, 1)" }} /> View
-            </MenuItem>
+           
             <MenuItem onClick={handleOpenEdit} sx={{ gap: "10px" }}>
-              <CreateIcon sx={{ color: "rgba(32, 63, 199, 1)" }} /> Edit
+              <CreateIcon sx={{ color: "rgba(32, 63, 199, 1)" }} /> {t("Actions.Edit")}
             </MenuItem>
             <MenuItem onClick={handleOpenDelete} sx={{ gap: "10px" }}>
-              <DeleteIcon sx={{ color: "rgba(32, 63, 199, 1)" }} /> Delete
+              <DeleteIcon sx={{ color: "rgba(32, 63, 199, 1)" }} />  {t("Actions.Delete")}
             </MenuItem>
           </>
         )}
