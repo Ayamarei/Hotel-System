@@ -40,11 +40,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 
-
-
-
-
-
 function CustomTable<T extends IRoomData|IFacility|IBookingData|IUserData| Iad >({loading,columnsLables,booking,user,ads,data,facility,room,renderActions}
     :{
         loading:boolean,

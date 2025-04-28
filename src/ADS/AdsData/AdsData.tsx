@@ -14,6 +14,7 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { SelectChangeEvent } from "@mui/material/Select";
 import {  AdsFormProps,  AdsData} from '../../Interfaces/AdsInterface'
+import i18n from "../../i18n";
 
 
 
@@ -117,6 +118,8 @@ export default function AdsFormModal({
     }
   }, [selectedItem]);
 
+
+
   const onSubmit = async (values: AdsData) => {
     const transformedValues = {
       ...values,
@@ -129,6 +132,8 @@ export default function AdsFormModal({
       addNewAd(transformedValues);
     }
   };
+
+  const {t}= i18n
 
   return (
     <Modal
@@ -147,7 +152,7 @@ export default function AdsFormModal({
           }}
         >
           <Typography id="modal-modal-title" variant="h5" component="h2">
-            {selectedItem ? "Edit this Ad" : "Add New Ad"}
+            {selectedItem ? t("AdsData.EditAd") : t("AdsData.AddNew")}
           </Typography>
           <IconButton edge="end" onClick={() => handleClose()}>
             <CloseIcon sx={{ fontSize: 30 }} />
@@ -158,7 +163,7 @@ export default function AdsFormModal({
         <form onSubmit={handleSubmit(onSubmit)}>
           {selectedItem ? (
             <Typography sx={passInputStyle}>
-              Room Number : {selectedRoomNumber}
+             {t("AdsData.RoomNumber")}: {selectedRoomNumber}
             </Typography>
           ) : (
             <FormControl sx={{ display: "block", mt: "0.5rem" }}>
@@ -222,16 +227,29 @@ export default function AdsFormModal({
             )}
           </FormControl>
 
-          {/* Button to submit or close */}
           <Button
-            variant="contained"
-            color="primary"
-            type="submit"
-            sx={{ mt: 2, width: "100%" }}
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? "...Loading" : "Save"}
-          </Button>
+                        disabled={isSubmitting}
+                        variant="outlined"
+                        type="submit"
+                        sx={{
+                          color: "#203FC7", 
+                          borderColor: "#203FC7", 
+                          fontWeight: 'bold',
+                          fontSize: '16px',
+                          padding: '10px 30px',
+                          borderRadius: '10px',
+                          textTransform: 'capitalize',
+                          width:"100%",
+                          mt:2,
+                          '&:hover': {
+                            backgroundColor: "#203FC7", 
+                            color: "#fff",
+                            borderColor: "#203FC7",
+                          },
+                        }}
+                      >
+                        {isSubmitting ? t("AdsData.Saving") : t("AdsData.save")}
+                      </Button>
         </form>
       </Box>
     </Modal>

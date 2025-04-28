@@ -33,11 +33,12 @@ export default function ViewFacility({ open, setOpenViewModal, facility, handleC
   const { theme } = ContextColor;
 
   const labelColor = theme === 'dark' ? THEMECOLOR.mainBlue : 'black'; 
+  
 
   return (
     <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
       <Box sx={style}>
-        <Typography>
+        <Typography >
           <Box component="span" sx={{ fontWeight: '900', color: labelColor }}>ID:</Box> {facility?._id}
         </Typography>
         <Typography>

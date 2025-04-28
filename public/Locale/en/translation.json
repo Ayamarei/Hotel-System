@@ -111,6 +111,64 @@
   "Facilities":"Facilities",
   "Rooms":"Rooms"
 },
+
+"ListUser":{
+  "UserName":"User Name",
+  "Picture":"Profile Picture",
+  "Email":"Email ",
+  "Number":"Phone Number ",
+  "Country":" Country ",
+  "UserType":"User Type  ",
+  "Actions":"Actions  "
+},
+
+"Actions":{
+  "view":"View",
+  "Edit":"Edit ",
+  "Delete":" Delete"
+},
+"Rooms-list":{
+  "Room-Number":"Room Number",
+  "Images":"Images",
+  "Price":"Price",
+  "Capacity":"Capacity",
+  "Discount":"Discount",
+  "Facilities":"Facilities",
+  "Actions":"Actions",
+  "title":"Room",
+    "item":"Room"
+},
+"ads-list":{
+  "Status":"Status",
+  "Room-Number":"Room Number",
+  "Capacity":"Capacity",
+  "Discount":"Discount",
+  "Date":"Date",
+  "Actions":"Actions",
+   "title":"Ads",
+  "item":"Ads"
+
+},
+"List-booking":{
+ "Room-Number" :"Room Number",
+ "Total-Price":"Total Price",
+ "Start-Date":"Start Date",
+ "End-Date":"End Date",
+ "User":"User",
+"Actions":"Actions",
+"title":"Booking"
+},
+"Facilities-List":{
+  "Id":"Id",
+  "Name":"Name",
+  "Created-At":"Created At",
+  "Updated-At":"Updated At",
+  "Created-By":"Created By",
+  "Actions":"Actions",
+  "title":"Facilities",
+  "item":"Facilities"
+},
+
 "List-User":{
   "User":"User"
 },
@@ -151,8 +209,47 @@
     "alerts": 
     {
     "loggedOutSuccessfully": "User Logged Out Successfully."
-    }
+    },
+    "LanguageSwitcher": 
+    {
+    "arabic": "Arabic",
+    "english": "English"
+    },
+    "Change-Password-Modal":{
+  " ChangePassword":" Change Password",
+  "current-password":"current password",
+  "new-password":"new password",
+  "enter-your-current-password":"enter your current password",
+  "enter-your-new-password":"enter your new password",
+  "confirm-new-password":"confirm new password",
+  "Passwords-donot-match":"Passwords do not match",
+  "Loading":"...Loading",
+  "old-password-required":"old password is required",
+  "confirm-new":"please confirm your new password"
+},
+    "DeleteConfirmation":{
+  "DeleteThis":"Delete This",
+  "content":"Are you sure you want to delete this item? If you are sure, just click on delete. ",
+  "Delete":" Delete",
+  "Deleting":" Deleting..."
+},
+    "AdsData":{
+  "AddNew":"Add New Ad",
+  "EditAd":"Edit this Ad",
+  "save":" Save",
+  "Saving":" Saving...",
+  "RoomNumber":"Room Number"
+},
+    "FacilitiesData":{
+  "AddNew":"Add Facility",
+  "Edit":"Edit Facility",
+  "save":" Save",
+  "Saving":" Saving...",
+  "placeholder":"Name"
+}
 
   }
+
+
 
 

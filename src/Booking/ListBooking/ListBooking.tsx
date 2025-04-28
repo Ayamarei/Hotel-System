@@ -8,6 +8,7 @@ import CustomTable from '../../Modules/Shared/CustomTable/CustomTable';
 import PaginationList from '../../Modules/Shared/PaginationList/PaginationList';
 import ViewBooking from '../ViewBooking/ViewBooking';
 import Actions from '../../Modules/Shared/Actions/Actions';
+import { useTranslation } from 'react-i18next';
 
 
 
@@ -71,18 +72,19 @@ export default function ListBooking() {
   React.useEffect(() => {
     getAllBookings(5, 1);
   }, []);
+  const{t}=useTranslation()
   const columnLabels: IColumLable[] = [
-    { label: "Room Number", align: "left" },
-    { label: "Total Price", align: "right" },
-    { label: "Start Date", align: "right" },
-    { label: "End Date", align: "right" },
-    { label: "User", align: "right" },
-    { label: "Actions", align: "right" }
-  ];
+    { label: t("List-booking.Room-Number"), align: "left" },
+    { label: t("List-booking.Room-Number"), align: "right" },
+    { label:t("List-booking.Room-Number"), align: "right" },
+    { label:t("List-booking.Room-Number"), align: "right" },
+    { label:t("List-booking.Room-Number"), align: "right" },
+    { label:t("List-booking.Room-Number"), align:"right"}
+];
   return (
     <>
 
-      <Heading title='Booking' item='booking' />
+      <Heading title={t("List-booking.title")} item='booking' />
 
 
       <CustomTable<IBookingData>

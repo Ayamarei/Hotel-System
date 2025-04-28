@@ -13,6 +13,7 @@ import PaginationList from "../../Modules/Shared/PaginationList/PaginationList";
 import { IColumLable } from "../../Interfaces/CustomTableInterface";
 import CustomTable from "../../Modules/Shared/CustomTable/CustomTable";
 import Heading from "../../Modules/Shared/Heading/Heading";
+import { useTranslation } from "react-i18next";
 
 
 const FacilitesList = () => {
@@ -130,20 +131,21 @@ const FacilitesList = () => {
     getAllFacilites(5, 1);
   }, [getAllFacilites]);
 
+  const{t}=useTranslation()
   const columnLabels: IColumLable[] = [
-    { label: "Id", align: "left" },
-    { label: "Name", align: "right" },
-    { label: "Created At", align: "right" },
-    { label: "Updated At", align: "right" },
-    { label: "Created By", align: "right" },
-    { label: "Actions", align: "right" }
+    { label: t("Facilities-List.Id"), align: "left" },
+    { label:t("Facilities-List.Name"), align: "right" },
+    { label:t("Facilities-List.Created-At"), align: "right" },
+    { label:t("Facilities-List.Updated-At"), align: "right" },
+    { label: t("Facilities-List.Created-By"), align: "right" },
+    { label:t("Facilities-List.Actions"), align:"right"}
   ];
 
   return (
     <>
       <Box className="content">
 
-<Heading handleClick={() => { setOpenAddModal(true); setSelectedFacility(null); }} title='Facility' item='facility' />
+<Heading handleClick={() => { setOpenAddModal(true); setSelectedFacility(null); }} title={t("Facilities-List.title")} item={t("Facilities-List.item")} />
 
         <CustomTable<IFacility>
           columnsLables={columnLabels}

@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { IFacility } from '../../Interfaces/FacilitesInterface';
 import { THEMECOLOR } from '../../Services/ThemeColors';
 import { ThemeContext } from '../../context/ThemeContext';
+import i18n from '../../i18n';
 
 const style = {
   position: 'absolute',
@@ -47,17 +48,20 @@ export default function FacilitiesData({ open, setOpenAddModal, onSubmit, onEdit
   const ContextColor = useContext(ThemeContext);
   if (!ContextColor) throw new Error("AuthContext must be used within AuthProvider");
   const { theme } = ContextColor;
+   const {t} =i18n
+
+
   return (
     <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
       <Box sx={style}>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Typography fontWeight="bold" fontSize="20px">
-            {facility ? "Edit Facility" : "Add Facility"}
+            {facility ? t("FacilitiesData.Edit") :t("FacilitiesData.AddNew")}
           </Typography>
           <CloseIcon sx={{ color:theme === 'dark' ? THEMECOLOR.mainBlue : "dark", cursor: 'pointer' }} onClick={handleClose} />
         </Box>
         <form onSubmit={handleSubmit(handleFormSubmit)} style={{ marginTop: '20px' }}>
-          <FilledInput {...register("name")} placeholder="Name" sx={{ width: "100%", mb: 3 }} />
+          <FilledInput {...register("name")} placeholder={t("FacilitiesData.placeholder")} sx={{ width: "100%", mb: 3 }} />
 
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
             <Button
@@ -79,7 +83,7 @@ export default function FacilitiesData({ open, setOpenAddModal, onSubmit, onEdit
                 },
               }}
             >
-              {isSubmitting ? "Saving..." : "Save"}
+              {isSubmitting ? t("FacilitiesData.Saving") :  t("FacilitiesData.save") }
             </Button>
           </Box>
 

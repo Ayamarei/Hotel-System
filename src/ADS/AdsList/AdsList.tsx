@@ -11,6 +11,7 @@ import CustomTable from '../../Modules/Shared/CustomTable/CustomTable';
 import { IColumLable } from '../../Interfaces/CustomTableInterface';
 import {Iad} from '../../Interfaces/AdsInterface'
 import AdsCard from "../AdsCard/AdsCard";
+import { useTranslation } from "react-i18next";
 
 
 
@@ -110,18 +111,19 @@ export default function Adslist() {
     getAllAds(5, 1);
   }, []);
 
-   const columnLabels: IColumLable[] = [
-      { label: "Status", align: "left" },
-      { label: "Room Number", align: "right" },
-      { label: "Capacity", align: "right" },
-      { label: "Discount", align: "right" },
-      { label: "Date", align: "right" },
-      { label: "Actions", align: "right" },
-    ];
+  const{t}=useTranslation()
+  const columnLabels: IColumLable[] = [
+     { label:t("ads-list.Status"), align: "left" },
+     { label: t("ads-list.Room-Number"), align: "right" },
+     { label:t("ads-list.Capacity"), align: "right" },
+     { label:t("ads-list.Discount"), align: "right" },
+     { label:t("ads-list.Date"), align: "right" },
+     { label:t("ads-list.Actions"), align: "right"},
+ ];
 
   return (
     <>
-     <Heading handleClick={()=>{setOpenFormModal(true);}} title='Ads' item='Ads' />
+     <Heading handleClick={()=>{setOpenFormModal(true);}} title={t("ads-list.title")} item={t("ads-list.item")} />
 
      <CustomTable<Iad>
         columnsLables={columnLabels}
