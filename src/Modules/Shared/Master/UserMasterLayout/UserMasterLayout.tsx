@@ -15,7 +15,7 @@ export default function UserMasterLayout() {
   return (
     <>
     <ResponsiveAppBar/>
-    <Box sx={{bgcolor: theme === "dark" ? "#121212" : "#f7f7f7", 
+    <Box sx={{bgcolor: theme === "dark" ? "#121212" : "#fff", 
       color: theme === "dark" ? "#fff" : "#000"}}>
      <Container maxWidth="lg" disableGutters  sx={{mb:8 ,py:3 }} >
      <Outlet/>
