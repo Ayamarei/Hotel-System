@@ -76,7 +76,7 @@ const Dashboard = () => {
   };
 
   const options = {
-    cutout: "98%",
+    cutout: "95%",
     plugins: {
       legend: {
         display: false,
@@ -104,7 +104,7 @@ const Dashboard = () => {
     <div dir={i18n.language === "ar" ? "rtl" : "ltr"}>
       <Box sx={{ flexGrow: 1, marginBottom: "80px" }}>
         <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-          <Grid  item xs={4} sm={4} md={4} size={4}>
+          <Grid  size={{xs:4,sm:4,md:4,lg:4}}>
             <Item sx={{ height: "180px", backgroundColor: "#1A2027" }}>
               <Stack
                 direction={i18n.language === "ar" ? "row-reverse" : "row"}
@@ -129,7 +129,7 @@ const Dashboard = () => {
               </Stack>
             </Item>
           </Grid>
-          <Grid  xs={4} sm={4} md={4} size={4} >
+          <Grid  size={{xs:4,sm:4,md:4,lg:4}} >
             <Item sx={{ height: "180px", backgroundColor: "#1A2027" }}>
               <Stack
                 direction={i18n.language === "ar" ? "row-reverse" : "row"}
@@ -154,7 +154,7 @@ const Dashboard = () => {
               </Stack>
             </Item>
           </Grid>
-          <Grid item xs={4} sm={4} md={6} size={4}>
+          <Grid  size={{xs:4,sm:4,md:4,lg:4}}>
             <Item sx={{ height: "180px", backgroundColor: "#1A2027" }}>
               <Stack
                 direction={i18n.language === "ar" ? "row-reverse" : "row"}
@@ -186,14 +186,14 @@ const Dashboard = () => {
 
     <Grid container spacing={10} justifyContent="center">
       {/* chart 1 */}
-      <Grid item xs={12} sm={6} md={6} >
+      <Grid size={{xs:4,sm:4,md:4,lg:4}} >
         <Box sx={{ width: "100%", height: "100%" }}>
           <Doughnut data={data1} />
         </Box>
       </Grid>
 
       {/* chart 2 */}
-      <Grid item xs={12} sm={6} md={6} size={5}>
+      <Grid size={{xs:12,sm:6,md:6,lg:6}}>
         <Box
           sx={{
             backgroundColor: (theme) =>

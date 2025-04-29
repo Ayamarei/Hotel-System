@@ -113,7 +113,6 @@ export default function PersistentDrawerLeft() {
     return <p>Loading...</p>;
   }
   const { userDetails } = authContext;
-
   const { i18n, t } = useTranslation();
 
   const NAV_ITEMS = [
@@ -169,6 +168,7 @@ export default function PersistentDrawerLeft() {
     name: userDetails?.userName,
     avatarUrl: userDetails?.profileImage,
   };
+console.log(userDetails);
 
   useEffect(() => {
     document.body.setAttribute('dir', i18n.language === 'ar' ? 'rtl' : 'ltr');
@@ -231,6 +231,7 @@ export default function PersistentDrawerLeft() {
             >
               {theme === "light" ? <Brightness4Icon /> : <Brightness7Icon />}
             </IconButton> 
+            
        <IconButton onClick={handleClick} color="inherit">
         <LanguageIcon />
       </IconButton>
