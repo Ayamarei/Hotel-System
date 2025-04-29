@@ -27,14 +27,20 @@ export default function Login() {
 
   const context = useContext(AuthContext);
   if (!context) throw new Error("AuthContext must be used within AuthProvider");
-  const {saveLoginData } = context;
+  const {saveLoginData,userDetails } = context;
+  
 
   const onSubmit = async (data: ILogin) => {
     try {
       const response = await publicUserAxiosInstance.post(USERS_URLS.LOGIN, data);
       const token = response.data.data.token;
       toast.success(response?.data?.message);
-      navigate("/dashboard");
+      console.log(userDetails);
+      if (userDetails?.role === "admin") {
+        navigate("/dashboard"); 
+      } else {
+        navigate("/"); 
+      }
 
       if (token) {
         localStorage.setItem("token", token);

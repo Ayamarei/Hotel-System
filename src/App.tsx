@@ -19,6 +19,12 @@ import ListBooking from './Booking/ListBooking/ListBooking'
 import ListUsers from './Users/ListUser/ListUsers'
 import Dashboard from './Modules/Dashboard/Dashboard'
 import ProtectedRoute from './Modules/Shared/Dashboard/ProtectedRoute/ProtectedRoute'
+import UserMasterLayout from './Modules/Shared/Master/UserMasterLayout/UserMasterLayout'
+import UserRoomsList from './Modules/UserRooms/UserRoomsList/UserRoomsList'
+import UserRoomsData from './Modules/UserRooms/UserRoomsData/UserRoomsData'
+import UserFav from './Modules/UserRooms/UserFav/UserFav'
+import UserPortal from './Modules/UserPortal/UserPortal'
+import UserProtectedRoute from './Modules/Shared/Master/UserProtectedRoute/UserProtectedRoute'
 
 
 
@@ -34,7 +40,17 @@ function App() {
 
   // routes
   const routes = createBrowserRouter([
-   
+   {
+    path:"",
+    element:<UserMasterLayout/>,
+    errorElement:<NotFound/>,
+    children:[
+      {index:true,element:<UserPortal/>},
+      {path:"user-room",element:<UserRoomsList/>},
+      {path:"user-room-data",element:<UserRoomsData/>},
+      {path:"user-room-fav",element:<UserProtectedRoute> <UserFav/></UserProtectedRoute>},
+    ]
+   },
     // auth layout
     {
       path: "auth",
