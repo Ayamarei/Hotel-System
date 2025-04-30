@@ -15,6 +15,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { Link, useNavigate } from "react-router-dom";
+import { FavoriteContext } from "../../../context/FavoriteContext ";
 export interface Facility {
   _id: string;
   name: string;
@@ -53,8 +54,8 @@ export default function UserRoomsList() {
   const [roomData, setRoomData] = useState<RoomsAPIResponse | null>(null);
   const [page, setpage] = useState(1);
   const [totalCount, setTotalCount] = useState<number>(1);
-  const [likedRooms, setLikedRooms] = useState<string[]>([]);
-  console.log("likedRooms", likedRooms);
+  const [favorites, setFavorites] = useState<Set<string>>(new Set());
+  console.log("favorites", favorites);
   const navigate = useNavigate();
 
   // filtersContext
@@ -70,6 +71,13 @@ export default function UserRoomsList() {
     throw new Error("AuthContext must be used within AuthProvider");
   const { theme } = ContextColor;
 
+   // favoriteContext
+   const favoriteContext = useContext(FavoriteContext);
+   if (!favoriteContext) {
+     throw new Error("FavoriteContext is not provided");
+   }
+   const { addToFavorite,RemoveFromeFavorite } = favoriteContext;
+ 
   //FetchRoomData
   const FetchRoomData = async (
     size?: number,
@@ -113,18 +121,33 @@ export default function UserRoomsList() {
   }, [page, startDate, endDate, capacity]);
 
   //fun toggleLike
-  const toggleLike = (roomId: string) => {
-    let newLikedRooms = [...likedRooms];
+  const toggleFavorite = (roomId: string) => {
+      const isFav = favorites.has(roomId);
 
-    if (newLikedRooms.includes(roomId)) {
-      newLikedRooms = newLikedRooms.filter((id) => id !== roomId);
-    } else {
-      newLikedRooms.push(roomId);
-    }
-
-    setLikedRooms(newLikedRooms);
+      if (isFav) {
+          setFavorites(prev => {
+              const updated = new Set(prev);
+              updated.delete(roomId);
+              return updated;
+          });
+          handleRemove(roomId);
+      } else {
+          setFavorites(prev => {
+              const updated = new Set(prev);
+              updated.add(roomId);
+              return updated;
+          });
+          handleAddToFav(roomId);
+      }
   };
-
+  const handleAddToFav = (roomId: string) => {
+    console.log("Room ID Add:", roomId);
+    addToFavorite(roomId);
+};
+const handleRemove = (roomId: string) => {
+    console.log("Room ID Remove:", roomId);
+    RemoveFromeFavorite(roomId);
+};
   return (
     <>
   
@@ -169,7 +192,6 @@ export default function UserRoomsList() {
         >
           {roomData?.data.rooms.map((room, index) => (
             <Grid key={index} size={{ xs: 12, sm: 4, md: 4, lg: 3 }}>
-
               <Card
                 sx={{
                   // maxWidth: 350,
@@ -206,9 +228,9 @@ export default function UserRoomsList() {
                       opacity: 0, 
                       transition: "opacity 0.3s ease", 
                     }}
-                    onClick={() => toggleLike(room._id)}
+                    onClick={() => toggleFavorite(room._id)}
                   >
-                    {likedRooms.includes(room._id) ? (
+                    {favorites.has(room._id) ? (
                       <FavoriteIcon sx={{ color: "white", fontSize: 28 }} />
                     ) : (
                       <FavoriteBorderIcon
@@ -225,10 +247,9 @@ export default function UserRoomsList() {
                       left: "52%",
                       zIndex: 10,
                       cursor: "pointer",
-                      opacity: 0, // بشكل افتراضي الإيقونة مخفية
-                      transition: "opacity 0.3s ease", // تأثير الظهور
+                      opacity: 0, 
+                      transition: "opacity 0.3s ease",  
                     }}
-                    // onClick={() => navigate(`/room-details/${room._id}`)}
                   >
                     <VisibilityIcon sx={{ color: "white", fontSize: 28 }} />
                   </Box>
@@ -266,7 +287,7 @@ export default function UserRoomsList() {
                           md: "6px 30px",   
                         },
                         textAlign: "center",
-                        borderRadius: "0 10px 0 30px",
+                        borderRadius: "0 4px 0 30px",
                         fontWeight: "500",
                         fontSize: "14px",
                         zIndex: 100,

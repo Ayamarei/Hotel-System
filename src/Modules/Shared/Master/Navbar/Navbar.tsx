@@ -21,6 +21,7 @@ import Brightness7Icon from "@mui/icons-material/Brightness7";
 
 
 
+
 const pages = [
   { name: 'Home', path: '' },
   { name: 'Explore', path: '/user-room' },
@@ -33,6 +34,7 @@ const privatePages = [
 
 
 function ResponsiveAppBar() {
+  
 
   const ContextColor = useContext(ThemeContext);
     if (!ContextColor) throw new Error("AuthContext must be used within AuthProvider");
@@ -57,10 +59,6 @@ function ResponsiveAppBar() {
     return <p>Loading...</p>;
   }
   const { userDetails } = authContext;
-  console.log(userDetails);
-
-  console.log(userDetails);
-
   const user = {
     name: userDetails?.userName,
     avatarUrl: userDetails?.profileImage,
@@ -98,6 +96,7 @@ function ResponsiveAppBar() {
             noWrap
             component="div"
             sx={{ fontWeight: 700, color: 'inherit', mr: 2 }}
+           
           >
             Staycation.
           </Typography>
