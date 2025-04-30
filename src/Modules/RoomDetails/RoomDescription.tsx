@@ -1,5 +1,4 @@
 import { Box, Grid, Typography } from "@mui/material";
-// import { IDesc } from "../../../../interfaces/RoomDetailsInterface";
 import bedimg from '../../assets/images/ic_bedroom.png'
 import livimg from '../../assets/images/ic_livingroom.png'
 import bathimg from '../../assets/images/ic_bathroom.png'

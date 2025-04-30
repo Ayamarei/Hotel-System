@@ -27,7 +27,7 @@ export default function Login() {
 
   const context = useContext(AuthContext);
   if (!context) throw new Error("AuthContext must be used within AuthProvider");
-  const {saveLoginData,userDetails } = context;
+  const {saveLoginData,loginData } = context;
   
 
   const onSubmit = async (data: ILogin) => {
@@ -35,16 +35,17 @@ export default function Login() {
       const response = await publicUserAxiosInstance.post(USERS_URLS.LOGIN, data);
       const token = response.data.data.token;
       toast.success(response?.data?.message);
-      console.log(userDetails);
-      if (userDetails?.role === "admin") {
-        navigate("/dashboard"); 
-      } else {
-        navigate("/"); 
-      }
+      // console.log(userDetails);
+      
 
       if (token) {
         localStorage.setItem("token", token);
         saveLoginData();
+      }
+      if (loginData && loginData?.role === "admin") {
+        navigate("/dashboard"); 
+      }else if (loginData&& loginData.role === "user") {
+        navigate("/");
       }
     } catch (error) {
       const err = error as AxiosError<{ message: string }>;

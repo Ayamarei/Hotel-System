@@ -1,14 +1,13 @@
-import { Box, Button, CircularProgress, Grid, TextField, Typography } from "@mui/material";
+import { Box, Button, CircularProgress,  TextField, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-// import { Room_Comment_Validation } from "../../../../services/validation";
-// import { axiosPrivateInstance } from "../../../../services/api/apiInstance";
-// import { PORTAL_URLS } from "../../../../services/api/apiConfig";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { IRoomComment } from "../../Interfaces/RoomDetailsInterface";
 import { Room_Comment_Validation } from "../../Services/Validation";
-// import { IRoomComment } from "../../../../interfaces/RoomDetailsInterface";
+import { PORTAL_URLS_Details } from "../../Services/Urls";
+import { privateAxiosInstance } from "../../Services/Axiosinstance";
+
 
 export default function RoomComment({roomId}:{roomId:string}){
     const {t}=useTranslation()
@@ -20,7 +19,7 @@ export default function RoomComment({roomId}:{roomId:string}){
           console.log(values)
  
             try {
-                const {data}=await axiosPrivateInstance.post(PORTAL_URLS.CREATE_COMMENT,values)
+                const {data}=await privateAxiosInstance.post(PORTAL_URLS_Details.CREATE_COMMENT,values)
                 console.log(data)
                 toast.success(data?.message)
     

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import {   useParams } from "react-router-dom";
-// import { axiosPuplicInstance } from "../../../../services/api/apiInstance";
 import { Breadcrumbs, Container, Grid, Typography,Link, Box, Stack } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { IRoomDetails, IRoomDetailsResponse } from "../../Interfaces/RoomDetailsInterface";
@@ -9,6 +8,8 @@ import RoomComment from "./RoomComment";
 import RoomBooking from "./RoomBooking";
 import RoomDescription from "./RoomDescription";
 import RoomRating from "./RoomRating";
+import { PORTAL_URLS_Details } from "../../Services/Urls";
+import { publicAxiosInstance } from "../../Services/Axiosinstance";
 
 
 export default function RoomDetails() {
@@ -21,8 +22,8 @@ const getRoom = async () => {
   setLoading(true);
   if (roomId) {
   try {
-      const { data } = await axiosPuplicInstance.get<IRoomDetailsResponse>(
-        PORTAL_URLS.GET_ROOM_DETAILS(roomId)
+      const { data } = await publicAxiosInstance.get<IRoomDetailsResponse>(
+        PORTAL_URLS_Details.GET_ROOM_DETAILS(roomId)
       );
       setRoom(data?.data?.room);
     } catch (error) {
@@ -93,7 +94,7 @@ getRoom()
   
       </Grid>:<Box sx={{textAlign:'center'}}>
         <Typography sx={{color:"#555",fontWeight:500,fontSize:'20px'}}>{t("room.MustLoginIN")}</Typography>
-        <Typography sx={{color:"#555",fontWeight:500,fontSize:'20px'}}>{t("room.YouCan")} <Link sx={{color:"#152c5b",textDecoration:"none"}} href='/auth/login'>{t("room.Login")}</Link> {t("room.Or")} <Link sx={{color:"#152c5b",textDecoration:"none"}} href='/auth/register'>{t("room.Register")}</Link></Typography>
+        <Typography sx={{color:"#555",fontWeight:500,fontSize:'20px'}}>{t("room.YouCan")} <Link sx={{color:"#152c5b",textDecoration:"none",fontWeight:600}} href='/auth/login'>{t("room.Login")}</Link> {t("room.Or")} <Link sx={{color:"#152c5b",textDecoration:"none",fontWeight:600}} href='/auth/register'>{t("room.Register")}</Link></Typography>
         </Box>}
 </Container>
 

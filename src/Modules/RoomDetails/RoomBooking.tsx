@@ -1,13 +1,16 @@
 import { Box, Button, Typography } from "@mui/material";
-// import { IRoomDetails } from "../../../../interfaces/RoomDetailsInterface";
 import { useTranslation } from "react-i18next";
 import { IRoomDetails } from "../../Interfaces/RoomDetailsInterface";
+import DateRangePickerComponent from "../Shared/DateRangePicker/DateRangePicker";
+import { Controller, useForm } from "react-hook-form";
+import Capacity from "../Shared/Capacity/Capacity";
 
 export default function RoomBooking({room}:{room:IRoomDetails}) {
+    const {  control, setValue } = useForm();
   const totalPay = room ? room.price - (room.discount / 100) * room.price : 0;
   const {t}=useTranslation()
   return <>
-   <Box sx={{width:{md:"49%",xs:"100%"},borderRadius:"8px",border:"1px solid rgba(229, 229, 229, 1)",display:"flex",alignItems:"center",flexDirection:"column"}}>
+   <Box sx={{height:"100%",width:{md:"49%",xs:"100%"},borderRadius:"8px",border:"1px solid rgba(229, 229, 229, 1)",display:"flex",alignItems: "center",flexDirection:"column"}}>
 <Box sx={{py:'30px'}}>
 <Typography sx={{color:'rgba(21, 44, 91, 1)',fontWeight:700,fontSize:"20px"}}>{t("room.StartBooking")}</Typography>
 <Typography component={'p'} sx={{fontSize:'40px',color:"#1abc9c"}}>{room?.price} {t("room.EGP")} <Typography component={'span'} sx={{fontSize:"40px",color:"#b0b0b0"}}>{t("room.perNight")}</Typography></Typography>
@@ -15,6 +18,47 @@ export default function RoomBooking({room}:{room:IRoomDetails}) {
 </Box>
 
 {/* input */}
+<Box sx={{px:"20px",py:"20px"}}>
+<Typography
+            variant="body1"
+            sx={{
+              fontSize: "16px",
+              fontWeight: 600,
+               display:"flex",
+               justifyContent:"flex-start",
+               width:"100%",
+              lineHeight: 0,
+              mb: 2,
+      
+            }}
+          >
+            Pick a Date
+          </Typography>
+<Box sx={{ display: "flex", alignItems: "center", gap: "8px", marginTop: "3px" }}>
+
+            <DateRangePickerComponent control={control} setValue={setValue} name="dateRange" />
+          </Box>
+
+          <Box sx={{ marginTop: "10px"}}>
+            <Typography
+              sx={{
+                fontSize: "16px",
+                fontWeight: "600",
+                mb: 1,
+              }}
+            >
+              Capacity
+            </Typography>
+            <Controller
+              name="capacity"
+              control={control}
+              defaultValue={0}
+              rules={{ required: "Capacity is required" }}
+              render={({ field }) => <Capacity value={field.value} onChange={field.onChange} />}
+            />
+          </Box>
+
+</Box>
 <Typography component="div" sx={{ color: "#b0b0b0" ,fontWeight:400}}>
   {t("room.Youwillpay")}{" "}
   <Box component="span" sx={{ color: "#152c5b", fontWeight: 600 ,fontSize:"19px"}}>
@@ -25,7 +69,7 @@ export default function RoomBooking({room}:{room:IRoomDetails}) {
     {1} {t("room.Person")}
   </Box>
 </Typography>
-<Button variant="contained" sx={{mt:'12px'}}>{t("room.continueBooking")}
+<Button variant="contained" sx={{mt:'12px',my:"20px"}}>{t("room.continueBooking")}
 </Button>
 </Box>
   </>;

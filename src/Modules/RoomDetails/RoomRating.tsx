@@ -1,16 +1,14 @@
-import { Box, Button, CircularProgress, Grid, Rating, TextField, Typography } from "@mui/material";
+import { Box, Button, CircularProgress,  Rating, TextField, Typography } from "@mui/material";
 import React, {  } from "react";
 import StarIcon from '@mui/icons-material/Star';
 import { Controller, useForm } from "react-hook-form";
-// import { axiosPrivateInstance } from "../../../../services/api/apiInstance";
-// import { PORTAL_URLS } from "../../../../services/api/apiConfig";
-// import { IReviewData } from "../../../../interfaces/RoomDetailsInterface";
-// import { Room_Rate_Validation, Room_Rewiew_Validation } from "../../../../services/validation";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { Room_Rate_Validation, Room_Rewiew_Validation } from "../../Services/Validation";
 import { IReviewData } from "../../Interfaces/RoomDetailsInterface";
+import { PORTAL_URLS_Details } from "../../Services/Urls";
+import { privateAxiosInstance } from "../../Services/Axiosinstance";
 
 
 export default function RoomRating({roomId}:{roomId:string}) {
@@ -40,7 +38,7 @@ const labels: { [index: string]: string } = {
       values.roomId=roomId
         console.log(values)
         try {
-            const {data}=await axiosPrivateInstance.post(PORTAL_URLS.CREATE_REVIEW,values)
+            const {data}=await privateAxiosInstance.post(PORTAL_URLS_Details.CREATE_REVIEW,values)
             toast.success(data?.message)
             console.log(data)
         } catch (error) {
@@ -52,7 +50,7 @@ const labels: { [index: string]: string } = {
     }
   return <>
 
-  {/* <Grid size={{md:6,xs:12}}> */}
+
   
    <Typography>{t("room.Message")}</Typography>
   <form onSubmit={handleSubmit(onSubmit)}>

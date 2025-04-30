@@ -131,19 +131,19 @@ export default function UserRoomsList() {
       <Box sx={{ flexGrow: 1, mt: "30px" }}>
         <Grid
           container
-          spacing={{ xs: 2, md: 3 }}
-          columns={{ xs: 4, sm: 8, md: 12 }}
+          spacing={{ xs: 2, md: 3  }}
+          columns={{ xs: 4, sm: 12, md: 12 }}
           sx={{ justifyContent: "center" }}
         >
           {roomData?.data.rooms.map((room, index) => (
-            <Grid key={index} size={{ xs: 12, sm: 6, md: 6, lg: 4 }}>
+            <Grid key={index} size={{ xs: 12, sm: 6, md: 4, lg: 4 }} >
               <Card
                 sx={{
                   maxWidth: 350,
                   margin: "auto",
                   borderRadius: "16px",
                   boxShadow: "0 4px 16px rgba(0,0,0,0.1)",
-                  transition: "transform 0.3s, box-shadow 0.3s",
+                  transition: "transform 0.5s, box-shadow 0.3s",
                   "&:hover": {
                     transform: "translateY(-5px)",
                     boxShadow: theme === "dark"
@@ -171,11 +171,11 @@ export default function UserRoomsList() {
                       opacity: 0,
                       transition: "opacity 0.3s ease",
                       zIndex: 2,
-                      // pointerEvents: "none",
+                      pointerEvents: "none",
                     }}
-                  >
-                  <Button sx={{color:"white"}} onClick={()=>navigate(`/explore-details/${room._id}`)}> <RemoveRedEyeIcon /></Button>
-                  </Box>
+                  />
+                  {/* <Button sx={{color:"white"}} onClick={()=>navigate(`/explore-details/${room._id}`)}> <RemoveRedEyeIcon /></Button> */}
+                  
                   {room.discount > 0 && (
                     <Box
                       sx={{
