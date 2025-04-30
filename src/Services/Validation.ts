@@ -127,3 +127,13 @@ export const Discount_Validation = (t: Function) => ({
 export const Facilities_Validation = (t: Function) => ({
   required: t("room.FacilitiesRequired"),
 }); 
+
+export const Room_Rewiew_Validation = (t: Function) => ({
+  required: t("room.RoomReviewRequired"),
+}); 
+export const Room_Rate_Validation = (t: Function) => ({
+  required: t("room.RoomRateRequired"),
+}); 
+export const Room_Comment_Validation = (t: Function) => ({
+  required: t("room.RoomCommentRequired"),
+}); 

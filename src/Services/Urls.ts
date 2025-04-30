@@ -49,3 +49,11 @@ export const ADMIN_BOOKINGS_URLS={
   DELETE_BOOKING : (id:string) => `booking/${id}`,
 }
 
+// room details portal
+
+export const PORTAL_URLS_Details={
+  GET_ALL_ROOMS:`/portal/rooms/available`,
+  GET_ROOM_DETAILS:(id:string)=>`/portal/rooms/${id}`,
+  CREATE_REVIEW:`/portal/room-reviews`,
+  CREATE_COMMENT:`/portal/room-comments`
+}

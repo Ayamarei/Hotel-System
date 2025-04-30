@@ -1,4 +1,4 @@
-import { Box, Card, CardMedia, Grid, Typography } from "@mui/material";
+import { Box, Button, Card, CardMedia, Grid, Typography } from "@mui/material";
 import { privateUserAxiosInstance } from "../../../Services/Axiosinstance";
 import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -10,7 +10,11 @@ import PaginationList from "../../Shared/PaginationList/PaginationList";
 import { FiltersContext } from "../../../context/FilterContext";
 import { THEMECOLOR } from "../../../Services/ThemeColors";
 import { ThemeContext } from "../../../context/ThemeContext";
-import PlaceholderImage from '../../../assets/images/explor.jpg'
+import PlaceholderImage from '../../../assets/images/explor.jpg';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import { useNavigate } from "react-router-dom";
+
+
 export interface Facility {
   _id: string;
   name: string;
@@ -50,6 +54,7 @@ export default function UserRoomsList() {
   const [page, setpage] = useState(1);
   const [totalCount, setTotalCount] = useState<number>(1);
   console.log("Total Rooms Count:", totalCount);
+  const navigate=useNavigate()
   // console.log("Calculated total pages:", Math.ceil(totalCount / 5));
   const filtersContext = useContext(FiltersContext);
   if (!filtersContext) {
@@ -155,6 +160,9 @@ export default function UserRoomsList() {
                     className="hover-overlay"
                     sx={{
                       position: "absolute",
+                      display:"flex",
+                      justifyContent:'center',
+                      alignItems:"center",
                       top: 0,
                       left: 0,
                       width: "100%",
@@ -163,10 +171,11 @@ export default function UserRoomsList() {
                       opacity: 0,
                       transition: "opacity 0.3s ease",
                       zIndex: 2,
-                      pointerEvents: "none",
+                      // pointerEvents: "none",
                     }}
-                  />
-
+                  >
+                  <Button sx={{color:"white"}} onClick={()=>navigate(`/explore-details/${room._id}`)}> <RemoveRedEyeIcon /></Button>
+                  </Box>
                   {room.discount > 0 && (
                     <Box
                       sx={{
