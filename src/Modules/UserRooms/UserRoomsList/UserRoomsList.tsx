@@ -122,24 +122,30 @@ export default function UserRoomsList() {
 
   //fun toggleLike
   const toggleFavorite = (roomId: string) => {
-      const isFav = favorites.has(roomId);
+    const token = localStorage.getItem("token"); 
+    if (!token) {
+        toast.info("Please login first");
+        return;
+    }
+    const isFav = favorites.has(roomId);
 
-      if (isFav) {
-          setFavorites(prev => {
-              const updated = new Set(prev);
-              updated.delete(roomId);
-              return updated;
-          });
-          handleRemove(roomId);
-      } else {
-          setFavorites(prev => {
-              const updated = new Set(prev);
-              updated.add(roomId);
-              return updated;
-          });
-          handleAddToFav(roomId);
-      }
-  };
+    if (isFav) {
+        setFavorites(prev => {
+            const updated = new Set(prev);
+            updated.delete(roomId);
+            return updated;
+        });
+        handleRemove(roomId);
+    } else {
+        setFavorites(prev => {
+            const updated = new Set(prev);
+            updated.add(roomId);
+            return updated;
+        });
+        handleAddToFav(roomId);
+    }
+};
+
   const handleAddToFav = (roomId: string) => {
     console.log("Room ID Add:", roomId);
     addToFavorite(roomId);
@@ -148,6 +154,7 @@ const handleRemove = (roomId: string) => {
     console.log("Room ID Remove:", roomId);
     RemoveFromeFavorite(roomId);
 };
+
   return (
     <>
   
