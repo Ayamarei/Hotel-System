@@ -1,17 +1,19 @@
 import { Box, Pagination } from "@mui/material";
 
-export default function PaginationList({getAllList,page,totalCount,setpage}:
+export default function PaginationList({getAllList,page,totalCount,setpage,userExplore}:
   {getAllList: (size: number, page: number) => Promise<void>,
     page:number,
     totalCount:number,
     setpage:(page:number)=>void
+    userExplore?:boolean,
     
   }) {
 
 
    const handlePagination=(_event: React.ChangeEvent<unknown>, value: number)=>{
     setpage(value); 
-  getAllList(5,value)
+    {userExplore===true?getAllList(6,value):getAllList(5,value)}
+  
    }
 
   return <>

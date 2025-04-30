@@ -2,6 +2,10 @@ import { Typography } from '@mui/material';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import { useEffect } from 'react';
+import { ADS_URLS } from '../../../Services/Urls';
+import { publicAxiosInstance } from '../../../Services/Axiosinstance';
+import { toast } from 'react-toastify';
+import { AxiosError } from 'axios';
 // import { Link } from 'react-router-dom';
 
 function srcset(image: string, size: number, rows = 1, cols = 1) {
@@ -42,8 +46,24 @@ const itemData =
 
 ];
 
-const getMostPoplarAds =()=>{
-  // const response = await publicUserAxiosInstance()
+const getMostPoplarAds =async ()=>{
+  try
+  {
+
+    const {data} = await publicAxiosInstance(ADS_URLS.GET_ALL_ADS)
+console.log(data);
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast.error(error?.response?.data?.message || "Something Went Wrong");
+      } else if (error instanceof Error) {
+        toast.error(error.message || "Something Went Wrong");
+      } else {
+        toast.error("Something Went Wrong");
+      }
+ 
+  }
+
+  
 }
 
 
