@@ -98,7 +98,7 @@ const labels: { [index: string]: string } = {
         {errors.review&& <Typography sx={{color:"#d32f2f"}}>*{errors.review.message}</Typography>}
         <Button variant="contained" type="submit" 
          startIcon={ isSubmitting ? <CircularProgress color="inherit" size={20} /> : null} 
-         disabled={isSubmitting} sx={{mt:"20px",width:"210px",height:"50px"}}>{isSubmitting?t("room.Rating..."):t("room.Rate")}</Button>
+         disabled={isSubmitting} sx={{mt:"20px",width:"210px",height:"50px"}}>{isSubmitting?t("room.Rating"):t("room.Rate")}</Button>
   </form>
 
 
