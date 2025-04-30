@@ -42,7 +42,7 @@ function App() {
   const routes = createBrowserRouter([
    {
     path:"",
-    element:<UserMasterLayout/>,
+    element: <UserMasterLayout/>,
     errorElement:<NotFound/>,
     children:[
       {index:true,element:<UserPortal/>},
