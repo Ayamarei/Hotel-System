@@ -3,7 +3,7 @@ import { publicAxiosInstance } from "../../Services/Axiosinstance";
 import { Ads_Url } from "../../Services/Urls";
 import { AxiosError } from "axios";
 import { useContext, useEffect, useState } from "react";
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -25,7 +25,7 @@ interface IAdsInterface {
 
 
 export default function PopularAds() {
-    const navigate=useNavigate()
+    const navigate = useNavigate();
     const ContextColor = useContext(ThemeContext);
     if (!ContextColor)
         throw new Error("AuthContext must be used within AuthProvider");
@@ -65,6 +65,12 @@ export default function PopularAds() {
     const [favorites, setFavorites] = useState<Set<string>>(new Set());
 
     const toggleFavorite = (roomId: string) => {
+        const token = localStorage.getItem("token"); 
+        if (!token) {
+            toast.info("Please log in frist");
+            navigate("/auth/login"); 
+            return;
+        }
         const isFav = favorites.has(roomId);
 
         if (isFav) {
@@ -190,7 +196,7 @@ export default function PopularAds() {
                                         )}
                                     </Box>
 
-                                    <Box component={'button'} sx={{color:"white",backgroundColor:"transparent",border:"none",p:"0"}} onClick={()=>navigate(`/explore-details/${Ad.room._id}`)}> <VisibilityOutlinedIcon sx={{ color: theme === "dark" ? "#ff498b" : "#fff", fontSize: 30, cursor: "pointer" }} /></Box>
+                                    <Box> <VisibilityOutlinedIcon sx={{ color: theme === "dark" ? "#ff498b" : "#fff", fontSize: 30, cursor: "pointer" }} /></Box>
                                 </Box>
                             </Box>
                         </Grid>
