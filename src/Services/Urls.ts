@@ -49,3 +49,23 @@ export const ADMIN_BOOKINGS_URLS={
   DELETE_BOOKING : (id:string) => `booking/${id}`,
 }
 
+//  Favorite_Url
+export const FAVORITE_ROOMS={
+  GET_ALL:"favorite-rooms",
+  ADD_Fav:"favorite-rooms",
+  DELETE_Fav:(id:string)=>`favorite-rooms/${id}`,
+}
+
+// Ads_Url
+export const Ads_Url={
+  GET_ALL:"ads",
+  
+}
+// room details portal
+
+export const PORTAL_URLS_Details={
+  GET_ALL_ROOMS:`/rooms/available`,
+  GET_ROOM_DETAILS:(id:string)=>`/rooms/${id}`,
+  CREATE_REVIEW:`/room-reviews`,
+  CREATE_COMMENT:`/room-comments`
+}

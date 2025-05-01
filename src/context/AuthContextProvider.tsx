@@ -17,6 +17,8 @@ export default function AuthContextProvider({ children }: { children: React.Reac
     if (encodedToken) {
       const decodedToken: ILoginData = jwtDecode<ILoginData>(encodedToken);
       setLoginData(decodedToken);
+      console.log(loginData);
+      
 
     }
   };

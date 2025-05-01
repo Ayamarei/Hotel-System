@@ -12,7 +12,7 @@ export default function PaginationList({getAllList,page,totalCount,setpage,userE
 
    const handlePagination=(_event: React.ChangeEvent<unknown>, value: number)=>{
     setpage(value); 
-    {userExplore===true?getAllList(6,value):getAllList(5,value)}
+    {userExplore===true?getAllList(12,value):getAllList(5,value)}
   
    }
 
