@@ -1,5 +1,5 @@
 import { Box, Card, CardMedia, Grid, Typography } from "@mui/material";
-import { privateUserAxiosInstance } from "../../../Services/Axiosinstance";
+import { privateAxiosInstance } from "../../../Services/Axiosinstance";
 import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
@@ -16,6 +16,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { Link, useNavigate } from "react-router-dom";
 import { FavoriteContext } from "../../../context/FavoriteContext ";
+import { EXPLORE_ROOMS_URLS } from "../../../Services/Urls";
 export interface Facility {
   _id: string;
   name: string;
@@ -71,13 +72,13 @@ export default function UserRoomsList() {
     throw new Error("AuthContext must be used within AuthProvider");
   const { theme } = ContextColor;
 
-   // favoriteContext
-   const favoriteContext = useContext(FavoriteContext);
-   if (!favoriteContext) {
-     throw new Error("FavoriteContext is not provided");
-   }
-   const { addToFavorite,RemoveFromeFavorite } = favoriteContext;
- 
+  // favoriteContext
+  const favoriteContext = useContext(FavoriteContext);
+  if (!favoriteContext) {
+    throw new Error("FavoriteContext is not provided");
+  }
+  const { addToFavorite, RemoveFromeFavorite } = favoriteContext;
+
   //FetchRoomData
   const FetchRoomData = async (
     size?: number,
@@ -98,8 +99,8 @@ export default function UserRoomsList() {
 
       console.log("Final Params:", params);
 
-      const response = await privateUserAxiosInstance.get(
-        `https://upskilling-egypt.com:3000/api/v0/portal/rooms/available`,
+      const response = await privateAxiosInstance.get(
+        EXPLORE_ROOMS_URLS.GET_ALL_ROOMS,
         { params }
       );
 
@@ -122,42 +123,41 @@ export default function UserRoomsList() {
 
   //fun toggleLike
   const toggleFavorite = (roomId: string) => {
-    const token = localStorage.getItem("token"); 
+    const token = localStorage.getItem("token");
     if (!token) {
-        toast.info("Please login first");
-        return;
+      toast.info("Please login first");
+      return;
     }
     const isFav = favorites.has(roomId);
 
     if (isFav) {
-        setFavorites(prev => {
-            const updated = new Set(prev);
-            updated.delete(roomId);
-            return updated;
-        });
-        handleRemove(roomId);
+      setFavorites((prev) => {
+        const updated = new Set(prev);
+        updated.delete(roomId);
+        return updated;
+      });
+      handleRemove(roomId);
     } else {
-        setFavorites(prev => {
-            const updated = new Set(prev);
-            updated.add(roomId);
-            return updated;
-        });
-        handleAddToFav(roomId);
+      setFavorites((prev) => {
+        const updated = new Set(prev);
+        updated.add(roomId);
+        return updated;
+      });
+      handleAddToFav(roomId);
     }
-};
+  };
 
   const handleAddToFav = (roomId: string) => {
     console.log("Room ID Add:", roomId);
     addToFavorite(roomId);
-};
-const handleRemove = (roomId: string) => {
+  };
+  const handleRemove = (roomId: string) => {
     console.log("Room ID Remove:", roomId);
     RemoveFromeFavorite(roomId);
-};
+  };
 
   return (
     <>
-  
       <Typography
         variant="h4"
         sx={{
@@ -171,24 +171,44 @@ const handleRemove = (roomId: string) => {
       >
         Explore ALL Rooms
       </Typography>
-      
 
-      <Box sx={{ display: 'flex', alignItems: 'center' , justifyContent: {
-      xs: 'center', 
-      md: 'flex-start' 
-    },}}>
-      <Typography sx={{ fontSize: '16px', color: 'primary.main' }}>
-        <Link to="/" style={{ textDecoration: 'none', color: 'rgba(176, 176, 176, 1)' }}>
-          Home
-        </Link>
-      </Typography>
-      <Typography sx={{ fontSize: '16px', marginX: 1 ,color:"rgba(176, 176, 176, 1)"}}> / </Typography>
-      <Typography sx={{ fontSize: '16px', color: 'primary.main' }}>
-        <Link to="/user-room" style={{ textDecoration: 'none', color: theme === "dark" ? THEMECOLOR.mainBlue : THEMECOLOR.LabelColor, }}>
-          Explore
-        </Link>
-      </Typography>
-    </Box>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: {
+            xs: "center",
+            md: "flex-start",
+          },
+        }}
+      >
+        <Typography sx={{ fontSize: "16px", color: "primary.main" }}>
+          <Link
+            to="/"
+            style={{ textDecoration: "none", color: "rgba(176, 176, 176, 1)" }}
+          >
+            Home
+          </Link>
+        </Typography>
+        <Typography
+          sx={{ fontSize: "16px", marginX: 1, color: "rgba(176, 176, 176, 1)" }}
+        >
+          {" "}
+          /{" "}
+        </Typography>
+        <Typography sx={{ fontSize: "16px", color: "primary.main" }}>
+          <Link
+            to="/user-room"
+            style={{
+              textDecoration: "none",
+              color:
+                theme === "dark" ? THEMECOLOR.mainBlue : THEMECOLOR.LabelColor,
+            }}
+          >
+            Explore
+          </Link>
+        </Typography>
+      </Box>
 
       <Box sx={{ flexGrow: 1, mt: "30px" }}>
         <Grid
@@ -214,26 +234,25 @@ const handleRemove = (roomId: string) => {
                         : "0 6px 20px rgba(0, 0, 0, 0.2)",
                     ".hover-overlay": {
                       opacity: 1,
-                      
                     },
                     ".icon": {
-                        opacity: 1,    
-                      },
+                      opacity: 1,
+                    },
                   },
                 }}
               >
                 <Box sx={{ position: "relative" }}>
                   {/* fav icon */}
                   <Box
-                     className="icon"
+                    className="icon"
                     sx={{
                       position: "absolute",
                       top: "50%",
                       right: "52%",
                       zIndex: 10,
                       cursor: "pointer",
-                      opacity: 0, 
-                      transition: "opacity 0.3s ease", 
+                      opacity: 0,
+                      transition: "opacity 0.3s ease",
                     }}
                     onClick={() => toggleFavorite(room._id)}
                   >
@@ -247,18 +266,21 @@ const handleRemove = (roomId: string) => {
                   </Box>
                   {/* view icon */}
                   <Box
-                     className="icon"
+                    className="icon"
                     sx={{
                       position: "absolute",
                       top: "50%",
                       left: "52%",
                       zIndex: 10,
                       cursor: "pointer",
-                      opacity: 0, 
-                      transition: "opacity 0.3s ease",  
+                      opacity: 0,
+                      transition: "opacity 0.3s ease",
                     }}
                   >
-                    <VisibilityIcon sx={{ color: "white", fontSize: 28 }} />
+                    <VisibilityIcon
+                      sx={{ color: "white", fontSize: 28 }}
+                      onClick={() => navigate(`/explore-details/${room._id}`)}
+                    />
                   </Box>
 
                   <Box
@@ -289,9 +311,9 @@ const handleRemove = (roomId: string) => {
                         backgroundColor: "rgba(255, 73, 139, 1)",
                         color: "white",
                         padding: {
-                          xs: "4px 10px",    
-                          sm: "6px 12px",   
-                          md: "6px 30px",   
+                          xs: "4px 10px",
+                          sm: "6px 12px",
+                          md: "6px 30px",
                         },
                         textAlign: "center",
                         borderRadius: "0 4px 0 30px",
@@ -299,7 +321,7 @@ const handleRemove = (roomId: string) => {
                         fontSize: "14px",
                         zIndex: 100,
                         width: "30%",
-                          whiteSpace: "nowrap"
+                        whiteSpace: "nowrap",
                       }}
                     >
                       ${room.price} per night
@@ -339,35 +361,43 @@ const handleRemove = (roomId: string) => {
                     )}
                   </Swiper>
                   {/* Adding Room Number and Item Location */}
-                    <Box
-                      sx={{
-                        position: "absolute",
-                        bottom: "10px",
-                        left: "10px",
-                        color: "#fff", 
-                        fontSize: "16px",
-                        fontWeight: "bold",
-                        display: "flex",
-                        flexDirection: "column",
-                        zIndex: 20,
-                      }}
-                    >
-                      <Typography> {room.roomNumber}</Typography>
-                      <Typography>Item Location</Typography>
-                    </Box>
+                  <Box
+                    sx={{
+                      position: "absolute",
+                      bottom: "10px",
+                      left: "10px",
+                      color: "#fff",
+                      fontSize: "16px",
+                      fontWeight: "bold",
+                      display: "flex",
+                      flexDirection: "column",
+                      zIndex: 20,
+                    }}
+                  >
+                    <Typography> {room.roomNumber}</Typography>
+                    <Typography>Item Location</Typography>
+                  </Box>
                 </Box>
               </Card>
             </Grid>
           ))}
         </Grid>
-
-        <PaginationList
-          page={page}
-          getAllList={(size, page) => FetchRoomData(size, page)}
-          totalCount={Math.ceil(totalCount / 12)}
-          setpage={setpage}
-          userExplore={true}
-        />
+        <Box
+          sx={{
+            "& .MuiPaginationItem-root": {
+              color: theme === "dark" ? THEMECOLOR.mainBlue : "black",
+              borderColor: theme === "dark" ? THEMECOLOR.mainBlue : "gray",
+            },
+          }}
+        >
+          <PaginationList
+            page={page}
+            getAllList={(size, page) => FetchRoomData(size, page)}
+            totalCount={Math.ceil(totalCount / 12)}
+            setpage={setpage}
+            userExplore={true}
+          />
+        </Box>
       </Box>
     </>
   );
