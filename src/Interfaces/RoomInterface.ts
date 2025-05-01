@@ -14,7 +14,7 @@ facilities:IFacility_Room[],
 },
 }
 
-interface CreatedBy {
+export interface CreatedBy {
     _id: string;
     userName: string;
   }

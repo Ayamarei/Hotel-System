@@ -15,7 +15,9 @@ export const ROOMS_URLS={
   GET_ROOMS: '/rooms',
   DELETE_ROOMS:(id:string)=>`/rooms/${id}`,
   GET_ROOM:(id:string)=>`/rooms/${id}`,
-  GET_FACILITIES_ROOM:'/room-facilities'
+  GET_FACILITIES_ROOM:'/room-facilities',
+
+  GET_USER_PORTAL_ROOMS:`/rooms/available`
 }
 //room-facilities-url
 export const FACILITES_URLS={
@@ -64,3 +66,10 @@ export const Ads_Url={
   GET_ALL:"ads",
   
 }
+
+export const USERS_REVIEWS_URLS={
+  GET_ALL_ROOM_COMMENTS : (id:string) => `room-comments/${id}`,
+  GET_ALL_ROOM_REVIEWS : (id:string) => `room-reviews/${id}`,
+
+}
+
