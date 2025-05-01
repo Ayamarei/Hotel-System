@@ -25,6 +25,7 @@ import UserRoomsData from './Modules/UserRooms/UserRoomsData/UserRoomsData'
 import UserFav from './Modules/UserRooms/UserFav/UserFav'
 import UserPortal from './Modules/UserPortal/UserPortal'
 import UserProtectedRoute from './Modules/Shared/Master/UserProtectedRoute/UserProtectedRoute'
+import RoomDetails from './Modules/RoomDetails/RoomDetails'
 
 
 
@@ -48,6 +49,7 @@ function App() {
       {index:true,element:<UserPortal/>},
       {path:"user-room",element:<UserRoomsList/>},
       {path:"user-room-data",element:<UserRoomsData/>},
+      {path:"explore-details/:roomId",element:<RoomDetails/>},
       {path:"user-room-fav",element:<UserProtectedRoute> <UserFav/></UserProtectedRoute>},
     ]
    },
