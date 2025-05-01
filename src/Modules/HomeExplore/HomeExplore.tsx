@@ -40,8 +40,14 @@ const onSubmit = (data: any) => {
   return (
     <Box
       sx={{
+        mt: "70px",
         display: "flex",
-        flexWrap: "wrap",
+        // flexWrap: "wrap",
+        flexWrap: {
+          xs: "wrap",           
+          md: "nowrap",          
+        },
+        
         alignItems: "center",
         justifyContent: "space-between",
         padding: { xs: "20px", md: "50px" },
@@ -162,9 +168,14 @@ const onSubmit = (data: any) => {
           flex: { xs: "1 1 100%", md: "1 1 45%" },
           position: "relative",
           minHeight: "400px",
-          display: "flex",
+          // display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          display: {
+            xs: "none",
+            sm: "none",  
+            md: "flex", 
+          },
         }}
       >
         <img
