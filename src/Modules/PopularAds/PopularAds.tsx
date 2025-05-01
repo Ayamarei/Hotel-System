@@ -100,7 +100,7 @@ export default function PopularAds() {
 
     return (
         <>
-            <Box>
+            <Box sx={{padding: { xs: "20px", md: "50px" }}}>
                 <Grid container spacing={3} sx={{ my:{xs:8,sm:8,md:5} }}>
                     {allAds && allAds.map((Ad) => (
                         <Grid key={Ad._id} size={{ xs: 12, sm: 6, md: 4, lg: 4 }}>
