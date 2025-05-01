@@ -69,3 +69,9 @@ export const PORTAL_URLS_Details={
   CREATE_REVIEW:`/room-reviews`,
   CREATE_COMMENT:`/room-comments`
 }
+
+//Explore rooms
+export const EXPLORE_ROOMS_URLS={
+  GET_ALL_ROOMS:'/rooms/available',
+  
+}
