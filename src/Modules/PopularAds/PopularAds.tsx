@@ -25,7 +25,7 @@ interface IAdsInterface {
 
 
 export default function PopularAds() {
-    const navigate = useNavigate();
+    const navigate=useNavigate();
     const ContextColor = useContext(ThemeContext);
     if (!ContextColor)
         throw new Error("AuthContext must be used within AuthProvider");
@@ -67,8 +67,7 @@ export default function PopularAds() {
     const toggleFavorite = (roomId: string) => {
         const token = localStorage.getItem("token"); 
         if (!token) {
-            toast.info("Please log in frist");
-            navigate("/auth/login"); 
+            toast.info("Please login first");
             return;
         }
         const isFav = favorites.has(roomId);
@@ -128,17 +127,23 @@ export default function PopularAds() {
                             >
                                 <Box
                                     sx={{
-                                        position: "absolute",
-                                        top: 0,
-                                        right: 0,
-                                        backgroundColor: "#ff498b",
-                                        color: "#fff",
-                                        padding: "7px 12px",
-                                        fontSize: "14px",
-                                        zIndex: 1,
-                                        borderRadius: "0 10px 0 30px",
-                                        fontWeight: "500",
-                                        width: "30%",
+                                    position: "absolute",
+                                    top: 0,
+                                    right: 0,
+                                    backgroundColor: "rgba(255, 73, 139, 1)",
+                                    color: "white",
+                                    padding: {
+                                        xs: "4px 10px",    
+                                        sm: "6px 12px",   
+                                        md: "6px 30px",   
+                                    },
+                                    textAlign: "center",
+                                    borderRadius: "0 4px 0 30px",
+                                    fontWeight: "500",
+                                    fontSize: "14px",
+                                    zIndex: 100,
+                                    width: "30%",
+                                        whiteSpace: "nowrap"
                                     }}
                                 >
                                     ${Ad.room.price} per night
@@ -177,7 +182,7 @@ export default function PopularAds() {
                                         left: 0,
                                         width: "100%",
                                         height: "100%",
-                                        bgcolor: theme === "dark" ? "rgba(255, 255, 255, 0.4)" : "rgba(0,0,0,0.5)",
+                                        bgcolor: theme === "dark" ? "rgba(255, 255, 255, 0.2)" : "rgba(0,0,0,0.5)",
                                         display: "flex",
                                         justifyContent: "center",
                                         alignItems: "center",
@@ -190,14 +195,31 @@ export default function PopularAds() {
 
                                     <Box onClick={() => toggleFavorite(Ad.room._id)}>
                                         {favorites.has(Ad.room._id) ? (
-                                            <FavoriteIcon sx={{ color: theme === "dark" ? "#ff498b" : "#fff", fontSize: 30, cursor: "pointer" }} />
+                                            <FavoriteIcon sx={{ color: theme === "dark" ? "#fff" : "#fff", fontSize: 30, cursor: "pointer" }} />
                                         ) : (
-                                            <FavoriteBorderIcon sx={{ color: theme === "dark" ? "#ff498b" : "#fff", fontSize: 30, cursor: "pointer" }} />
+                                            <FavoriteBorderIcon sx={{ color: theme === "dark" ? "#fff" : "#fff", fontSize: 30, cursor: "pointer" }} />
                                         )}
                                     </Box>
 
-                                    <Box> <VisibilityOutlinedIcon sx={{ color: theme === "dark" ? "#ff498b" : "#fff", fontSize: 30, cursor: "pointer" }} /></Box>
+                                    <Box> <VisibilityOutlinedIcon sx={{ color: theme === "dark" ? "#fff" : "#fff", fontSize: 30, cursor: "pointer" }} onClick={()=>navigate(`/explore-details/${Ad.room._id}`)}/></Box>
                                 </Box>
+                                {/* Adding Room Number and Item Location */}
+                                    <Box
+                                    sx={{
+                                        position: "absolute",
+                                        bottom: "10px",
+                                        left: "10px",
+                                        color: "#fff", 
+                                        fontSize: "16px",
+                                        fontWeight: "bold",
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        zIndex: 20,
+                                    }}
+                                    >
+                                    <Typography> {Ad.room.roomNumber}</Typography>
+                                    <Typography>Item Location</Typography>
+                                    </Box>
                             </Box>
                         </Grid>
                     ))}
