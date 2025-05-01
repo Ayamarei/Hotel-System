@@ -25,8 +25,11 @@ import UserRoomsData from './Modules/UserRooms/UserRoomsData/UserRoomsData'
 import UserFav from './Modules/UserRooms/UserFav/UserFav'
 import UserPortal from './Modules/UserPortal/UserPortal'
 import UserProtectedRoute from './Modules/Shared/Master/UserProtectedRoute/UserProtectedRoute'
+import { loadStripe } from '@stripe/stripe-js';
+import CheckoutForm from './Modules/Payment/CheckoutForm'
+import { Elements } from '@stripe/react-stripe-js'
 
-
+const stripe=loadStripe("pk_test_51OTjURBQWp069pqTmqhKZHNNd3kMf9TTynJtLJQIJDOSYcGM7xz3DabzCzE7bTxvuYMY0IX96OHBjsysHEKIrwCK006Mu7mKw8");
 
 function App() {
   // local
@@ -49,6 +52,7 @@ function App() {
       {path:"user-room",element:<UserRoomsList/>},
       {path:"user-room-data",element:<UserRoomsData/>},
       {path:"user-room-fav",element:<UserProtectedRoute> <UserFav/></UserProtectedRoute>},
+      { path: "CheckoutForm", element: <Elements stripe={stripe}><CheckoutForm /></Elements>},
     ]
    },
     // auth layout
@@ -77,6 +81,7 @@ function App() {
         { path: "facilities", element:<ProtectedRoute><FacilitiesList /> </ProtectedRoute> },
         { path: "list-booking", element: <ProtectedRoute><ListBooking /></ProtectedRoute> },
         { path: "list-users", element:<ProtectedRoute> <ListUsers /> </ProtectedRoute>},
+
       ],
     },
   ])
