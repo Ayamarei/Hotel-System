@@ -9,6 +9,7 @@ import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { FavoriteContext } from "../../context/FavoriteContext ";
 import { ThemeContext } from "../../context/ThemeContext";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -24,6 +25,7 @@ interface IAdsInterface {
 
 
 export default function PopularAds() {
+    const navigate = useNavigate();
     const ContextColor = useContext(ThemeContext);
     if (!ContextColor)
         throw new Error("AuthContext must be used within AuthProvider");
@@ -63,6 +65,12 @@ export default function PopularAds() {
     const [favorites, setFavorites] = useState<Set<string>>(new Set());
 
     const toggleFavorite = (roomId: string) => {
+        const token = localStorage.getItem("token"); 
+        if (!token) {
+            toast.info("Please log in frist");
+            navigate("/auth/login"); 
+            return;
+        }
         const isFav = favorites.has(roomId);
 
         if (isFav) {

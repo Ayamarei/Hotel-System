@@ -7,7 +7,7 @@ const SwiperNavigation = () => {
   const swiper = useSwiper();
 
   return (
-    <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }} className={styles.swiper_nav_btns}>
+    <Box component="span" sx={{ display: "flex", justifyContent: "center", mt: 2 }} className={styles.swiper_nav_btns}>
         <Button className={styles.prev} onClick={() => swiper.slideNext()}><img width="75%" height="90%" src={prev}/></Button>
         <Button className={styles.next} onClick={() => swiper.slidePrev()}><img width="75%" height="90%"src={next}/></Button>
     </Box>

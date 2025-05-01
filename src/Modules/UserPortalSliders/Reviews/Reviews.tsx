@@ -18,7 +18,7 @@ export default function Reviews() {
   const ContextColor = useContext(ThemeContext);
   if (!ContextColor)
       throw new Error("AuthContext must be used within AuthProvider");
-  const { theme } = ContextColor;
+  // const { theme } = ContextColor;
 
   const { t ,i18n} = useTranslation();
 
@@ -60,27 +60,29 @@ export default function Reviews() {
                 
                 </Grid>
                 <Grid size={{xs:12 ,sm:6}}>
-                  <Typography sx={{m:{xs:2,sm:6}}}>
-                    <Typography  sx={{ color:THEMECOLOR.user_portal_blue ,fontWeight:700,fontSize:{xs:20,sm:24}}}>
+                  <Typography  sx={{m:{xs:1,sm:6}}}>
+                    <Typography component="span" sx={{display: "block", color:THEMECOLOR.user_portal_blue ,fontWeight:700,fontSize:{xs:20,sm:24}}}>
                         {t("Sliders.GuestReview")} 
                     </Typography>
                     <br/>
-                    <Typography >
+                    <Typography component="span" sx={{display: "block"}}>
                         <Rating name="read-only" value={5} readOnly />
                     </Typography >
-                    <Typography sx={{ color:THEMECOLOR.user_portal_blue ,mb:{xs:1,sm:4} ,mt:{xs:1,sm:4} }}>
+                      <br/>
+                    <Typography component="span" sx={{display: "block",  color:THEMECOLOR.user_portal_blue ,mt:{xs:1,sm:2} }}>
                       Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, excepturi voluptatum voluptates voluptate vitae dignissimos sunt facilis esse molestiae nisi, aspernatur rem, praesentium saepe cupiditate ad
                     </Typography>
-                    <Typography sx={{ color:THEMECOLOR.slider_subtitle }}>
+                      <br/>
+                    <Typography component="span" sx={{display: "block", color:THEMECOLOR.slider_subtitle }}>
                       Angga, Product Designer
                     </Typography>
                 </Typography>
-                <Typography>          <SwiperNavigation /></Typography>
+                <Typography> <SwiperNavigation /></Typography>
                 </Grid>
               </Grid>
             </SwiperSlide>
 
-              <SwiperSlide style={{ position:'relative' }}>
+             <SwiperSlide style={{ position:'relative' }}>
     
               <Grid container sx={{ overflow:'visible' }}>
                 <Grid  size={{xs:12 ,sm:4 }}  sx={{ position: "relative",textAlign:i18n.language === 'ar' ? 'start' :'end',m:5,marginBottom:0,paddingTop:5,height:"490px",width:'350px'}}>
@@ -107,28 +109,28 @@ export default function Reviews() {
                 
                 </Grid>
                 <Grid size={{xs:12 ,sm:6}}>
-                  <Typography sx={{m:{xs:2,sm:6}}}>
-                    <Typography  sx={{ color:THEMECOLOR.user_portal_blue ,fontWeight:700,fontSize:{xs:20,sm:24}}}>
+                  <Typography  sx={{m:{xs:1,sm:6}}}>
+                    <Typography component="span" sx={{display: "block", color:THEMECOLOR.user_portal_blue ,fontWeight:700,fontSize:{xs:20,sm:24}}}>
                         {t("Sliders.GuestReview")} 
                     </Typography>
                     <br/>
-                    <Typography >
+                    <Typography component="span" sx={{display: "block"}}>
                         <Rating name="read-only" value={5} readOnly />
                     </Typography >
-                    <Typography sx={{ color:THEMECOLOR.user_portal_blue ,mb:{xs:1,sm:4} ,mt:{xs:1,sm:4} }}>
+                      <br/>
+                    <Typography component="span" sx={{display: "block",  color:THEMECOLOR.user_portal_blue ,mt:{xs:1,sm:2} }}>
                       Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, excepturi voluptatum voluptates voluptate vitae dignissimos sunt facilis esse molestiae nisi, aspernatur rem, praesentium saepe cupiditate ad
                     </Typography>
-                    <Typography sx={{ color:THEMECOLOR.slider_subtitle }}>
+                      <br/>
+                    <Typography component="span" sx={{display: "block", color:THEMECOLOR.slider_subtitle }}>
                       Angga, Product Designer
                     </Typography>
                 </Typography>
-                <Typography>          <SwiperNavigation /></Typography>
+                <Typography> <SwiperNavigation /></Typography>
                 </Grid>
               </Grid>
             </SwiperSlide>
-
-               <SwiperSlide style={{ position:'relative' }}>
-    
+            <SwiperSlide style={{ position:'relative' }}>
               <Grid container sx={{ overflow:'visible' }}>
                 <Grid  size={{xs:12 ,sm:4 }}  sx={{ position: "relative",textAlign:i18n.language === 'ar' ? 'start' :'end',m:5,marginBottom:0,paddingTop:5,height:"490px",width:'350px'}}>
                   <Box
@@ -154,22 +156,24 @@ export default function Reviews() {
                 
                 </Grid>
                 <Grid size={{xs:12 ,sm:6}}>
-                  <Typography sx={{m:{xs:2,sm:6}}}>
-                    <Typography  sx={{ color:THEMECOLOR.user_portal_blue ,fontWeight:700,fontSize:{xs:20,sm:24}}}>
+                  <Typography  sx={{m:{xs:1,sm:6}}}>
+                    <Typography component="span" sx={{display: "block", color:THEMECOLOR.user_portal_blue ,fontWeight:700,fontSize:{xs:20,sm:24}}}>
                         {t("Sliders.GuestReview")} 
                     </Typography>
                     <br/>
-                    <Typography >
+                    <Typography component="span" sx={{display: "block"}}>
                         <Rating name="read-only" value={5} readOnly />
                     </Typography >
-                    <Typography sx={{ color:THEMECOLOR.user_portal_blue ,mb:{xs:1,sm:4} ,mt:{xs:1,sm:4} }}>
+                      <br/>
+                    <Typography component="span" sx={{display: "block",  color:THEMECOLOR.user_portal_blue ,mt:{xs:1,sm:2} }}>
                       Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, excepturi voluptatum voluptates voluptate vitae dignissimos sunt facilis esse molestiae nisi, aspernatur rem, praesentium saepe cupiditate ad
                     </Typography>
-                    <Typography sx={{ color:THEMECOLOR.slider_subtitle }}>
+                      <br/>
+                    <Typography component="span" sx={{display: "block", color:THEMECOLOR.slider_subtitle }}>
                       Angga, Product Designer
                     </Typography>
                 </Typography>
-                <Typography>          <SwiperNavigation /></Typography>
+                <Typography> <SwiperNavigation /></Typography>
                 </Grid>
               </Grid>
             </SwiperSlide>

@@ -14,9 +14,11 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { THEMECOLOR } from "../../../Services/ThemeColors";
+import { useNavigate } from "react-router-dom";
 
 export default function Ads() {
   const [allAds, setAllAds] = React.useState<IUserPortalAd[]>([]);
+  const navigate = useNavigate();
 
   // get all ads
   const getAllUserPortalAds = async () => {
@@ -189,7 +191,7 @@ export default function Ads() {
                               )}
                           </Box>
 
-                          <Box> <VisibilityOutlinedIcon sx={{ color: theme === "dark" ? "#ff498b" : "#fff", fontSize: 30, cursor: "pointer" }} /></Box>
+                          <Box> <VisibilityOutlinedIcon onClick={()=>{navigate(`/explore-details/${ad?.room?._id}`)}} sx={{ color: theme === "dark" ? "#ff498b" : "#fff", fontSize: 30, cursor: "pointer" }} /></Box>
                       </Box>
                     </Box>
 
