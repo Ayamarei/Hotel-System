@@ -49,9 +49,6 @@ export const ADMIN_BOOKINGS_URLS={
   DELETE_BOOKING : (id:string) => `booking/${id}`,
 }
 
-
-
- // For User Portal
 //  Favorite_Url
 export const FAVORITE_ROOMS={
   GET_ALL:"favorite-rooms",
@@ -62,5 +59,19 @@ export const FAVORITE_ROOMS={
 // Ads_Url
 export const Ads_Url={
   GET_ALL:"ads",
+  
+}
+// room details portal
+
+export const PORTAL_URLS_Details={
+  GET_ALL_ROOMS:`/rooms/available`,
+  GET_ROOM_DETAILS:(id:string)=>`/rooms/${id}`,
+  CREATE_REVIEW:`/room-reviews`,
+  CREATE_COMMENT:`/room-comments`
+}
+
+//Explore rooms
+export const EXPLORE_ROOMS_URLS={
+  GET_ALL_ROOMS:'/rooms/available',
   
 }
