@@ -4,9 +4,9 @@ import { Ads_Url } from "../../Services/Urls";
 import { AxiosError } from "axios";
 import { useContext, useEffect, useState } from "react";
 import { Box, Grid, Typography } from "@mui/material";
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
-import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import { FavoriteContext } from "../../context/FavoriteContext ";
 import { ThemeContext } from "../../context/ThemeContext";
 import { useNavigate } from "react-router-dom";
@@ -14,15 +14,14 @@ import { useNavigate } from "react-router-dom";
 
 
 interface IAdsInterface {
-    room: {
-        images: string[],
-        price: number,
-        roomNumber: string,
-        _id: string,
-    },
-    _id: string,
+  room: {
+    images: string[];
+    price: number;
+    roomNumber: string;
+    _id: string;
+  };
+  _id: string;
 }
-
 
 export default function PopularAds() {
     const navigate=useNavigate();
@@ -31,38 +30,34 @@ export default function PopularAds() {
         throw new Error("AuthContext must be used within AuthProvider");
     const { theme } = ContextColor;
 
-    const FavContext = useContext(FavoriteContext)
-    if (!FavContext) throw new Error("Error")
-    const { addToFavorite, RemoveFromeFavorite } = FavContext
+  const FavContext = useContext(FavoriteContext);
+  if (!FavContext) throw new Error("Error");
+  const { addToFavorite, RemoveFromeFavorite } = FavContext;
 
+  const handleAddToFav = (roomId: string) => {
+    console.log("Room ID Add:", roomId);
+    addToFavorite(roomId);
+  };
+  const handleRemove = (roomId: string) => {
+    console.log("Room ID Remove:", roomId);
+    RemoveFromeFavorite(roomId);
+  };
 
-    const handleAddToFav = (roomId: string) => {
-        console.log("Room ID Add:", roomId);
-        addToFavorite(roomId);
-    };
-    const handleRemove = (roomId: string) => {
-        console.log("Room ID Remove:", roomId);
-        RemoveFromeFavorite(roomId);
-    };
+  const [allAds, setAllAds] = useState<IAdsInterface[]>([]);
 
-    const [allAds, setAllAds] = useState<IAdsInterface[]>([])
+  const getAds = async () => {
+    try {
+      let response = await publicAxiosInstance.get(Ads_Url.GET_ALL);
+      console.log(response.data.data.ads);
+      setAllAds(response.data.data.ads);
+    } catch (error) {
+      const err = error as AxiosError<{ message: string }>;
 
-    const getAds = async () => {
-        try {
-            let response = await publicAxiosInstance.get(Ads_Url.GET_ALL)
-            console.log(response.data.data.ads);
-            setAllAds(response.data.data.ads)
-
-
-        } catch (error) {
-            const err = error as AxiosError<{ message: string }>;
-
-            toast.error(err?.response?.data?.message || "Something went wrong!");
-
-        }
+      toast.error(err?.response?.data?.message || "Something went wrong!");
     }
+  };
 
-    const [favorites, setFavorites] = useState<Set<string>>(new Set());
+  const [favorites, setFavorites] = useState<Set<string>>(new Set());
 
     const toggleFavorite = (roomId: string) => {
         const token = localStorage.getItem("token"); 
@@ -72,31 +67,26 @@ export default function PopularAds() {
         }
         const isFav = favorites.has(roomId);
 
-        if (isFav) {
-            setFavorites(prev => {
-                const updated = new Set(prev);
-                updated.delete(roomId);
-                return updated;
-            });
-            handleRemove(roomId);
-        } else {
-            setFavorites(prev => {
-                const updated = new Set(prev);
-                updated.add(roomId);
-                return updated;
-            });
-            handleAddToFav(roomId);
-        }
-    };
+    if (isFav) {
+      setFavorites((prev) => {
+        const updated = new Set(prev);
+        updated.delete(roomId);
+        return updated;
+      });
+      handleRemove(roomId);
+    } else {
+      setFavorites((prev) => {
+        const updated = new Set(prev);
+        updated.add(roomId);
+        return updated;
+      });
+      handleAddToFav(roomId);
+    }
+  };
 
-
-
-    useEffect(() => {
-        getAds()
-
-    }, [])
-
-
+  useEffect(() => {
+    getAds();
+  }, []);
 
     return (
         <>

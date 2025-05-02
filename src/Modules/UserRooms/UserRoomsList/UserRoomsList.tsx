@@ -17,39 +17,10 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import { Link, useNavigate } from "react-router-dom";
 import { FavoriteContext } from "../../../context/FavoriteContext ";
 import { EXPLORE_ROOMS_URLS } from "../../../Services/Urls";
-export interface Facility {
-  _id: string;
-  name: string;
-}
+import { RoomsAPIResponse} from '../../../Interfaces/RoomInterface'
 
-export interface CreatedBy {
-  _id: string;
-  userName: string;
-}
 
-export interface Room {
-  _id: string;
-  roomNumber: string;
-  price: number;
-  capacity: number;
-  discount: number;
-  facilities: Facility[];
-  createdBy: CreatedBy;
-  images: string[];
-  createdAt: string;
-  updatedAt: string;
-}
 
-export interface RoomsResponseData {
-  rooms: Room[];
-  totalCount: number;
-}
-
-export interface RoomsAPIResponse {
-  success: boolean;
-  message: string;
-  data: RoomsResponseData;
-}
 
 export default function UserRoomsList() {
   const [roomData, setRoomData] = useState<RoomsAPIResponse | null>(null);
