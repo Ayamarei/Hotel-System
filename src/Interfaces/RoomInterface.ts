@@ -11,7 +11,7 @@ export interface IFacilities_Room_Response {
   };
 }
 
-export interface CreatedBy {
+ export interface CreatedBy {
   _id: string;
   userName: string;
 }

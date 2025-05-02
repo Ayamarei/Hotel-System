@@ -1,0 +1,90 @@
+
+
+ [dir="ltr"] .prev {
+  display: block;
+  position: absolute;
+  top: 70% !important;
+  left: 42%;
+  z-index: 99999999999;
+}
+
+ [dir="ltr"] .next {
+  display: block;
+  position: absolute;
+  top: 70% !important;
+  right:44%;
+  z-index: 99999999999;
+}
+
+[dir="rtl"] .prev {
+  display: block;
+  position: absolute;
+  top: 70% !important;
+  left: 37%;
+  z-index: 99999999999;
+}
+
+ [dir="rtl"] .next {
+  display: block;
+  position: absolute;
+  top: 70% !important;
+  right:44%;
+  z-index: 99999999999;
+
+}
+
+@media (max-width: 922px) {
+  [dir="ltr"] .prev {
+    top: 80% !important;
+    left: 47%;
+  }
+
+  [dir="ltr"] .next {
+    top: 80% !important;
+    right: 30%;
+  }
+
+  [dir="rtl"] .prev {
+    top: 80% !important;
+    left: 25%; /* Adjust for RTL */
+    right: auto;
+  }
+
+  [dir="rtl"] .next {
+    top: 80% !important;
+    right: 52%; /* Adjust for RTL */
+    left: auto;
+  
+  }
+}
+@media (max-width: 768px) {
+  [dir="ltr"] .prev {
+    top: 62% !important;
+    left: 35%;
+    right: auto;
+  }
+
+  [dir="ltr"] .next {
+    top: 62% !important;
+    right: 25%;
+  }
+
+  [dir="rtl"] .prev {
+    top: 62% !important;
+    left: 45%; /* Adjust for RTL */
+    right: auto;
+  }
+
+  [dir="rtl"] .next {
+    top: 62% !important;
+    right: 20%; /* Adjust for RTL */
+    left: auto;
+  
+  }
+}
+
+
+.swiper_nav_btns button:hover {
+  background-color: rgba(50, 82, 223, 1);
+  color: #fff;
+}

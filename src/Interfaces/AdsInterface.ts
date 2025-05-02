@@ -1,5 +1,5 @@
 
-import { IRoomData } from "../Interfaces/RoomInterface";
+import { CreatedBy, IRoomData } from "../Interfaces/RoomInterface";
 
 export interface AdsFormProps {
   open: boolean;
@@ -20,6 +20,27 @@ export interface Iad {
     roomNumber : number;
     capacity : number;
     discount : number;
-    createdAt : String;
+    createdAt : string;
     room:IRoomData;
   }
+
+
+   export interface IUserPortalAd {
+        _id: string,
+        isActive: boolean,
+        room: IRoomData,
+        createdBy: CreatedBy
+        createdAt: string,
+        updatedAt: string,
+
+  }
+
+
+export interface IAdsResponseData {
+  success: boolean;
+  message: string;
+  data: { 
+      ads: IUserPortalAd[],
+      totalCount: number;
+    };
+}
