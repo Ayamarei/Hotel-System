@@ -14,6 +14,9 @@ const LIGHT_GREEN="rgba(84, 209, 77, 1)";
 const BABY_BLUE="rgba(53, 194, 253, 1)";
 const DARK_BABY_BLUE="rgba(83, 104, 240, 1)";
 const PURPLE="rgba(157, 87, 213, 1)";
+//user portal
+const USER_PORTAL_BLUE  = "rgba(21, 44, 91, 1)";
+const SLIDER_SUBTITLE="rgba(176, 176, 176, 1)";
 
 
 export const THEMECOLOR ={
@@ -31,4 +34,7 @@ export const THEMECOLOR ={
     BabyBlue:`${BABY_BLUE}`,
     Dark_Baby_Blue:`${DARK_BABY_BLUE}`,
     Purple:`${PURPLE}`,
+
+    user_portal_blue : `${USER_PORTAL_BLUE}`,
+    slider_subtitle : `${SLIDER_SUBTITLE}`,
 }
