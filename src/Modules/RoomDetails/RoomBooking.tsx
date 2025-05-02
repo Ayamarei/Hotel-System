@@ -5,20 +5,14 @@ import DateRangePickerComponent from "../Shared/DateRangePicker/DateRangePicker"
 import { Controller, useForm } from "react-hook-form";
 import Capacity from "../Shared/Capacity/Capacity";
 import { useNavigate } from "react-router-dom";
-import { useElements, useStripe } from "@stripe/react-stripe-js";
-import axios from "axios";
 import { privateUserAxiosInstance } from "../../Services/Axiosinstance";
 import { toast } from "react-toastify";
 
 export default function RoomBooking({ room }: { room: IRoomDetails }) {
-  const elements = useElements();
-  const stripe = useStripe();
-
   const {
     control,
     setValue,
     watch,
-    getValues
   } = useForm();
 
 
