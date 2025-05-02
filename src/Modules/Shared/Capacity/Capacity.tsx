@@ -11,7 +11,7 @@ export default function Capacity({ value, onChange }: CapacityProps) {
   };
 
   const handleDecrement = () => {
-    if (value > 1) {
+    if (value >= 1) {
       onChange(value - 1);
     }
   };

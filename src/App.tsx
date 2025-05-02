@@ -52,9 +52,9 @@ function App() {
       {index:true,element:<UserPortal/>},
       {path:"user-room",element:<UserRoomsList/>},
       {path:"user-room-data",element:<UserRoomsData/>},
-      {path:"explore-details/:roomId",element:<RoomDetails/>},
+      {path:"explore-details/:roomId",element: <Elements stripe={stripe}><RoomDetails/></Elements>},
       {path:"user-room-fav",element:<UserProtectedRoute> <UserFav/></UserProtectedRoute>},
-      { path: "CheckoutForm", element: <Elements stripe={stripe}><CheckoutForm /></Elements>},
+
     ]
    },
     // auth layout
@@ -86,6 +86,13 @@ function App() {
 
       ],
     },
+    {path:"payment",
+      errorElement:<NotFound/>,
+      children:[
+        { path: "checkout-form", element: <Elements stripe={stripe}><CheckoutForm /></Elements>},
+
+      ]
+    }
   ])
   return(
  <>

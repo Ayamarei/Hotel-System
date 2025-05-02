@@ -1,24 +1,56 @@
 import { Box, Typography } from "@mui/material";
-import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import {
+  AddressElement,
+  CardElement,
+  useElements,
+  useStripe,
+} from "@stripe/react-stripe-js";
 import React, { useState } from "react";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import BCA from "../../assets/images/BCA.svg";
 import mandiri from "../../assets/images/mandiri.svg";
+import {
+  privateAxiosInstance,
+  privateUserAxiosInstance,
+} from "../../Services/Axiosinstance";
+import { useLocation } from "react-router-dom";
 const CheckoutForm = () => {
   const [activeStep, setActiveStep] = useState(1);
 
   const elements = useElements();
   const stripe = useStripe();
-  const submitPaymentHandler = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+
+  const Payment = async (token: string, bookingId: string) => {
+    try {
+      const { data } = await privateAxiosInstance.post(
+        `/booking/${state?.bookingId}/pay`,
+        { token: token }
+      );
+
+      console.log(data);
+      if (data.success === true) {
+        setActiveStep(3);
+      } else {
+        console.log("Payment failed");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const { state } = useLocation();
+  const submitPaymentHandler = async () => {
+    // e.preventDefault();
     if (!elements || !stripe) return;
     const cardElement = elements?.getElement("card");
     // console.log("cardElement",cardElement);
     const { token, error } = await stripe?.createToken(cardElement!);
     if (error) return;
     console.log("tokenID", token.id);
+    console.log("state?.bookingId",state?.bookingId);
+    await Payment(token.id, state?.bookingId);
+
   };
   const steps = ["", "", ""];
   return (
@@ -97,180 +129,184 @@ const CheckoutForm = () => {
         >
           {/* static section */}
           {activeStep !== 3 && (
-          <Box
-            sx={{
-              flex: 1,
-              display: "flex",
-              flexDirection: "column",
-              minWidth: "300px",
-              padding: 3,
-              borderRadius: 2,
-              alignItems: "flex-start",
-            }}
-          >
-            <Typography
-              sx={{
-                mb: 2,
-                fontSize: "16px",
-                fontWeight: "700",
-                color: "rgba(21, 44, 91, 1)",
-                lineHeight: "170%",
-              }}
-            >
-              Transfer Pembayaran:
-            </Typography>
-            <Typography
-              sx={{
-                mb: 2,
-                fontSize: "16px",
-                fontWeight: "700",
-                color: "rgba(21, 44, 91, 1)",
-                lineHeight: "170%",
-              }}
-            >
-              Tax: 10%
-            </Typography>
-            <Typography
-              sx={{
-                mb: 2,
-                fontSize: "16px",
-                fontWeight: "700",
-                color: "rgba(21, 44, 91, 1)",
-                lineHeight: "170%",
-              }}
-            >
-              Sub total: $480 USD
-            </Typography>
-            <Typography
-              sx={{
-                mb: 2,
-                fontSize: "16px",
-                fontWeight: "700",
-                color: "rgba(21, 44, 91, 1)",
-                lineHeight: "170%",
-              }}
-            >
-              Total: $580 USD
-            </Typography>
             <Box
               sx={{
+                flex: 1,
                 display: "flex",
-                alignItems: "center",
-                gap: 2,
-                mb: 3,
+                flexDirection: "column",
+                minWidth: "300px",
+                padding: 3,
+                borderRadius: 2,
+                alignItems: "flex-start",
               }}
             >
-              <Box component="img" src={BCA} alt="Instruction" />
-
               <Typography
                 sx={{
+                  mb: 2,
                   fontSize: "16px",
                   fontWeight: "700",
                   color: "rgba(21, 44, 91, 1)",
                   lineHeight: "170%",
                 }}
               >
-                Bank Central Asia,
-                <br />
-                2208 1996
-                <br />
-                BuildWith Angga
+                Transfer Pembayaran:
               </Typography>
-            </Box>
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                gap: 2,
-                mb: 3,
-              }}
-            >
-              <Box component="img" src={mandiri} alt="Instruction" />
-
               <Typography
                 sx={{
+                  mb: 2,
                   fontSize: "16px",
                   fontWeight: "700",
                   color: "rgba(21, 44, 91, 1)",
                   lineHeight: "170%",
                 }}
               >
-                Bank Mandiri
-                <br />
-                2208 1996
-                <br />
-                BuildWith Angga
+                Tax: 10%
               </Typography>
+              <Typography
+                sx={{
+                  mb: 2,
+                  fontSize: "16px",
+                  fontWeight: "700",
+                  color: "rgba(21, 44, 91, 1)",
+                  lineHeight: "170%",
+                }}
+              >
+                Sub total: $480 USD
+              </Typography>
+              <Typography
+                sx={{
+                  mb: 2,
+                  fontSize: "16px",
+                  fontWeight: "700",
+                  color: "rgba(21, 44, 91, 1)",
+                  lineHeight: "170%",
+                }}
+              >
+                Total: $580 USD
+              </Typography>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 2,
+                  mb: 3,
+                }}
+              >
+                <Box component="img" src={BCA} alt="Instruction" />
+
+                <Typography
+                  sx={{
+                    fontSize: "16px",
+                    fontWeight: "700",
+                    color: "rgba(21, 44, 91, 1)",
+                    lineHeight: "170%",
+                  }}
+                >
+                  Bank Central Asia,
+                  <br />
+                  2208 1996
+                  <br />
+                  BuildWith Angga
+                </Typography>
+              </Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 2,
+                  mb: 3,
+                }}
+              >
+                <Box component="img" src={mandiri} alt="Instruction" />
+
+                <Typography
+                  sx={{
+                    fontSize: "16px",
+                    fontWeight: "700",
+                    color: "rgba(21, 44, 91, 1)",
+                    lineHeight: "170%",
+                  }}
+                >
+                  Bank Mandiri
+                  <br />
+                  2208 1996
+                  <br />
+                  BuildWith Angga
+                </Typography>
+              </Box>
             </Box>
-          </Box>)}
+          )}
           {/* vertical line */}
           {activeStep !== 3 && (
-          <Box
-            sx={{
-              width: "1px",
-              backgroundColor: "#aaa",
-              alignSelf: "stretch",
-            }}
-          />)}
+            <Box
+              sx={{
+                width: "1px",
+                backgroundColor: "#aaa",
+                alignSelf: "stretch",
+              }}
+            />
+          )}
 
           {/* form section */}
           <Box
             component="form"
-            onSubmit={submitPaymentHandler}
+            // onSubmit={submitPaymentHandler}
             sx={{ flex: 1, minWidth: "300px", padding: 3 }}
           >
-             {activeStep === 1 && <CardElement />}
-              {activeStep === 2 && <Typography>Step2</Typography>}
-              {activeStep === 3 && (
-                <Typography
-                  variant="h5"
-                  sx={{ color: "green", fontWeight: "bold", mt: 5 }}
-                >
-                  🎉 Your booking is complete!
-                </Typography>
-              )}
+            {activeStep === 1 && (
+              <AddressElement options={{ mode: "billing" }} />
+            )}
+            {activeStep === 2 && <CardElement />}
+            {activeStep === 3 && (
+              <Typography
+                variant="h5"
+                sx={{ color: "green", fontWeight: "bold", mt: 5 }}
+              >
+                🎉 Your booking is complete!
+              </Typography>
+            )}
           </Box>
         </Box>
         <Box sx={{ display: "flex", justifyContent: "space-between", mt: 2 }}>
-        <Box sx={{ display: "flex", flexDirection: "column", gap: 2, mt: 2 }}>
-  {activeStep === 1 && (
-    <>
-      <button
-        type="button"
-        onClick={() => setActiveStep((prev) => prev + 1)}
-      >
-        Continue to Book
-      </button>
-    </>
-  )}
-  {activeStep === 2 && (
-    <>
-      <button
-        type="button"
-        onClick={() => setActiveStep((prev) => prev - 1)}
-      >
-        Back
-      </button>
-      <button
-        type="button"
-        onClick={() => setActiveStep((prev) => prev + 1)}
-      >
-        Continue to Book
-      </button>
-    </>
-  )}
-  {activeStep === 3 && (
-    <>
-      <button
-        type="button"
-        onClick={() => setActiveStep((prev) => prev - 1)}
-      >
-        Back to home
-      </button>
-    </>
-  )}
-</Box>
-
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 2, mt: 2 }}>
+            {activeStep === 1 && (
+              <>
+                <button
+                  type="button"
+                  onClick={() => setActiveStep((prev) => prev + 1)}
+                >
+                  Continue to Book
+                </button>
+              </>
+            )}
+            {activeStep === 2 && (
+              <>
+                <button
+                  type="button"
+                  onClick={() => setActiveStep((prev) => prev - 1)}
+                >
+                  Back
+                </button>
+                <button
+                  type="submit"
+                  // onClick={() => setActiveStep((prev) => prev + 1)}
+                  onClick={submitPaymentHandler}
+                >
+                  Continue to Book
+                </button>
+              </>
+            )}
+            {activeStep === 3 && (
+              <>
+                <button
+                  type="button"
+                  onClick={() => setActiveStep((prev) => prev - 1)}
+                >
+                  Back to home
+                </button>
+              </>
+            )}
+          </Box>
         </Box>
       </Box>
     </>
