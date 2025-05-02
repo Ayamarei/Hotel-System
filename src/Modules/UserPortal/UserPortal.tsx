@@ -7,11 +7,8 @@ export default function UserPortal() {
     // HOME SECTION
     
     < >
-
- 
      <HomeExplore/>
      <PopularAds/>
-     
     </>
   )
 }
