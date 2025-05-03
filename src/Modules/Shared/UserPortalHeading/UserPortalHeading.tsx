@@ -8,7 +8,8 @@ export default function UserPortalHeading({title}:{title:string}) {
     if (!ContextColor) throw new Error("AuthContext must be used within AuthProvider");
     const { theme } = ContextColor;
   return (
-    <Box sx={{ mt: {xs:2,md:10}}}>
+    <Box sx={{ paddingX: { xs: "20px", md: "50px" },
+}}>
       <Typography sx={{ color: theme === 'dark' ? THEMECOLOR.White : THEMECOLOR.user_portal_blue, fontWeight:500,fontSize:{xs:16,sm:24}, mt:2,mb:2 }}>
           {title}
       </Typography> 

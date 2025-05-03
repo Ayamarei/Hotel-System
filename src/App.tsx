@@ -26,8 +26,11 @@ import UserFav from './Modules/UserRooms/UserFav/UserFav'
 import UserPortal from './Modules/UserPortal/UserPortal'
 import UserProtectedRoute from './Modules/Shared/Master/UserProtectedRoute/UserProtectedRoute'
 import RoomDetails from './Modules/RoomDetails/RoomDetails'
+import { loadStripe } from '@stripe/stripe-js';
+import CheckoutForm from './Modules/Payment/CheckoutForm'
+import { Elements } from '@stripe/react-stripe-js'
 
-
+const stripe=loadStripe("pk_test_51OTjURBQWp069pqTmqhKZHNNd3kMf9TTynJtLJQIJDOSYcGM7xz3DabzCzE7bTxvuYMY0IX96OHBjsysHEKIrwCK006Mu7mKw8");
 
 function App() {
   // local
@@ -49,8 +52,9 @@ function App() {
       {index:true,element:<UserPortal/>},
       {path:"user-room",element:<UserRoomsList/>},
       {path:"user-room-data",element:<UserRoomsData/>},
-      {path:"explore-details/:roomId",element:<RoomDetails/>},
+      {path:"explore-details/:roomId",element: <Elements stripe={stripe}><RoomDetails/></Elements>},
       {path:"user-room-fav",element:<UserProtectedRoute> <UserFav/></UserProtectedRoute>},
+
     ]
    },
     // auth layout
@@ -79,8 +83,16 @@ function App() {
         { path: "facilities", element:<ProtectedRoute><FacilitiesList /> </ProtectedRoute> },
         { path: "list-booking", element: <ProtectedRoute><ListBooking /></ProtectedRoute> },
         { path: "list-users", element:<ProtectedRoute> <ListUsers /> </ProtectedRoute>},
+
       ],
     },
+    {path:"payment",
+      errorElement:<NotFound/>,
+      children:[
+        { path: "checkout-form", element: <Elements stripe={stripe}><CheckoutForm /></Elements>},
+
+      ]
+    }
   ])
   return(
  <>

@@ -92,7 +92,7 @@ export default function Ads() {
     <>
         <UserPortalHeading title={t("Sliders.Ads")} />
 
-        <Box sx={{ mb: {xs:2,md:6} }}>
+        <Box sx={{ mb: {xs:2,md:6} ,paddingX: { xs: "20px", md: "50px" }}}>
             <Box sx={{ display:'flex',justifyContent:'space-around' }}>
             <Swiper
                 style={{width:'100%',overflowY:'visible',overflowX:'hidden'}}
@@ -140,19 +140,26 @@ export default function Ads() {
                         }}
                     >
                         <Box
+                          
                             sx={{
                                 position: "absolute",
                                 top: 0,
                                 right: 0,
-                                backgroundColor: "#ff498b",
-                                color: "#fff",
-                                padding: "7px 12px",
-                                fontSize: "12px",
-                                zIndex: 1,
-                                borderRadius: "0 10px 0 20px",
+                                backgroundColor: "rgba(255, 73, 139, 1)",
+                                color: "white",
+                                padding: {
+                                  xs: "4px 10px",
+                                  sm: "6px 10px",
+                                  md: "6px 33px",
+                                },
+                                textAlign: "center",
+                                borderRadius: "0 4px 0 30px",
                                 fontWeight: "500",
-                                width: "32%",
-                            }}
+                                fontSize: "14px",
+                                zIndex: 100,
+                                width: "30%",
+                                whiteSpace: "nowrap",
+                              }}
                         >
                             ${ad?.room?.price} per night
                         </Box>

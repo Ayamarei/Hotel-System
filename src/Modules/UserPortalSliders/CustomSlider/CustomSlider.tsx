@@ -16,7 +16,7 @@ export default function CustomSlider({details}: ISliderProps) {
         throw new Error("AuthContext must be used within AuthProvider");
         const { theme } = ContextColor;
     return (
-        <Box sx={{ mb: {xs:2,md:6} }}>
+        <Box sx={{ mb: {xs:2,md:6},paddingX: { xs: "20px", md: "50px" } }}>
             <Box sx={{ display:'flex',justifyContent:'space-around' }}>
             <Swiper
                 modules={[ Autoplay]}
@@ -31,7 +31,7 @@ export default function CustomSlider({details}: ISliderProps) {
                     spaceBetween: 20,
                     },
                     768: {
-                        slidesPerView: 1,
+                        slidesPerView: 2,
                         spaceBetween: 20,
                     },
                     922: {
@@ -47,19 +47,38 @@ export default function CustomSlider({details}: ISliderProps) {
                         <Box sx={{ width: '100%',
                             height: "200px" }}>
                             <Box
+                                // sx={{
+                                //     position: "absolute",
+                                //     top: 0,
+                                //     right: 0,
+                                //     backgroundColor: "#ff498b",
+                                //     color: "#fff",
+                                //     padding: "7px 12px",
+                                //     fontSize: "12px",
+                                //     zIndex: 1,
+                                //     borderRadius: "0 10px 0 20px",
+                                //     fontWeight: "500",
+                                //     width: "32%",
+                                // }}
                                 sx={{
                                     position: "absolute",
                                     top: 0,
                                     right: 0,
-                                    backgroundColor: "#ff498b",
-                                    color: "#fff",
-                                    padding: "7px 12px",
-                                    fontSize: "12px",
-                                    zIndex: 1,
-                                    borderRadius: "0 10px 0 20px",
+                                    backgroundColor: "rgba(255, 73, 139, 1)",
+                                    color: "white",
+                                    padding: {
+                                      xs: "4px 10px",
+                                      sm: "6px 10px",
+                                      md: "6px 32px",
+                                    },
+                                    textAlign: "center",
+                                    borderRadius: "0 4px 0 30px",
                                     fontWeight: "500",
-                                    width: "32%",
-                                }}
+                                    fontSize: "14px",
+                                    zIndex: 100,
+                                    width: "30%",
+                                    whiteSpace: "nowrap",
+                                  }}
                             >
                                 {details[slideIndex].price}
                             </Box>
