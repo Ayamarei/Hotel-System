@@ -292,6 +292,12 @@
   "save":" Save",
   "Saving":" Saving...",
   "placeholder":"Name"
+},
+"Sliders": {
+  "HousesWithBeautyBackyards":"Houses With Beauty Backyards",
+  "HotelsWithLargeRooms": "Hotels With Large Living Rooms",
+  "Ads": "Ads",
+  "GuestReview": "Guests Reviews"
 }
 
   }
