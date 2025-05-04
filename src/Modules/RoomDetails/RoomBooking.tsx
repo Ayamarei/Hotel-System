@@ -31,7 +31,7 @@ export default function RoomBooking({ room }: { room: IRoomDetails }) {
     const endDate = dateRange?.[1]?.$d;
   
     if (!startDate || !endDate) {
-      console.error("Start date or end date is missing");
+      toast.error("Start date or end date is missing");
       return; 
     }
   
@@ -64,7 +64,7 @@ export default function RoomBooking({ room }: { room: IRoomDetails }) {
       navigate("/payment/checkout-form",{state:{bookingId:res?.data?.data?.booking?._id}})
       toast.success("Booking submitted successfully!");
     } catch (err) {
-      console.error("Error submitting booking:", err);
+      toast.error("Please login first")
     }
   };
   
