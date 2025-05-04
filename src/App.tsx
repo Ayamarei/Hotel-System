@@ -7,7 +7,7 @@ import ForgetPassword from './Modules/Authentication/Forget-Password/Forget-Pass
 import ResetPassword from './Modules/Authentication/Reset-Password/Reset-Password'
 import { Bounce, ToastContainer } from 'react-toastify'
 import  { useEffect } from "react";
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createHashRouter, RouterProvider } from 'react-router-dom'
 import i18n from './i18n'
 import cookies from "js-cookie"
 import MasterLayout from './Modules/Shared/MasterLayout/MasterLayout'
@@ -43,7 +43,7 @@ function App() {
   
 
   // routes
-  const routes = createBrowserRouter([
+  const routes = createHashRouter([
    {
     path:"",
     element: <UserMasterLayout/>,
