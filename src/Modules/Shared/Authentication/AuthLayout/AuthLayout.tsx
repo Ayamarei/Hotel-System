@@ -4,10 +4,15 @@ import Grid from '@mui/material/Grid';
 import { Typography } from '@mui/material';
 import { THEMECOLOR } from '../../../../Services/ThemeColors';
 import { IAuthProps } from '../../../../Interfaces/AuthProps';
+import { Link as RouterLink } from 'react-router-dom';
 import Link from '@mui/material/Link';
 import { useTranslation } from 'react-i18next';
 import { ThemeContext } from '../../../../context/ThemeContext';
 import { useContext } from 'react';
+import loginImg from  '../../../../assets/images/auth/login.png'
+import registerImg from  '../../../../assets/images/auth/register.png'
+import resetImg from  '../../../../assets/images/auth/reset-password.png'
+import forgetImg from  '../../../../assets/images/auth/forget-password.png'
 
 
 export default function AuthLayout() {
@@ -21,7 +26,7 @@ export default function AuthLayout() {
     // Define props for each route dynamically
     const routePropsMap: Record<string, IAuthProps> = {
         '/auth/login': {
-        image: '/src/assets/images/auth/login.png',
+        image: loginImg,
         title: t("AuthLogin.title"),
         description: t("AuthLogin.description"),
         subDescription:t("AuthLogin.subDescription"),
@@ -30,7 +35,7 @@ export default function AuthLayout() {
         href:"/auth/register"
         },
         '/auth/register': {
-        image: '/src/assets/images/auth/register.png',
+        image: registerImg,
         title: t("AuthRegister.title"),
         description:t("AuthRegister.description"),
         subDescription:t("AuthRegister.subDescription"),
@@ -39,7 +44,7 @@ export default function AuthLayout() {
         href:"/auth/login"
         },
         '/auth/forget-password': {
-        image: '/src/assets/images/auth/forget-password.png',
+        image: forgetImg,
         title: t("AuthForget.title"),
         description:  t("AuthForget.description"),
         subDescription: t("AuthForget.subDescription"),
@@ -48,7 +53,7 @@ export default function AuthLayout() {
         href:"/auth/login"
         },
         '/auth/reset-password': {
-        image: '/src/assets/images/auth/reset-password.png',
+        image: resetImg,
         title: t("AuthRest.title"),
         description:t("AuthRest.description"),
         subDescription:t("AuthRest.subDescription"),
@@ -77,7 +82,7 @@ export default function AuthLayout() {
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'space-between',
-                    maxHeight: '100vh',
+                    height: '100vh',
                     overflowY: 'auto',
                     scrollbarWidth: 'none',        
                     msOverflowStyle: 'none',       
@@ -126,7 +131,7 @@ export default function AuthLayout() {
                             <Typography component="span" sx={{color: theme === 'dark' ? 'white' : 'black',marginBottom: {xs:1,md:2} ,fontSize:{xs:'14px',sm:'22px'} }}>
                                 {subDescription}  {"  "} 
                             </Typography>
-                            <Link href={href} underline="none" sx={{fontWeight:'bold',color:THEMECOLOR.mainRed, marginBottom: {xs:2,md:5} }}>
+                            <Link component={RouterLink}  to={href || "#"} underline="none" sx={{fontWeight:'bold',color:THEMECOLOR.mainRed, marginBottom: {xs:2,md:5} }}>
                                 {spanDescription}
                             </Link>
                         </Typography>    

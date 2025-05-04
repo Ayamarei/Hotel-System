@@ -191,12 +191,12 @@ function ResponsiveAppBar() {
               {theme === "light" ? <Brightness4Icon /> : <Brightness7Icon />}
             </IconButton> 
 
-          <Box sx={{ display: { md: 'flex' }, gap: 1 }}>
+          <Box sx={{ display: { md: 'flex',sm:"none" }, gap: 1 }}>
             {isLoggedIn ? (
               ""
             ) : (
               <>
-                <Button  variant="contained" color="primary" onClick={() => handleNavigate('/auth/login')}>
+                <Button   variant="contained" color="primary" onClick={() => handleNavigate('/auth/login')}>
                   Login
                 </Button>
                 <Button variant="contained"
