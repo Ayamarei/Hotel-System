@@ -102,16 +102,14 @@ export default function PopularAds() {
 
     return (
         <>
-
-
-<Grid container spacing={2} sx={{ height:"420px" }}>
+<Grid container spacing={2} sx={{ height:"420px" ,mb:{md:8 ,sm:35,xs:85}, padding: { xs: "20px", md: "50px" } }}>
 <Grid size={{md:4,xs:12}} >
     <Grid sx={{ display: 'flex' }}>
    
                             <Box
                                 sx={{
                                      flex:1,
-                                     height: { xs: "250px", md: "420px" },
+                                     height: { xs: "200px", md: "420px" },
                                     position: "relative",
                                     border: "1px solid #ccc",
                                     borderRadius: "8px",
@@ -171,7 +169,7 @@ export default function PopularAds() {
                                     <Box
                                         sx={{
                                             width: "100%",
-                                            height: "200px",
+                                            height: { xs: "150px", md: "2000px" },
                                             backgroundColor: "#eee",
                                             display: "flex",
                                             alignItems: "center",

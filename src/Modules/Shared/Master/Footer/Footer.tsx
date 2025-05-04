@@ -1,6 +1,3 @@
-
-
-
 import { Box, Container, Typography } from "@mui/material";
 import   Grid  from "@mui/material/Grid";
 
@@ -17,8 +14,13 @@ export default function Footer() {
       <Container maxWidth="lg">
         <Grid container spacing={4}>
           {/* Column 1 */}
-          <Grid item xs={12} sm={4}>
-            <Box>
+          <Grid sx={{xs:12,sm:4,md:4,lg:4}} >
+            <Box sx={{
+      display: "flex",
+      flexDirection: "column",
+      alignItems: { xs: "center", sm: "flex-start" },
+      textAlign: { xs: "center", sm: "left" },
+    }}>
               <Typography
                 variant="h6"
                 noWrap
@@ -34,10 +36,10 @@ export default function Footer() {
           </Grid>
 
           {/* Column 2 */}
-          <Grid item xs={12} sm={8}>
+          <Grid sx={{xs:12,sm:8,md:8,lg:8}} >
             <Grid container spacing={2}>
               {/* For Beginners */}
-              <Grid item xs={12} sm={4}>
+              <Grid sx={{xs:12,sm:4,md:4,lg:4}} >
                 <Box>
                   <Typography
                     variant="h6"
@@ -60,7 +62,7 @@ export default function Footer() {
               </Grid>
 
               {/* Explore Us */}
-              <Grid item xs={12} sm={4}>
+              <Grid sx={{xs:12,sm:4,md:4,lg:4}} >
                 <Box>
                   <Typography
                     variant="h6"
@@ -83,7 +85,7 @@ export default function Footer() {
               </Grid>
 
               {/* Connect Us */}
-              <Grid item xs={12} sm={4}>
+              <Grid sx={{xs:12,sm:4,md:4,lg:4}} >
                 <Box>
                   <Typography
                     variant="h6"
@@ -106,7 +108,7 @@ export default function Footer() {
               </Grid>
             </Grid>
 
-            <Typography sx={{ color: "GrayText", mt: 3 }}>
+            <Typography sx={{ color: "GrayText", mt: 4 }}>
               Copyright 2019 • All rights reserved • Staycation
             </Typography>
           </Grid>

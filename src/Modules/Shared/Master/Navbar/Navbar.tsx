@@ -102,7 +102,6 @@ function ResponsiveAppBar() {
           </Typography>
 
 
-
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton onClick={handleOpenNavMenu} color="inherit">
               <MenuIcon />
@@ -124,6 +123,8 @@ function ResponsiveAppBar() {
                     <Typography textAlign="center">{name}</Typography>
                   </MenuItem>
                 ))}
+        
+                
               {!isLoggedIn && (
                 <>
                   <MenuItem onClick={() => handleNavigate('/auth/login')}>
@@ -136,7 +137,7 @@ function ResponsiveAppBar() {
               )}
             </Menu>
           </Box>
-
+         
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, ml: 2 }}>
             {pages.map(({ name, path }) => (
@@ -180,7 +181,7 @@ function ResponsiveAppBar() {
           )}
 
 
-
+          
           <IconButton
               color="inherit"
               onClick={toggleTheme}

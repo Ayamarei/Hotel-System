@@ -19,6 +19,7 @@ import { FiltersContext } from "../../../context/FilterContext";
 import { ThemeContext } from "../../../context/ThemeContext";
 import { Link, useNavigate } from "react-router-dom";
 import { FavoriteContext } from "../../../context/FavoriteContext ";
+import { DotLoader } from "react-spinners";
 
 
 
@@ -27,6 +28,7 @@ export default function UserFav() {
   const [page, setpage] = useState(1);
   const [totalCount, setTotalCount] = useState<number>(1);
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   // filtersContext
   const filtersContext = useContext(FiltersContext);
@@ -57,6 +59,7 @@ export default function UserFav() {
     capacity?: number
   ) => {
     try {
+      setIsLoading(true)
       const params: any = {
         size,
         page,
@@ -81,6 +84,8 @@ export default function UserFav() {
             "Something went wrong. Please try again later."
         );
       }
+    }finally{
+      setIsLoading(false)
     }
   };
 
@@ -154,7 +159,10 @@ export default function UserFav() {
         </Typography>
       </Box>
 
-      <Box sx={{ flexGrow: 1, mt: "30px" }}>
+      {isLoading?<Box sx={{display:"flex",alignItems:"center",justifyContent:"center",height:"50vh"}}><DotLoader
+  color="#203FC7"
+  size={60}
+/></Box>:  <Box sx={{ flexGrow: 1, mt: "30px" }}>
         <Grid
           container
           spacing={{ xs: 2, md: 3 }}
@@ -338,7 +346,9 @@ export default function UserFav() {
             userExplore={true}
           />
         </Box>
-      </Box>
+      </Box>}
+
+    
     </>
   );
 }

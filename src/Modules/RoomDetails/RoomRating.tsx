@@ -74,7 +74,7 @@ const labels: { [index: string]: string } = {
                 // console.log(newHover)
                 setHover(newHover);
               }}
-              emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+              emptyIcon={<StarIcon style={{ opacity: 0.55,color:"rgba(176, 176, 176, 1)" }} fontSize="inherit" />}
             />
           )}
         />
@@ -88,13 +88,29 @@ const labels: { [index: string]: string } = {
     </Box>
     {errors.rating&& <Typography sx={{color:"#d32f2f"}}>*{errors.rating.message}</Typography>}
 
+<TextField
+  {...register("review", Room_Rewiew_Validation(t))}
+  fullWidth
+  multiline
+  rows={5}
+  sx={{
+    
+    '& .MuiOutlinedInput-root': {
+     
+  
+      '& fieldset': {
+        borderColor: "rgba(176, 176, 176, 1)", 
+      },
+      '&:hover fieldset': {
+        borderColor: "rgba(176, 176, 176, 1)", 
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: "rgba(176, 176, 176, 1)",  
+      },
+    },
+  }}
+/>
 
-    <TextField
-{...register("review",Room_Rewiew_Validation(t))}
-          fullWidth
-          multiline
-          rows={5}
-        />
         {errors.review&& <Typography sx={{color:"#d32f2f"}}>*{errors.review.message}</Typography>}
         <Button variant="contained" type="submit" 
          startIcon={ isSubmitting ? <CircularProgress color="inherit" size={20} /> : null} 

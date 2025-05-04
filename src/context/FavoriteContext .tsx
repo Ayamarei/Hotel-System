@@ -13,7 +13,6 @@ interface FavoriteContextType {
   }
 
  export const FavoriteContext =   createContext <FavoriteContextType |null>(null)
-
  export default function FavoriteContextProvider ({children}: { children: React.ReactNode }) {
 
 

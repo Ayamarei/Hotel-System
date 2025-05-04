@@ -1,18 +1,24 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {   useParams } from "react-router-dom";
 import { Breadcrumbs, Container, Grid, Typography,Link, Box, Stack } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { IRoomDetails, IRoomDetailsResponse } from "../../Interfaces/RoomDetailsInterface";
-import Loading from "../Shared/Loading/Loading";
 import RoomComment from "./RoomComment";
 import RoomBooking from "./RoomBooking";
 import RoomDescription from "./RoomDescription";
 import RoomRating from "./RoomRating";
 import { PORTAL_URLS_Details } from "../../Services/Urls";
 import { publicAxiosInstance } from "../../Services/Axiosinstance";
+import { DotLoader } from "react-spinners";
+import { ThemeContext } from "../../context/ThemeContext";
+import { THEMECOLOR } from "../../Services/ThemeColors";
+
 
 
 export default function RoomDetails() {
+  const ContextColor = useContext(ThemeContext);
+    if (!ContextColor) throw new Error("AuthContext must be used within AuthProvider");
+    const { theme }=ContextColor;
  const {roomId}=useParams()
  const [room, setRoom] = useState<IRoomDetails|null>(null);
  const [loading,setLoading]=useState(false)
@@ -38,23 +44,26 @@ useEffect(()=>{
 getRoom()
     },[roomId])
   return <>
-  {loading?<Loading/>:<>
+  {loading?<Box sx={{display:"flex",alignItems:"center",justifyContent:"center",height:"50vh"}}><DotLoader
+  color="#203FC7"
+  size={60}
+/></Box>:<>
     <Container maxWidth={'lg'} sx={{mt:"50px",display:"flex",alignItems:"center"}}>
 <div role="presentation" >
-      <Breadcrumbs aria-label="breadcrumb">
+      <Breadcrumbs aria-label="breadcrumb" sx={{color: "rgba(176, 176, 176, 1)"}}>
        
         <Link
           // color="inherit"
-          sx={{color:'#0009',fontSize:"18px",fontWeight:300,textDecoration:"none"}}
+          sx={{color:  "rgba(176, 176, 176, 1)",fontSize:"18px",fontWeight:300,textDecoration:"none"}}
           href="/"
         >
         {t("room.Home")}
         </Link>
-        <Typography sx={{ color: '#152c5b',fontWeight:700,fontSize:"18px" }}>{t("room.RoomDetails")}</Typography>
+        <Typography sx={{color: theme === "dark" ? THEMECOLOR.mainBlue : THEMECOLOR.LabelColor,fontWeight:700,fontSize:"18px" }}>{t("room.RoomDetails")}</Typography>
       </Breadcrumbs>
     </div>
    <Box sx={{marginLeft: "auto", marginRight: "auto",textAlign:"center"}}> <Typography 
-   sx={{  textAlign: "center" ,color:"#152c5b",fontWeight:600,fontSize:'34px'}}>{room?.roomNumber}</Typography>
+   sx={{  textAlign: "center" ,color: theme === "dark" ? THEMECOLOR.mainBlue : THEMECOLOR.LabelColor,fontWeight:600,fontSize:'34px'}}>{room?.roomNumber}</Typography>
    <Typography component={'span'} sx={{  color:"rgba(176, 176, 176, 1)",fontWeight:300,fontSize:'18px'}}>{t("room.BogorIndonesia")}</Typography></Box>
 </Container>
 
