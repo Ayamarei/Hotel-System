@@ -1,17 +1,10 @@
 
 import {
-  TextField,
   Grid,
   Box,
-  FormControl,
-  InputLabel,
-  FilledInput,
-  InputAdornment,
-  IconButton,
   Button,
 } from "@mui/material";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
+
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import { THEMECOLOR } from "../../../Services/ThemeColors";
@@ -41,11 +34,11 @@ export default function Register() {
   const [uploadSuccess, setUploadSuccess] = React.useState(false);
   const [showPassword, setShowPassword] = React.useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleClickShowConfirmPassword = () =>
     setShowConfirmPassword((show) => !show);
- 
+
   const {
     register,
     formState: { errors, isSubmitting },
@@ -53,53 +46,53 @@ export default function Register() {
     watch,
     trigger,
   } = useForm<IRegisterForm>();
-  
-// submit form data
-const onSubmit = async (data: IRegisterForm) => {
 
-  if (!uploadedImage) {
-    alert("Please upload an image");
-    return;
-  }
+  // submit form data
+  const onSubmit = async (data: IRegisterForm) => {
 
-  const formData = new FormData();
-  // Append the text fields from the form
-  const dataEntries = {
-    userName: data.userName,
-    phoneNumber: data.phoneNumber,
-    country: data.country,
-    email: data.email,
-    password: data.password,
-    confirmPassword: data.confirmPassword,
-    role: "user"
+    if (!uploadedImage) {
+      alert("Please upload an image");
+      return;
+    }
+
+    const formData = new FormData();
+    // Append the text fields from the form
+    const dataEntries = {
+      userName: data.userName,
+      phoneNumber: data.phoneNumber,
+      country: data.country,
+      email: data.email,
+      password: data.password,
+      confirmPassword: data.confirmPassword,
+      role: "user"
+    };
+    for (const [key, value] of Object.entries(dataEntries)) {
+      formData.append(key, value);
+    }
+    formData.append("profileImage", uploadedImage);
+
+
+
+    try {
+      const response = await publicUserAxiosInstance.post(
+        USERS_URLS.REGISTER,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      toast.success(response.data?.message)
+      navigate('/auth/login')
+    } catch (error) {
+      console.log(error)
+      if (error instanceof AxiosError) {
+        toast.error(error?.response?.data?.message || 'Something Went Wrong')
+      }
+    }
   };
-  for (const [key, value] of Object.entries(dataEntries)) {
-    formData.append(key, value);
-  }
-  formData.append("profileImage", uploadedImage);
-  
-  
-
-  try {
-    const response = await publicUserAxiosInstance.post(
-      USERS_URLS.REGISTER,
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
-
-    toast.success(response.data?.message)
-   navigate('/auth/login')
-  }catch (error) {
-    console.log(error)
-      if(error instanceof AxiosError){
-        toast.error(error?.response?.data?.message||'Something Went Wrong')
-      }
-  }
-};
 
   //match password
   const password = watch("password");
@@ -124,30 +117,30 @@ const onSubmit = async (data: IRegisterForm) => {
     setUploadSuccess(false);
     setUploadedImage(null);
   };
-const { t } = useTranslation();
+  const { t } = useTranslation();
   return (
-   <>
-<form onSubmit={handleSubmit(onSubmit)}>
-      <CustomInput
-        label={t("RegisterForm.User-Name")}
-        type="text"
-        placeholder={t("RegisterForm.Please-type")}
-        register={register}
-        name="userName"
-        error={errors.userName?.message}
-        rules={USER_NAME_VALIDATION(t)}
-        sx={{
-          input: {
-            color: theme === 'dark' ? 'white' : 'black',
-            backgroundColor: theme === 'dark' ? '#333' : '#f0f0f0', 
-            borderColor: theme === 'dark' ? 'gray' : '#ccc', 
-          },
-          label: {
-            color: theme === 'dark' ? 'white' : 'black',
-          },
-        }}
-        
-      />
+    <>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <CustomInput
+          label={t("RegisterForm.User-Name")}
+          type="text"
+          placeholder={t("RegisterForm.Please-type")}
+          register={register}
+          name="userName"
+          error={errors.userName?.message}
+          rules={USER_NAME_VALIDATION(t)}
+          sx={{
+            input: {
+              color: theme === 'dark' ? 'white' : 'black',
+              backgroundColor: theme === 'dark' ? '#333' : '#f0f0f0',
+              borderColor: theme === 'dark' ? 'gray' : '#ccc',
+            },
+            label: {
+              color: theme === 'dark' ? 'white' : 'black',
+            },
+          }}
+
+        />
         <Box sx={{ width: "100%" }}>
           <Grid
             container
@@ -166,8 +159,8 @@ const { t } = useTranslation();
                 sx={{
                   input: {
                     color: theme === 'dark' ? 'white' : 'black',
-                    backgroundColor: theme === 'dark' ? '#333' : '#f0f0f0', 
-                    borderColor: theme === 'dark' ? 'gray' : '#ccc', 
+                    backgroundColor: theme === 'dark' ? '#333' : '#f0f0f0',
+                    borderColor: theme === 'dark' ? 'gray' : '#ccc',
                   },
                   label: {
                     color: theme === 'dark' ? 'white' : 'black',
@@ -188,8 +181,8 @@ const { t } = useTranslation();
                 sx={{
                   input: {
                     color: theme === 'dark' ? 'white' : 'black',
-                    backgroundColor: theme === 'dark' ? '#333' : '#f0f0f0', 
-                    borderColor: theme === 'dark' ? 'gray' : '#ccc', 
+                    backgroundColor: theme === 'dark' ? '#333' : '#f0f0f0',
+                    borderColor: theme === 'dark' ? 'gray' : '#ccc',
                   },
                   label: {
                     color: theme === 'dark' ? 'white' : 'black',
@@ -200,46 +193,46 @@ const { t } = useTranslation();
           </Grid>
         </Box>
         <CustomInput
-        label={t("RegisterForm.Email")}
-        type="email"
-        placeholder={t("RegisterForm.Please-type")}
-        register={register}
-        name="email"
-        error={errors.email?.message}
-        rules={EMAIL_VALIDATION(t)}
-        sx={{
-          input: {
-            color: theme === 'dark' ? 'white' : 'black',
-            backgroundColor: theme === 'dark' ? '#333' : '#f0f0f0', 
-            borderColor: theme === 'dark' ? 'gray' : '#ccc', 
-          },
-          label: {
-            color: theme === 'dark' ? 'white' : 'black',
-          },
-        }}
-      />
+          label={t("RegisterForm.Email")}
+          type="email"
+          placeholder={t("RegisterForm.Please-type")}
+          register={register}
+          name="email"
+          error={errors.email?.message}
+          rules={EMAIL_VALIDATION(t)}
+          sx={{
+            input: {
+              color: theme === 'dark' ? 'white' : 'black',
+              backgroundColor: theme === 'dark' ? '#333' : '#f0f0f0',
+              borderColor: theme === 'dark' ? 'gray' : '#ccc',
+            },
+            label: {
+              color: theme === 'dark' ? 'white' : 'black',
+            },
+          }}
+        />
 
-      <CustomInput
-        label={t("RegisterForm.Password")}
-        type="password"
-        placeholder={t("RegisterForm.Please-type")}
-        register={register}
-        name="password"
-        error={errors.password?.message}
-        showPassword={showPassword}
-        onTogglePasswordVisibility={handleClickShowPassword}
-        rules={PASSWORD_VALIDATION(t)}
-        sx={{
-          input: {
-            color: theme === 'dark' ? 'white' : 'black',
-            backgroundColor: theme === 'dark' ? '#333' : '#f0f0f0', 
-            borderColor: theme === 'dark' ? 'gray' : '#ccc', 
-          },
-          label: {
-            color: theme === 'dark' ? 'white' : 'black',
-          },
-        }}
-      />
+        <CustomInput
+          label={t("RegisterForm.Password")}
+          type="password"
+          placeholder={t("RegisterForm.Please-type")}
+          register={register}
+          name="password"
+          error={errors.password?.message}
+          showPassword={showPassword}
+          onTogglePasswordVisibility={handleClickShowPassword}
+          rules={PASSWORD_VALIDATION(t)}
+          sx={{
+            input: {
+              color: theme === 'dark' ? 'white' : 'black',
+              backgroundColor: theme === 'dark' ? '#333' : '#f0f0f0',
+              borderColor: theme === 'dark' ? 'gray' : '#ccc',
+            },
+            label: {
+              color: theme === 'dark' ? 'white' : 'black',
+            },
+          }}
+        />
         <CustomInput
           label={t("RegisterForm.Confirm-Password")}
           type={showConfirmPassword ? "text" : "password"}
@@ -257,8 +250,8 @@ const { t } = useTranslation();
           sx={{
             input: {
               color: theme === 'dark' ? 'white' : 'black',
-              backgroundColor: theme === 'dark' ? '#333' : '#f0f0f0', 
-              borderColor: theme === 'dark' ? 'gray' : '#ccc', 
+              backgroundColor: theme === 'dark' ? '#333' : '#f0f0f0',
+              borderColor: theme === 'dark' ? 'gray' : '#ccc',
             },
             label: {
               color: theme === 'dark' ? 'white' : 'black',
@@ -267,10 +260,10 @@ const { t } = useTranslation();
         />
 
         <ImageUpload
-                uploadSuccess={uploadSuccess}
-                handleFileChange={handleFileChange}
-                handleUploadNewImage={handleUploadNewImage}
-              />
+          uploadSuccess={uploadSuccess}
+          handleFileChange={handleFileChange}
+          handleUploadNewImage={handleUploadNewImage}
+        />
         <Button
           disabled={isSubmitting}
           type="submit"
@@ -278,7 +271,7 @@ const { t } = useTranslation();
           variant="contained"
           sx={{ backgroundColor: THEMECOLOR.mainBlue }}
         >
-          {isSubmitting ? t("RegisterForm.Register...") :t("RegisterForm.Register")}
+          {isSubmitting ? t("RegisterForm.Register...") : t("RegisterForm.Register")}
         </Button>
       </form>
 

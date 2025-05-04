@@ -11,17 +11,43 @@ export default function AuthContextProvider({ children }: { children: React.Reac
   const [userDetails, setUserDetails] = useState<IUser | null>(null); 
   const [isAuthLoading, setIsAuthLoading] = useState<boolean>(true);  
 
-  const saveLoginData = () => {
+  // const saveLoginData = () => {
+  //   const bearerToken = localStorage.getItem("token");
+  //   const encodedToken = bearerToken?.split(" ")[1];
+  //   if (encodedToken) {
+  //     const decodedToken: ILoginData = jwtDecode<ILoginData>(encodedToken);
+  //     setLoginData(decodedToken);
+  //     console.log(loginData);
+      
+
+  //   }
+  // };
+
+  const saveLoginData = async (): Promise<IUser | null> => {
     const bearerToken = localStorage.getItem("token");
     const encodedToken = bearerToken?.split(" ")[1];
     if (encodedToken) {
       const decodedToken: ILoginData = jwtDecode<ILoginData>(encodedToken);
       setLoginData(decodedToken);
       console.log(loginData);
-      
 
+      try {
+        const userId = decodedToken?._id;
+        if (userId) {
+          const response = await privateUserAxiosInstance.get(`/users/${userId}`);
+          const user = response.data.data.user;
+          setUserDetails(user);
+          return user;
+        }
+      } catch (error) {
+        console.log(error);
+        if (error instanceof AxiosError) {
+          toast.error(error?.response?.data?.message || "Something Went Wrong");
+        }
+      }
     }
-  };
+    return null;
+  };
 
 useEffect(() => {
   if (loginData) {
