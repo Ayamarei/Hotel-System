@@ -18,6 +18,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FavoriteContext } from "../../../context/FavoriteContext ";
 import { EXPLORE_ROOMS_URLS } from "../../../Services/Urls";
 import { RoomsAPIResponse} from '../../../Interfaces/RoomInterface'
+import {DotLoader} from "react-spinners"
 
 
 
@@ -25,6 +26,7 @@ import { RoomsAPIResponse} from '../../../Interfaces/RoomInterface'
 export default function UserRoomsList() {
   const [roomData, setRoomData] = useState<RoomsAPIResponse | null>(null);
   const [page, setpage] = useState(1);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [totalCount, setTotalCount] = useState<number>(1);
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
   console.log("favorites", favorites);
@@ -59,6 +61,7 @@ export default function UserRoomsList() {
     capacity?: number
   ) => {
     try {
+      setIsLoading(true)
       const params: any = {
         size,
         page,
@@ -77,6 +80,7 @@ export default function UserRoomsList() {
 
       setRoomData(response.data);
       setTotalCount(response?.data?.data?.totalCount);
+      
     } catch (error) {
       console.log(error);
       if (error instanceof AxiosError) {
@@ -85,6 +89,8 @@ export default function UserRoomsList() {
             "Something went wrong. Please try again later."
         );
       }
+    }finally{
+      setIsLoading(false)
     }
   };
 
@@ -129,7 +135,8 @@ export default function UserRoomsList() {
 
   return (
     <>
-      <Typography
+
+<Typography
         variant="h4"
         sx={{
           textAlign: "center",
@@ -180,8 +187,10 @@ export default function UserRoomsList() {
           </Link>
         </Typography>
       </Box>
-
-      <Box sx={{ flexGrow: 1, mt: "30px" }}>
+    {isLoading?<Box sx={{display:"flex",alignItems:"center",justifyContent:"center",height:"50vh"}}><DotLoader
+  color="#203FC7"
+  size={60}
+/></Box> :<Box sx={{ flexGrow: 1, mt: "30px" }}>
         <Grid
           container
           spacing={{ xs: 2, md: 3 }}
@@ -370,6 +379,10 @@ export default function UserRoomsList() {
           />
         </Box>
       </Box>
+}
+     
+
+      
     </>
   );
 }

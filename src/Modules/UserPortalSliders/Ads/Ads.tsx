@@ -150,7 +150,7 @@ export default function Ads() {
                                 padding: {
                                   xs: "4px 10px",
                                   sm: "6px 10px",
-                                  md: "6px 33px",
+                                  md: "6px 40px",
                                 },
                                 textAlign: "center",
                                 borderRadius: "0 4px 0 30px",

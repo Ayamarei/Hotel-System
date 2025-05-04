@@ -20,7 +20,7 @@ export interface IUser {
 }
 export interface IAuthContext {
   loginData: ILoginData | null;
-  saveLoginData: () => void;
+  saveLoginData: () => Promise<IUser | null>;
   userDetails: IUser | null;
   isAuthLoading: boolean;
 }

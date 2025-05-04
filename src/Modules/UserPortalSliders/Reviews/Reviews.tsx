@@ -16,7 +16,7 @@ export default function Reviews() {
   const ContextColor = useContext(ThemeContext);
   if (!ContextColor)
     throw new Error("AuthContext must be used within AuthProvider");
-  // const { theme } = ContextColor;
+  const { theme } = ContextColor;
 
   const { t, i18n } = useTranslation();
 
@@ -77,7 +77,7 @@ export default function Reviews() {
                     component="span"
                     sx={{
                       display: "block",
-                      color: THEMECOLOR.user_portal_blue,
+                      color: theme === "dark" ? THEMECOLOR.mainBlue : THEMECOLOR.LabelColor,
                       fontWeight: 700,
                       fontSize: { xs: 20, sm: 24 },
                     }}
@@ -93,7 +93,7 @@ export default function Reviews() {
                     component="span"
                     sx={{
                       display: "block",
-                      color: THEMECOLOR.user_portal_blue,
+                      color: theme === "dark" ? THEMECOLOR.mainBlue : THEMECOLOR.LabelColor,
                       mt: { xs: 1, sm: 2 },
                     }}
                   >
@@ -169,7 +169,7 @@ export default function Reviews() {
                     component="span"
                     sx={{
                       display: "block",
-                      color: THEMECOLOR.user_portal_blue,
+                      color: theme === "dark" ? THEMECOLOR.mainBlue : THEMECOLOR.LabelColor,
                       fontWeight: 700,
                       fontSize: { xs: 20, sm: 24 },
                     }}

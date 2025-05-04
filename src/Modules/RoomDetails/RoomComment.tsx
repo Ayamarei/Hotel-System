@@ -43,7 +43,24 @@ export default function RoomComment({roomId}:{roomId:string}){
             fullWidth
             multiline
             rows={5}
-            sx={{mt:"72px"}}
+            // sx={{mt:"72px"}}
+            sx={{
+              mt:"72px",
+              
+              '& .MuiOutlinedInput-root': {
+               
+            
+                '& fieldset': {
+                  borderColor: "rgba(176, 176, 176, 1)", 
+                },
+                '&:hover fieldset': {
+                  borderColor: "rgba(176, 176, 176, 1)", 
+                },
+                '&.Mui-focused fieldset': {
+                  borderColor: "rgba(176, 176, 176, 1)",  
+                },
+              },
+            }}
           />
           {errors.comment&& <Typography sx={{color:"#d32f2f"}}>*{errors.comment.message}</Typography>}
        <Box sx={{display:"flex",justifyContent:"flex-end"}}>

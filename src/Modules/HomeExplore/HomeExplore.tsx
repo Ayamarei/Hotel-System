@@ -42,7 +42,6 @@ const onSubmit = (data: any) => {
       sx={{
         mt: "70px",
         display: "flex",
-        // flexWrap: "wrap",
         flexWrap: {
           xs: "wrap",           
           md: "nowrap",          

@@ -7,6 +7,9 @@ import Capacity from "../Shared/Capacity/Capacity";
 import { useNavigate } from "react-router-dom";
 import { privateUserAxiosInstance } from "../../Services/Axiosinstance";
 import { toast } from "react-toastify";
+import { useContext } from "react";
+import { ThemeContext } from "../../context/ThemeContext";
+import { THEMECOLOR } from "../../Services/ThemeColors";
 
 export default function RoomBooking({ room }: { room: IRoomDetails }) {
   const {
@@ -17,6 +20,7 @@ export default function RoomBooking({ room }: { room: IRoomDetails }) {
 
 
   const submitPaymentHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+
     e.preventDefault();
   
     const { dateRange, capacity } = watch();
@@ -67,14 +71,14 @@ export default function RoomBooking({ room }: { room: IRoomDetails }) {
   const navigate = useNavigate();
 
   const capacity = watch("capacity") || 0;
-  const totalPay = room
-    ? (room.price - (room.discount / 100) * room.price) * capacity
-    : 0;
+  const totalPay = room ? room.price * capacity: 0;
+  const priceAfterDiscount = (room.price - (room.discount / 100) * room.price) * capacity;
   const { t } = useTranslation();
-  const priceAfterDiscount = room
-    ? room.price - (room.discount / 100) * room.price
-    : 0;
 
+  const ContextColor = useContext(ThemeContext);
+    if (!ContextColor) throw new Error("AuthContext must be used within AuthProvider");
+    const { theme }=ContextColor;
+  
   return (
     <>
       <Box
@@ -91,7 +95,7 @@ export default function RoomBooking({ room }: { room: IRoomDetails }) {
         <Box sx={{ py: "30px" }}>
           <Typography
             sx={{
-              color: "rgba(21, 44, 91, 1)",
+              color: theme === "dark" ? THEMECOLOR.mainBlue : THEMECOLOR.LabelColor,
               fontWeight: 700,
               fontSize: "20px",
             }}
@@ -172,20 +176,20 @@ export default function RoomBooking({ room }: { room: IRoomDetails }) {
           {t("room.Youwillpay")}{" "}
           <Box
             component="span"
-            sx={{ color: "#152c5b", fontWeight: 600, fontSize: "19px" }}
+            sx={{ color: theme === "dark" ? THEMECOLOR.mainBlue : THEMECOLOR.LabelColor, fontWeight: 600, fontSize: "19px" }}
           >
             {totalPay} {t("room.EGP")}
           </Box>{" "}
           {t("room.for")}{" "}
           <Box
             component="span"
-            sx={{ color: "#152c5b", fontWeight: 600, fontSize: "19px" }}
+            sx={{ color: theme === "dark" ? THEMECOLOR.mainBlue : THEMECOLOR.LabelColor, fontWeight: 600, fontSize: "19px" }}
           >
             {capacity} {t("room.Person")}
           </Box>
         </Typography>
-        <Typography sx={{ color: "rgba(255, 22, 18, 1)", fontWeight: 600 }}>
-          After discount {priceAfterDiscount.toFixed(2)} {t("room.EGP")}
+        <Typography sx={{ color: "rgba(255, 22, 18, 1)", fontWeight: 600,mt:2 }}>
+          After discount <span style={{fontSize:"24px"}}> {priceAfterDiscount}</span> {t("room.EGP")}
         </Typography>
 
         <form onSubmit={submitPaymentHandler}>

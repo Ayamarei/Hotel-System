@@ -47,19 +47,6 @@ export default function CustomSlider({details}: ISliderProps) {
                         <Box sx={{ width: '100%',
                             height: "200px" }}>
                             <Box
-                                // sx={{
-                                //     position: "absolute",
-                                //     top: 0,
-                                //     right: 0,
-                                //     backgroundColor: "#ff498b",
-                                //     color: "#fff",
-                                //     padding: "7px 12px",
-                                //     fontSize: "12px",
-                                //     zIndex: 1,
-                                //     borderRadius: "0 10px 0 20px",
-                                //     fontWeight: "500",
-                                //     width: "32%",
-                                // }}
                                 sx={{
                                     position: "absolute",
                                     top: 0,
@@ -69,7 +56,7 @@ export default function CustomSlider({details}: ISliderProps) {
                                     padding: {
                                       xs: "4px 10px",
                                       sm: "6px 10px",
-                                      md: "6px 32px",
+                                      md: "6px 40px",
                                     },
                                     textAlign: "center",
                                     borderRadius: "0 4px 0 30px",
