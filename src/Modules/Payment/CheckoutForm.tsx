@@ -70,8 +70,8 @@ const CheckoutForm = () => {
   return (
     <Box
       sx={{
-        mt: 5,
-        mb: 10,
+        pt: 5,
+        pb: 10,
         px: 2,
         display: "flex",
         flexDirection: "column",
@@ -114,7 +114,7 @@ const CheckoutForm = () => {
 
       {activeStep !== 3 && (
         <>
-          <Typography variant="h4" sx={{ mt: 2, mb: 1, color: "#152c5b" }}>
+          <Typography variant="h4"  sx={{ mt: 2, mb: 1, color: theme === "dark" ? THEMECOLOR.mainBlue : THEMECOLOR.LabelColor,}}>
             Payment
           </Typography>
           <Typography variant="h6" sx={{ mb: 3, color: "#b0b0b0" }}>
@@ -132,11 +132,13 @@ const CheckoutForm = () => {
           width: "100%",
           maxWidth: "1000px",
           minHeight: "300px",
+          
         }}
       >
         {activeStep !== 3 && (
           <Box
             sx={{
+             
               flex: 1,
               minWidth: "300px",
               maxWidth: "450px",
@@ -160,7 +162,7 @@ const CheckoutForm = () => {
                   mb: 2,
                   fontSize: "16px",
                   fontWeight: 700,
-                  color: "#152c5b",
+                  color: theme === "dark" ? THEMECOLOR.mainBlue : THEMECOLOR.LabelColor,
                   lineHeight: "170%",
                 }}
               >
@@ -171,7 +173,7 @@ const CheckoutForm = () => {
             {[{ img: BCA, name: "Bank Central Asia" }, { img: mandiri, name: "Bank Mandiri" }].map((bank, i) => (
               <Box key={i} sx={{ display: "flex", alignItems: "center", gap: 2, mb: 3 }}>
                 <Box component="img" src={bank.img} alt={bank.name} />
-                <Typography sx={{ fontSize: "16px", fontWeight: 700, color: "#152c5b", lineHeight: "170%" }}>
+                <Typography sx={{ fontSize: "16px", fontWeight: 700, color: theme === "dark" ? THEMECOLOR.mainBlue : THEMECOLOR.LabelColor, lineHeight: "170%" }}>
                   {bank.name}
                   <br />
                   2208 1996
