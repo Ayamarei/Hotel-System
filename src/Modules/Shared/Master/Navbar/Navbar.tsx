@@ -191,7 +191,7 @@ function ResponsiveAppBar() {
               {theme === "light" ? <Brightness4Icon /> : <Brightness7Icon />}
             </IconButton> 
 
-          <Box sx={{ display: { md: 'flex',sm:"none" }, gap: 1 }}>
+          <Box sx={{ display: { md: 'flex',sm:"none",xs:"none" }, gap: 1 }}>
             {isLoggedIn ? (
               ""
             ) : (
